@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Instagram — Delete Account</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --off-white: #fafafa;
+    --border: #dbdbdb;
+    --border-light: #efefef;
+    --text-primary: #262626;
+    --text-secondary: #737373;
+    --text-hint: #a8a8a8;
+    --ig-gradient-start: #f09433;
+    --ig-gradient-mid1: #e6683c;
+    --ig-gradient-mid2: #dc2743;
+    --ig-gradient-mid3: #cc2366;
+    --ig-gradient-end: #bc1888;
+    --red: #ed4956;
+    --red-light: #fff1f2;
+    --red-border: #fca5a5;
+    --red-dark: #b91c1c;
+    --orange: #f97316;
+    --orange-light: #fff7ed;
+    --green: #22c55e;
+    --green-light: #f0fdf4;
+    --green-dark: #15803d;
+    --green-border: #86efac;
+    --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--off-white);
+    font-family: var(--font);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── TOP NAV ── */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 54px;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .ig-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--ig-gradient-start), var(--ig-gradient-mid1), var(--ig-gradient-mid2), var(--ig-gradient-mid3), var(--ig-gradient-end));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ig-icon svg { width: 16px; height: 16px; }
+
+  .navbar-wordmark {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .nav-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f09433, #bc1888);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* ── PAGE LAYOUT ── */
+  .page-layout {
+    display: flex;
+    min-height: calc(100vh - 54px);
+  }
+
+  .sidebar {
+    width: 240px;
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    flex-shrink: 0;
+    position: sticky;
+    top: 54px;
+    height: calc(100vh - 54px);
+    overflow-y: auto;
+  }
+
+  .sidebar-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-hint);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 0 20px 8px;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background 0.15s;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar-item:hover { background: var(--off-white); color: var(--text-primary); }
+
+  .sidebar-item.active {
+    color: var(--text-primary);
+    font-weight: 500;
+    border-left-color: var(--text-primary);
+    background: var(--off-white);
+  }
+
+  .sidebar-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* ── MAIN CONTENT ── */
+  .main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 24px;
+  }
+
+  .flow-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── PROGRESS ── */
+  .progress-header {
+    padding: 20px 24px 0;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .progress-step-label {
+    font-size: 12px;
+    color: var(--text-hint);
+    font-weight: 400;
+  }
+
+  .progress-step-count {
+    font-size: 12px;
+    color: var(--text-hint);
+  }
+
+  .progress-track {
+    height: 2px;
+    background: var(--border-light);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 1px;
+    background: linear-gradient(90deg, var(--ig-gradient-mid2), var(--ig-gradient-end));
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    padding: 0 24px 20px;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 20px;
+  }
+
+  .section-header h2 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .section-header p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  /* ── BODY PADDING ── */
+  .screen-body { padding: 0 24px 24px; }
+
+  /* ── CHOICE CARDS (Screen 1) ── */
+  .choice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .choice-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .choice-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .choice-card.deactivate:hover { border-color: var(--orange); }
+  .choice-card.delete:hover { border-color: var(--red); }
+
+  .choice-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .badge-orange { background: var(--orange-light); color: var(--orange); }
+  .badge-red { background: var(--red-light); color: var(--red-dark); }
+
+  .choice-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .choice-card p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 9px 0;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    transition: opacity 0.15s, transform 0.1s;
+    letter-spacing: 0.1px;
+  }
+
+  .btn:active { transform: scale(0.98); }
+
+  .btn-orange { background: var(--orange); color: white; }
+  .btn-red { background: var(--red); color: white; }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+  .btn-outline:hover { background: var(--off-white); }
+  .btn-green { background: var(--green-dark); color: white; }
+  .btn-ghost {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 10px 0;
+    text-align: center;
+    transition: color 0.15s;
+  }
+  .btn-ghost:hover { color: var(--text-primary); }
+
+  /* ── DATA CARD ── */
+  .data-card {
+    background: var(--off-white);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .data-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .data-row:last-child { border-bottom: none; }
+
+  .data-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .data-icon-wrap svg { width: 16px; height: 16px; color: var(--text-secondary); }
+
+  .data-label { font-size: 13px; color: var(--text-primary); flex: 1; }
+  .data-count { font-size: 12px; color: var(--text-hint); }
+
+  /* ── TIMELINE ── */
+  .timeline { margin-bottom: 20px; }
+
+  .tl-item {
+    display: flex;
+    gap: 14px;
+    position: relative;
+  }
+
+  .tl-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 16px;
+  }
+
+  .tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .tl-dot.now { background: var(--red); }
+  .tl-dot.soon { background: var(--orange); }
+  .tl-dot.final { background: var(--border); }
+
+  .tl-connector {
+    width: 1px;
+    flex: 1;
+    background: var(--border-light);
+    min-height: 28px;
+    margin: 4px 0;
+  }
+
+  .tl-right { padding-bottom: 20px; }
+  .tl-right h4 { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .tl-right p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* ── WARNING BOX ── */
+  .warning-box {
+    background: var(--red-light);
+    border: 1px solid var(--red-border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .warning-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--red);
+  }
+
+  .warning-box p { font-size: 13px; color: var(--red-dark); line-height: 1.5; }
+
+  /* ── INPUT ── */
+  .input-group { margin-bottom: 16px; }
+  .input-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+  .input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--off-white);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .input-group input:focus { border-color: var(--text-secondary); background: var(--white); }
+  .input-group input::placeholder { color: var(--text-hint); }
+
+  /* ── SUCCESS SCREEN ── */
+  .success-banner {
+    background: var(--green-light);
+    border: 1px solid var(--green-border);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .success-check {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+
+  .success-check svg { width: 22px; height: 22px; }
+
+  .success-banner h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+
+  .deletion-date {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--green-dark);
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+
+  .success-banner .sub { font-size: 12px; color: #166534; }
+
+  .cancel-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .cancel-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .cancel-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+
+  .fine-print {
+    font-size: 12px;
+    color: var(--text-hint);
+    line-height: 1.6;
+    text-align: center;
+    padding: 0 4px;
+    margin-bottom: 20px;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: 0 24px 16px;
+  }
+
+  .back-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0 24px 20px;
+    background: none;
+    border: none;
+    font-family: var(--font);
+    transition: color 0.15s;
+  }
+
+  .back-link:hover { color: var(--text-primary); }
+  .back-link svg { width: 14px; height: 14px; }
+
+  /* ── DEACTIVATED SCREEN ── */
+  .deactivated-wrap {
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  .deactivated-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--orange-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .deactivated-icon svg { width: 28px; height: 28px; color: var(--orange); }
+  .deactivated-wrap h2 { font-size: 17px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+  .deactivated-wrap p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 24px; }
+
+  /* ── FADE ANIMATION ── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .screen.active { animation: fadeIn 0.22s ease; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <a class="navbar-logo" href="#">
+    <div class="ig-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/>
+      </svg>
+    </div>
+    <span class="navbar-wordmark">Instagram</span>
+  </a>
+  <div class="navbar-right">
+    <div class="nav-avatar">CD</div>
+  </div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <p class="sidebar-section-title" style="margin-top:4px;">Settings</p>
+
+    <div class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Edit profile
+    </div>
+    <div class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Password & security
+    </div>
+    <div class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      Privacy
+    </div>
+    <div class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      Notifications
+    </div>
+    <div class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Messages
+    </div>
+    <div class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+      Download your data
+    </div>
+
+    <div style="height:1px; background: var(--border-light); margin: 12px 0;"></div>
+    <p class="sidebar-section-title">Account</p>
+
+    <div class="sidebar-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      Delete account
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="flow-card">
+
+      <!-- ── SCREEN 1: CHOOSE ── -->
+      <div class="screen active" id="s1">
+        <div class="progress-header">
+          <div class="progress-meta">
+            <span class="progress-step-label">Manage account</span>
+            <span class="progress-step-count">Step 1 of 5</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
+        </div>
+        <div class="section-header">
+          <h2>Deactivate or delete your account?</h2>
+          <p>These are two different actions. Read carefully before choosing.</p>
+        </div>
+        <div class="screen-body">
+          <div class="choice-grid">
+            <div class="choice-card deactivate">
+              <span class="choice-badge badge-orange">Temporary</span>
+              <h3>Deactivate account</h3>
+              <p>Your profile, photos, and data are hidden. You can reactivate anytime by logging back in.</p>
+              <button class="btn btn-orange" onclick="goTo('s-deactivated')">Deactivate</button>
+            </div>
+            <div class="choice-card delete">
+              <span class="choice-badge badge-red">Permanent</span>
+              <h3>Delete account</h3>
+              <p>Your account and all data are permanently removed after 30 days. This cannot be undone.</p>
+              <button class="btn btn-red" onclick="goTo('s2')">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN DEACTIVATED ── -->
+      <div class="screen" id="s-deactivated">
+        <div class="deactivated-wrap">
+          <div class="deactivated-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.94 17.94A10.07 10.07 0 0112 20a10 10 0 01-10-10c0-2.08.64-4.01 1.73-5.61M9.9 4.24A9.12 9.12 0 0112 4a10 10 0 0110 10c0 .97-.15 1.9-.42 2.79M3 3l18 18"/></svg>
+          </div>
+          <h2>Account deactivated</h2>
+          <p>Your account is now hidden. To reactivate, simply log back in to Instagram at any time.</p>
+          <button class="btn btn-outline" style="max-width:220px; margin: 0 auto;" onclick="goTo('s1')">← Restart prototype</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 2: DOWNLOAD DATA ── -->
+      <div class="screen" id="s2">
+        <button class="back-link" onclick="goTo('s1')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <div class="progress-header">
+          <div class="progress-meta">
+            <span class="progress-step-label">Save your data</span>
+            <span class="progress-step-count">Step 2 of 5</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+        </div>
+        <div class="section-header">
+          <h2>Download your data first?</h2>
+          <p>Before you delete, you can save a copy of everything. This is your last chance to do so.</p>
+        </div>
+        <div class="screen-body">
+          <div class="data-card">
+            <div class="data-row">
+              <div class="data-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <span class="data-label">Photos &amp; videos</span>
+              <span class="data-count">342 items</span>
+            </div>
+            <div class="data-row">
+              <div class="data-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+              <span class="data-label">Messages</span>
+              <span class="data-count">1,204 threads</span>
+            </div>
+            <div class="data-row">
+              <div class="data-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              </div>
+              <span class="data-label">Profile &amp; account info</span>
+              <span class="data-count">Bio, links, settings</span>
+            </div>
+          </div>
+          <button class="btn btn-outline" style="margin-bottom:10px;" onclick="goTo('s3')">Download my data</button>
+          <button class="btn-ghost" onclick="goTo('s3')">Skip and continue without downloading</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 3: WHAT GETS DELETED ── -->
+      <div class="screen" id="s3">
+        <button class="back-link" onclick="goTo('s2')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <div class="progress-header">
+          <div class="progress-meta">
+            <span class="progress-step-label">What gets deleted</span>
+            <span class="progress-step-count">Step 3 of 5</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
+        </div>
+        <div class="section-header">
+          <h2>Here's what will be permanently removed</h2>
+          <p>All of this data will be deleted after a 30-day grace period. There is no partial recovery.</p>
+        </div>
+        <div class="screen-body">
+          <div class="data-card" style="margin-bottom:20px;">
+            <div class="data-row">
+              <div class="data-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <span class="data-label">Photos &amp; videos</span>
+            </div>
+            <div class="data-row">
+              <div class="data-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+              <span class="data-label">Messages &amp; comments</span>
+            </div>
+            <div class="data-row">
+              <div class="data-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <span class="data-label">Followers &amp; following lists</span>
+            </div>
+            <div class="data-row">
+              <div class="data-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              </div>
+              <span class="data-label">Likes, saves &amp; story views</span>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot now"></div>
+                <div class="tl-connector"></div>
+              </div>
+              <div class="tl-right">
+                <h4>Today — Deletion scheduled</h4>
+                <p>Your account is immediately hidden from search and other users. You can still log in and cancel.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot soon"></div>
+                <div class="tl-connector"></div>
+              </div>
+              <div class="tl-right">
+                <h4>30 days — Last chance to cancel</h4>
+                <p>Log back in before this date to keep your account. After this, cancellation is no longer possible.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-left">
+                <div class="tl-dot final"></div>
+              </div>
+              <div class="tl-right">
+                <h4>After 30 days — Permanently deleted</h4>
+                <p>All data is removed from Instagram's servers and cannot be recovered under any circumstances.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-red" onclick="goTo('s4')">I understand — continue to delete</button>
+          <button class="btn-ghost" onclick="goTo('s1')">Cancel — keep my account</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 4: PASSWORD CONFIRM ── -->
+      <div class="screen" id="s4">
+        <button class="back-link" onclick="goTo('s3')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <div class="progress-header">
+          <div class="progress-meta">
+            <span class="progress-step-label">Confirm your identity</span>
+            <span class="progress-step-count">Step 4 of 5</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
+        </div>
+        <div class="section-header">
+          <h2>Enter your password to confirm</h2>
+          <p>This verifies it's really you requesting this deletion.</p>
+        </div>
+        <div class="screen-body">
+          <div class="warning-box">
+            <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p>This will schedule your account for permanent deletion. After the 30-day window closes, this action cannot be reversed.</p>
+          </div>
+          <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="pw" placeholder="Enter your Instagram password" />
+          </div>
+          <button class="btn btn-red" style="margin-bottom:10px;" onclick="goTo('s5')">Confirm deletion</button>
+          <button class="btn-ghost" onclick="goTo('s1')">Cancel — keep my account</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 5: CONFIRMATION ── -->
+      <div class="screen" id="s5">
+        <div class="progress-header">
+          <div class="progress-meta">
+            <span class="progress-step-label">Deletion scheduled</span>
+            <span class="progress-step-count">Step 5 of 5</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+        </div>
+        <div class="screen-body" style="padding-top:4px;">
+          <div class="success-banner">
+            <div class="success-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Deletion scheduled</h3>
+            <div class="deletion-date">April 16, 2026</div>
+            <p class="sub">Your account will be permanently deleted on this date.</p>
+          </div>
+
+          <div class="cancel-card">
+            <h4>Changed your mind? You have 30 days.</h4>
+            <p>Log back in to Instagram before <strong>April 16, 2026</strong> and your account will be fully restored. All your photos, messages, and followers will still be there.</p>
+            <button class="btn btn-green">Cancel deletion — restore my account</button>
+          </div>
+
+          <p class="fine-print">A confirmation email has been sent to your registered address. If you do not log in before April 16, 2026, all data will be permanently and irreversibly removed from Instagram's servers.</p>
+
+          <div class="divider"></div>
+          <button class="back-link" onclick="goTo('s1')" style="justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            Restart prototype
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  function goTo(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
