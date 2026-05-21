@@ -1252,7 +1252,7 @@ footer p{opacity:.82;font-size:14px;margin-bottom:4px}
         <button onclick="submitVQ()" style="margin-top:10px;width:100%;padding:13px;background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">Submit Answer</button>
       </div>
 
-      <div id="vq-feedback" style="display:none;border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:14px"></div>
+      <div id="vq-feedback" style="display:none;border-radius:12px;padding:18px 20px;margin-bottom:16px;font-size:14px;border:2px solid transparent;box-shadow:0 4px 20px rgba(0,0,0,.18)"></div>
 
       <div style="display:flex;gap:10px;margin-top:8px">
         <button id="vq-next-btn" onclick="nextVQ()" style="flex:1;padding:13px;background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;display:none">Next Term →</button>
@@ -1961,10 +1961,18 @@ function showVQFeedback(isCorrect, correctDef) {
   if (isCorrect) vqCorrect++; else vqWrong.push(vqOrder[vqIdx]);
   const fb = document.getElementById('vq-feedback');
   fb.style.display = 'block';
-  fb.style.background = isCorrect ? 'var(--green-bg)' : 'var(--red-bg)';
-  fb.style.borderColor = isCorrect ? '#43a047' : '#ef5350';
-  fb.style.color = isCorrect ? 'var(--green)' : 'var(--red)';
-  fb.innerHTML = isCorrect ? `<strong>✅ Correct!</strong> ${correctDef}` : `<strong>❌ Not quite.</strong> Correct: <em>${correctDef}</em>`;
+  fb.style.borderLeft = '6px solid';
+  if (isCorrect) {
+    fb.style.background = '#1b5e20';
+    fb.style.borderColor = '#69f0ae';
+    fb.style.color = '#ffffff';
+    fb.innerHTML = `<div style="font-size:18px;font-weight:800;margin-bottom:8px">✅ Correct!</div><div style="font-size:14px;line-height:1.6;color:#e8f5e9">${correctDef}</div>`;
+  } else {
+    fb.style.background = '#7f0000';
+    fb.style.borderColor = '#ff5252';
+    fb.style.color = '#ffffff';
+    fb.innerHTML = `<div style="font-size:18px;font-weight:800;margin-bottom:8px">❌ Not quite!</div><div style="font-size:13px;color:#ffcdd2;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Correct Definition:</div><div style="font-size:15px;line-height:1.6;color:#ffffff;font-weight:600">${correctDef}</div>`;
+  }
   document.getElementById('vq-score-label').textContent = `Score: ${vqCorrect} / ${vqTotal}`;
   const nextBtn = document.getElementById('vq-next-btn');
   nextBtn.style.display = 'block';
