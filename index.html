@@ -415,6 +415,19 @@ tbody tr:last-child td{border-bottom:none}
   font-size:13px;font-weight:700;color:#fff;flex-shrink:0;transition:all .18s;
 }
 .ati-opt .opt-text{color:rgba(255,255,255,.9);font-size:14.5px;line-height:1.55;padding-top:3px}
+/* Vocab quiz — light background override */
+#vq-mc-opts .ati-opt{background:#fff;border-color:var(--blush-mid);color:var(--text)}
+#vq-mc-opts .ati-opt .opt-text{color:var(--text)}
+#vq-mc-opts .ati-opt .opt-letter{background:var(--blush);color:var(--rose-deep);border-color:var(--blush-mid)}
+#vq-mc-opts .ati-opt:hover:not(.locked){background:var(--blush-soft);border-color:var(--rose);transform:translateX(3px)}
+#vq-mc-opts .ati-opt.selected{background:var(--blush-soft);border-color:var(--rose)}
+#vq-mc-opts .ati-opt.selected .opt-letter{background:var(--rose);color:#fff;border-color:var(--rose)}
+#vq-mc-opts .ati-opt.correct{background:var(--green-bg)!important;border-color:#43a047!important}
+#vq-mc-opts .ati-opt.correct .opt-letter{background:#43a047!important;color:#fff!important;border-color:#43a047!important}
+#vq-mc-opts .ati-opt.correct .opt-text{color:var(--green)!important}
+#vq-mc-opts .ati-opt.wrong{background:var(--red-bg)!important;border-color:#ef5350!important}
+#vq-mc-opts .ati-opt.wrong .opt-letter{background:#ef5350!important;color:#fff!important;border-color:#ef5350!important}
+#vq-mc-opts .ati-opt.wrong .opt-text{color:var(--red)!important}
 .ati-opt.selected{background:rgba(233,30,140,.15);border-color:var(--rose)}
 .ati-opt.selected .opt-letter{background:var(--rose);border-color:var(--rose)}
 .ati-opt.correct{background:rgba(27,94,32,.2)!important;border-color:#43a047!important}
