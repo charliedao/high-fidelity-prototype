@@ -1,886 +1,1982 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Instagram — Delete Account</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shayne Ramos — Physical Assessment Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --white: #ffffff;
-    --off-white: #fafafa;
-    --border: #dbdbdb;
-    --border-light: #efefef;
-    --text-primary: #262626;
-    --text-secondary: #737373;
-    --text-hint: #a8a8a8;
-    --ig-gradient-start: #f09433;
-    --ig-gradient-mid1: #e6683c;
-    --ig-gradient-mid2: #dc2743;
-    --ig-gradient-mid3: #cc2366;
-    --ig-gradient-end: #bc1888;
-    --red: #ed4956;
-    --red-light: #fff1f2;
-    --red-border: #fca5a5;
-    --red-dark: #b91c1c;
-    --orange: #f97316;
-    --orange-light: #fff7ed;
-    --green: #22c55e;
-    --green-light: #f0fdf4;
-    --green-dark: #15803d;
-    --green-border: #86efac;
-    --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  }
-
-  html, body {
-    min-height: 100vh;
-    background: var(--off-white);
-    font-family: var(--font);
-    color: var(--text-primary);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ── TOP NAV ── */
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    height: 54px;
-  }
-
-  .navbar-logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-  }
-
-  .ig-icon {
-    width: 28px;
-    height: 28px;
-    background: linear-gradient(135deg, var(--ig-gradient-start), var(--ig-gradient-mid1), var(--ig-gradient-mid2), var(--ig-gradient-mid3), var(--ig-gradient-end));
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ig-icon svg { width: 16px; height: 16px; }
-
-  .navbar-wordmark {
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--text-primary);
-    letter-spacing: -0.3px;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .nav-avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #f09433, #bc1888);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
-  }
-
-  /* ── PAGE LAYOUT ── */
-  .page-layout {
-    display: flex;
-    min-height: calc(100vh - 54px);
-  }
-
-  .sidebar {
-    width: 240px;
-    background: var(--white);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    flex-shrink: 0;
-    position: sticky;
-    top: 54px;
-    height: calc(100vh - 54px);
-    overflow-y: auto;
-  }
-
-  .sidebar-section-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-hint);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    padding: 0 20px 8px;
-  }
-
-  .sidebar-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-    font-size: 14px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: background 0.15s;
-    border-left: 3px solid transparent;
-  }
-
-  .sidebar-item:hover { background: var(--off-white); color: var(--text-primary); }
-
-  .sidebar-item.active {
-    color: var(--text-primary);
-    font-weight: 500;
-    border-left-color: var(--text-primary);
-    background: var(--off-white);
-  }
-
-  .sidebar-item svg { width: 18px; height: 18px; flex-shrink: 0; }
-
-  /* ── MAIN CONTENT ── */
-  .main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 40px 24px;
-  }
-
-  .flow-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    width: 100%;
-    max-width: 500px;
-    overflow: hidden;
-  }
-
-  /* ── SCREENS ── */
-  .screen { display: none; }
-  .screen.active { display: block; }
-
-  /* ── PROGRESS ── */
-  .progress-header {
-    padding: 20px 24px 0;
-  }
-
-  .progress-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-
-  .progress-step-label {
-    font-size: 12px;
-    color: var(--text-hint);
-    font-weight: 400;
-  }
-
-  .progress-step-count {
-    font-size: 12px;
-    color: var(--text-hint);
-  }
-
-  .progress-track {
-    height: 2px;
-    background: var(--border-light);
-    border-radius: 1px;
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-
-  .progress-fill {
-    height: 100%;
-    border-radius: 1px;
-    background: linear-gradient(90deg, var(--ig-gradient-mid2), var(--ig-gradient-end));
-    transition: width 0.4s ease;
-  }
-
-  /* ── SECTION HEADER ── */
-  .section-header {
-    padding: 0 24px 20px;
-    border-bottom: 1px solid var(--border-light);
-    margin-bottom: 20px;
-  }
-
-  .section-header h2 {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
-
-  .section-header p {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.55;
-  }
-
-  /* ── BODY PADDING ── */
-  .screen-body { padding: 0 24px 24px; }
-
-  /* ── CHOICE CARDS (Screen 1) ── */
-  .choice-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 4px;
-  }
-
-  .choice-card {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 16px;
-    cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-
-  .choice-card:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-
-  .choice-card.deactivate:hover { border-color: var(--orange); }
-  .choice-card.delete:hover { border-color: var(--red); }
-
-  .choice-badge {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 8px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-  }
-
-  .badge-orange { background: var(--orange-light); color: var(--orange); }
-  .badge-red { background: var(--red-light); color: var(--red-dark); }
-
-  .choice-card h3 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
-
-  .choice-card p {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: 16px;
-  }
-
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 9px 0;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 600;
-    font-family: var(--font);
-    cursor: pointer;
-    border: none;
-    text-align: center;
-    transition: opacity 0.15s, transform 0.1s;
-    letter-spacing: 0.1px;
-  }
-
-  .btn:active { transform: scale(0.98); }
-
-  .btn-orange { background: var(--orange); color: white; }
-  .btn-red { background: var(--red); color: white; }
-  .btn-outline {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-primary);
-  }
-  .btn-outline:hover { background: var(--off-white); }
-  .btn-green { background: var(--green-dark); color: white; }
-  .btn-ghost {
-    display: block;
-    width: 100%;
-    background: none;
-    border: none;
-    font-family: var(--font);
-    font-size: 13px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    padding: 10px 0;
-    text-align: center;
-    transition: color 0.15s;
-  }
-  .btn-ghost:hover { color: var(--text-primary); }
-
-  /* ── DATA CARD ── */
-  .data-card {
-    background: var(--off-white);
-    border: 1px solid var(--border-light);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .data-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border-light);
-  }
-
-  .data-row:last-child { border-bottom: none; }
-
-  .data-icon-wrap {
-    width: 32px;
-    height: 32px;
-    border-radius: 4px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .data-icon-wrap svg { width: 16px; height: 16px; color: var(--text-secondary); }
-
-  .data-label { font-size: 13px; color: var(--text-primary); flex: 1; }
-  .data-count { font-size: 12px; color: var(--text-hint); }
-
-  /* ── TIMELINE ── */
-  .timeline { margin-bottom: 20px; }
-
-  .tl-item {
-    display: flex;
-    gap: 14px;
-    position: relative;
-  }
-
-  .tl-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-    width: 16px;
-  }
-
-  .tl-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-top: 4px;
-    flex-shrink: 0;
-  }
-
-  .tl-dot.now { background: var(--red); }
-  .tl-dot.soon { background: var(--orange); }
-  .tl-dot.final { background: var(--border); }
-
-  .tl-connector {
-    width: 1px;
-    flex: 1;
-    background: var(--border-light);
-    min-height: 28px;
-    margin: 4px 0;
-  }
-
-  .tl-right { padding-bottom: 20px; }
-  .tl-right h4 { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
-  .tl-right p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-
-  /* ── WARNING BOX ── */
-  .warning-box {
-    background: var(--red-light);
-    border: 1px solid var(--red-border);
-    border-radius: 4px;
-    padding: 12px 14px;
-    margin-bottom: 16px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .warning-icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    margin-top: 1px;
-    color: var(--red);
-  }
-
-  .warning-box p { font-size: 13px; color: var(--red-dark); line-height: 1.5; }
-
-  /* ── INPUT ── */
-  .input-group { margin-bottom: 16px; }
-  .input-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
-
-  .input-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-family: var(--font);
-    font-size: 14px;
-    color: var(--text-primary);
-    background: var(--off-white);
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
-  .input-group input:focus { border-color: var(--text-secondary); background: var(--white); }
-  .input-group input::placeholder { color: var(--text-hint); }
-
-  /* ── SUCCESS SCREEN ── */
-  .success-banner {
-    background: var(--green-light);
-    border: 1px solid var(--green-border);
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-
-  .success-check {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--green-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px;
-  }
-
-  .success-check svg { width: 22px; height: 22px; }
-
-  .success-banner h3 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--green-dark);
-    margin-bottom: 8px;
-  }
-
-  .deletion-date {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--green-dark);
-    margin-bottom: 6px;
-    letter-spacing: -0.3px;
-  }
-
-  .success-banner .sub { font-size: 12px; color: #166534; }
-
-  .cancel-card {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 16px;
-    margin-bottom: 16px;
-  }
-
-  .cancel-card h4 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
-
-  .cancel-card p {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.55;
-    margin-bottom: 14px;
-  }
-
-  .fine-print {
-    font-size: 12px;
-    color: var(--text-hint);
-    line-height: 1.6;
-    text-align: center;
-    padding: 0 4px;
-    margin-bottom: 20px;
-  }
-
-  .divider {
-    height: 1px;
-    background: var(--border-light);
-    margin: 0 24px 16px;
-  }
-
-  .back-link {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    padding: 0 24px 20px;
-    background: none;
-    border: none;
-    font-family: var(--font);
-    transition: color 0.15s;
-  }
-
-  .back-link:hover { color: var(--text-primary); }
-  .back-link svg { width: 14px; height: 14px; }
-
-  /* ── DEACTIVATED SCREEN ── */
-  .deactivated-wrap {
-    padding: 40px 24px;
-    text-align: center;
-  }
-
-  .deactivated-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--orange-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 16px;
-  }
-
-  .deactivated-icon svg { width: 28px; height: 28px; color: var(--orange); }
-  .deactivated-wrap h2 { font-size: 17px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
-  .deactivated-wrap p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 24px; }
-
-  /* ── FADE ANIMATION ── */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .screen.active { animation: fadeIn 0.22s ease; }
+/* ── Variables ─────────────────────────────────────────────────── */
+:root {
+  --rose:      #e91e8c;
+  --rose-dark: #ad1457;
+  --rose-deep: #880e4f;
+  --blush:     #fce4ec;
+  --blush-mid: #f8bbd0;
+  --blush-soft:#fff0f6;
+  --cream:     #fff9fc;
+  --text:      #1a0a12;
+  --muted:     #7b4f63;
+  --green:     #1b5e20;
+  --green-bg:  #e8f5e9;
+  --shadow:    0 4px 24px rgba(233,30,140,.13);
+  --shadow-lg: 0 12px 48px rgba(233,30,140,.18);
+  --radius:    16px;
+  --radius-sm: 8px;
+}
+
+/* ── Reset & Base ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--blush); }
+::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 99px; }
+
+/* ── Hero ──────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--rose-deep) 0%, var(--rose) 50%, #f06292 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,.06) 0%, transparent 45%);
+}
+.hero-bubbles span {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.07);
+  animation: float 8s ease-in-out infinite;
+}
+.hero-bubbles span:nth-child(1) { width:320px;height:320px;top:-80px;right:-60px;animation-delay:0s; }
+.hero-bubbles span:nth-child(2) { width:200px;height:200px;bottom:-40px;left:-50px;animation-delay:2s; }
+.hero-bubbles span:nth-child(3) { width:140px;height:140px;top:40%;left:5%;animation-delay:4s; }
+.hero-bubbles span:nth-child(4) { width:100px;height:100px;bottom:15%;right:8%;animation-delay:1s; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+
+.hero-badge {
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255,255,255,.3);
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+.hero-hearts { font-size: 28px; margin-bottom: 16px; position: relative; z-index:1; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 8vw, 78px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 4px 24px rgba(0,0,0,.2);
+}
+.hero h1 em { font-style: normal; color: var(--blush-mid); }
+.hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+  font-weight: 300;
+  letter-spacing: .02em;
+}
+.hero-card {
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255,255,255,.25);
+  border-radius: 20px;
+  padding: 28px 40px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+.hero-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.hero-card p { color: rgba(255,255,255,.8); font-size: 14px; }
+
+.hero-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin-bottom: 40px;
+}
+.hero-topics span {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.hero-cta {
+  background: #fff;
+  color: var(--rose-deep);
+  padding: 14px 36px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
+  transition: transform .2s, box-shadow .2s;
+  display: inline-block;
+}
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,.25); }
+
+/* ── Sticky Nav ────────────────────────────────────────────────── */
+.sidenav {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  width: 240px;
+  background: #fff;
+  border-right: 1.5px solid var(--blush-mid);
+  padding: 24px 0;
+  overflow-y: auto;
+  z-index: 100;
+  transform: translateX(-100%);
+  transition: transform .3s ease;
+  box-shadow: var(--shadow-lg);
+}
+.sidenav.open { transform: translateX(0); }
+.sidenav-logo {
+  padding: 0 20px 20px;
+  border-bottom: 1.5px solid var(--blush-mid);
+  margin-bottom: 12px;
+}
+.sidenav-logo p { font-family: 'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--rose-deep); }
+.sidenav-logo small { font-size:11px; color:var(--muted); }
+.sidenav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: all .15s;
+}
+.sidenav a:hover, .sidenav a.active {
+  color: var(--rose-deep);
+  background: var(--blush-soft);
+  border-left-color: var(--rose);
+}
+.sidenav a .nav-num {
+  min-width: 22px; height: 22px;
+  background: var(--blush-mid);
+  color: var(--rose-deep);
+  border-radius: 50%;
+  display: flex;align-items:center;justify-content:center;
+  font-size: 10px; font-weight: 700;
+  flex-shrink: 0;
+}
+.sidenav a.active .nav-num { background: var(--rose); color: #fff; }
+
+/* ── Toggle Button ─────────────────────────────────────────────── */
+.nav-toggle {
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 200;
+  width: 44px; height: 44px;
+  background: var(--rose);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex; align-items:center; justify-content:center;
+  flex-direction: column; gap: 5px;
+  box-shadow: var(--shadow);
+  transition: background .2s;
+}
+.nav-toggle:hover { background: var(--rose-dark); }
+.nav-toggle span {
+  display: block;
+  width: 20px; height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all .3s;
+}
+.nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+/* ── Main Content ──────────────────────────────────────────────── */
+.main { max-width: 900px; margin: 0 auto; padding: 60px 24px 100px; }
+
+/* ── Section Wrapper ───────────────────────────────────────────── */
+.section-block {
+  margin-bottom: 56px;
+  animation: fadeUp .5s ease both;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--blush-mid);
+}
+.section-num {
+  min-width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+  color: #fff;
+  border-radius: 12px;
+  display: flex; align-items:center; justify-content:center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(233,30,140,.35);
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--rose-deep);
+  line-height: 1.2;
+}
+.section-title small {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 2px;
+}
+
+/* ── Cards ─────────────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  border: 1.5px solid var(--blush-mid);
+  box-shadow: var(--shadow);
+}
+.card-pink {
+  background: linear-gradient(135deg, #fff 60%, var(--blush-soft));
+  border-color: var(--blush-mid);
+}
+.card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--rose-deep);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card h3::before { content:''; display:inline-block; width:4px; height:18px; background:var(--rose); border-radius:2px; flex-shrink:0; }
+
+/* ── Bullet List ───────────────────────────────────────────────── */
+.bullet-list { list-style: none; }
+.bullet-list li {
+  padding: 6px 0 6px 24px;
+  position: relative;
+  border-bottom: 1px solid var(--blush-soft);
+  font-size: 14px;
+}
+.bullet-list li:last-child { border-bottom: none; }
+.bullet-list li::before {
+  content: '♥';
+  position: absolute;
+  left: 0;
+  color: var(--rose);
+  font-size: 10px;
+  top: 9px;
+}
+
+/* ── Tag Chips ─────────────────────────────────────────────────── */
+.chip-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.chip {
+  background: var(--blush);
+  color: var(--rose-deep);
+  border: 1.5px solid var(--blush-mid);
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.chip.green { background: var(--green-bg); color: var(--green); border-color: #a5d6a7; }
+.chip.dark { background: var(--rose-deep); color: #fff; border-color: var(--rose-deep); }
+
+/* ── Tables ────────────────────────────────────────────────────── */
+.tbl-wrap { overflow-x: auto; margin: 16px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+thead tr { background: linear-gradient(90deg, var(--rose-deep), var(--rose-dark)); }
+thead th {
+  color: #fff;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+tbody tr:nth-child(even) { background: var(--blush-soft); }
+tbody tr:hover { background: var(--blush); transition: background .15s; }
+tbody td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--blush-mid);
+  vertical-align: top;
+  line-height: 1.5;
+}
+tbody tr:last-child td { border-bottom: none; }
+td strong { color: var(--rose-deep); }
+td .tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+.tag-warn { background:#fff3e0; color:#e65100; }
+.tag-good { background:var(--green-bg); color:var(--green); }
+.tag-bad  { background:#ffebee; color:#c62828; }
+
+/* ── Two-col layout ────────────────────────────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media(max-width:640px) { .two-col,.three-col { grid-template-columns: 1fr; } }
+
+/* ── Info Box ──────────────────────────────────────────────────── */
+.info-box {
+  background: var(--blush-soft);
+  border-left: 4px solid var(--rose);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-size: 13.5px;
+}
+.info-box.green-box {
+  background: var(--green-bg);
+  border-left-color: var(--green);
+  color: var(--green);
+}
+.info-box strong { color: var(--rose-deep); }
+.info-box.green-box strong { color: var(--green); }
+
+/* ── Practice Questions ────────────────────────────────────────── */
+.q-block {
+  background: #fff;
+  border: 1.5px solid var(--blush-mid);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.q-head {
+  background: linear-gradient(90deg, var(--blush-soft), #fff);
+  padding: 16px 20px;
+  border-bottom: 1.5px solid var(--blush-mid);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: background .2s;
+}
+.q-head:hover { background: var(--blush); }
+.q-num {
+  min-width: 30px; height: 30px;
+  background: var(--rose);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.q-text { font-weight: 600; color: var(--rose-deep); font-size: 14px; line-height: 1.5; flex: 1; }
+.q-arrow { color: var(--rose); font-size: 18px; margin-left: auto; transition: transform .25s; flex-shrink:0; margin-top:2px; }
+.q-body {
+  display: none;
+  padding: 16px 20px;
+}
+.q-block.open .q-body { display: block; }
+.q-block.open .q-arrow { transform: rotate(180deg); }
+.q-options { list-style: none; margin-bottom: 14px; }
+.q-options li {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  font-size: 13.5px;
+  border: 1.5px solid var(--blush-mid);
+  cursor: pointer;
+  transition: all .15s;
+}
+.q-options li:hover { background: var(--blush); border-color: var(--rose); }
+.q-options li.correct { background: var(--green-bg)!important; border-color: var(--green)!important; color: var(--green)!important; font-weight:600; }
+.q-options li.wrong   { background: #ffebee!important; border-color:#ef9a9a!important; color:#c62828!important; }
+.q-answer {
+  background: var(--green-bg);
+  border: 1.5px solid #a5d6a7;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: var(--green);
+  display: none;
+}
+.q-answer.show { display: block; }
+.q-answer strong { color: var(--green); }
+.show-ans-btn {
+  background: none;
+  border: 1.5px solid var(--rose);
+  color: var(--rose);
+  padding: 6px 16px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all .15s;
+}
+.show-ans-btn:hover { background: var(--rose); color: #fff; }
+
+/* ── Vocab Search ──────────────────────────────────────────────── */
+.search-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+.search-wrap input {
+  width: 100%;
+  padding: 14px 20px 14px 48px;
+  border: 2px solid var(--blush-mid);
+  border-radius: 99px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.search-wrap input:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(233,30,140,.1); }
+.search-wrap::before {
+  content: '🔍';
+  position: absolute;
+  left: 18px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+}
+.vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media(max-width:600px) { .vocab-grid { grid-template-columns: 1fr; } }
+.vocab-card {
+  background: #fff;
+  border: 1.5px solid var(--blush-mid);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  transition: all .2s;
+  box-shadow: 0 2px 8px rgba(233,30,140,.07);
+}
+.vocab-card:hover { border-color: var(--rose); transform: translateY(-2px); box-shadow: var(--shadow); }
+.vocab-term {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--rose-deep);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vocab-term::before { content:'♥'; font-size:9px; color:var(--rose); }
+.vocab-def { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.vocab-hidden { display: none; }
+
+/* ── Progress Bar ──────────────────────────────────────────────── */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose), #f48fb1);
+  z-index: 9999;
+  width: 0%;
+  transition: width .1s;
+}
+
+/* ── Back to top ───────────────────────────────────────────────── */
+.back-top {
+  position: fixed;
+  bottom: 28px; right: 24px;
+  width: 46px; height: 46px;
+  background: var(--rose);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  align-items: center; justify-content: center;
+  box-shadow: var(--shadow-lg);
+  transition: all .2s;
+  z-index: 150;
+  text-decoration: none;
+}
+.back-top.show { display: flex; }
+.back-top:hover { background: var(--rose-dark); transform: translateY(-3px); }
+
+/* ── Highlight Box ─────────────────────────────────────────────── */
+.highlight {
+  background: linear-gradient(135deg, var(--rose-deep), var(--rose));
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 20px 0;
+}
+.highlight h3 { color: #fff; font-family:'Playfair Display',serif; font-size:18px; margin-bottom:8px; }
+.highlight p { font-size: 14px; color: rgba(255,255,255,.9); }
+.highlight ul { list-style:none; margin-top:10px; }
+.highlight ul li { padding: 4px 0; font-size:14px; color:rgba(255,255,255,.9); padding-left:18px; position:relative; }
+.highlight ul li::before { content:'✓'; position:absolute; left:0; color:var(--blush-mid); font-weight:700; }
+
+/* ── Signs & Symptoms Grid ─────────────────────────────────────── */
+.sx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin-top: 12px; }
+.sx-card {
+  background: var(--blush-soft);
+  border: 1.5px solid var(--blush-mid);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+.sx-card h4 { font-size: 13px; font-weight: 700; color: var(--rose-deep); margin-bottom: 8px; display:flex; align-items:center; gap:6px; }
+.sx-card ul { list-style: none; }
+.sx-card ul li { font-size: 12.5px; padding: 2px 0; color: var(--muted); padding-left: 12px; position:relative; }
+.sx-card ul li::before { content:'•'; position:absolute; left:0; color:var(--rose); }
+
+/* ── Memory Tricks ─────────────────────────────────────────────── */
+.trick-list { list-style:none; }
+.trick-list li {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--blush-mid);
+  font-size: 14px;
+  align-items: flex-start;
+}
+.trick-list li:last-child { border-bottom: none; }
+.trick-list li::before {
+  content: '★';
+  color: var(--rose);
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Footer ────────────────────────────────────────────────────── */
+footer {
+  background: linear-gradient(135deg, var(--rose-deep), var(--rose));
+  color: #fff;
+  text-align: center;
+  padding: 48px 24px;
+}
+footer h2 { font-family:'Playfair Display',serif; font-size:28px; margin-bottom:8px; }
+footer p { opacity:.85; font-size:14px; }
+
+/* ── Overlay ───────────────────────────────────────────────────── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 90;
+}
+.overlay.show { display: block; }
+
+/* ── Responsive ────────────────────────────────────────────────── */
+@media(max-width:480px) {
+  .hero h1 { font-size: 36px; }
+  .hero-card { padding: 20px 24px; }
+  .section-title { font-size: 20px; }
+  .main { padding: 40px 16px 80px; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="navbar">
-  <a class="navbar-logo" href="#">
-    <div class="ig-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-        <circle cx="12" cy="12" r="4"/>
-        <circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/>
-      </svg>
-    </div>
-    <span class="navbar-wordmark">Instagram</span>
-  </a>
-  <div class="navbar-right">
-    <div class="nav-avatar">CD</div>
+<div class="progress-bar" id="progress"></div>
+
+<!-- Nav toggle -->
+<button class="nav-toggle" id="navToggle" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Side Navigation -->
+<nav class="sidenav" id="sidenav">
+  <div class="sidenav-logo">
+    <p>Shayne Ramos 💕</p>
+    <small>NUR 110 · Physical Assessment · 2026</small>
   </div>
+  <a href="#s1"><span class="nav-num">1</span>Why Assess?</a>
+  <a href="#s2"><span class="nav-num">2</span>Types of Assessments</a>
+  <a href="#s3"><span class="nav-num">3</span>Types of Data</a>
+  <a href="#s4"><span class="nav-num">4</span>Interviewing</a>
+  <a href="#s5"><span class="nav-num">5</span>Exam Techniques</a>
+  <a href="#s6"><span class="nav-num">6</span>Client Positioning</a>
+  <a href="#s7"><span class="nav-num">7</span>Vital Signs</a>
+  <a href="#s8"><span class="nav-num">8</span>Lifespan Assessment</a>
+  <a href="#s9"><span class="nav-num">9</span>Skin & General Survey</a>
+  <a href="#s10"><span class="nav-num">10</span>Neuro / LOC</a>
+  <a href="#s11"><span class="nav-num">11</span>Respiratory</a>
+  <a href="#s12"><span class="nav-num">12</span>Abdomen & Urinary</a>
+  <a href="#s13"><span class="nav-num">13</span>Musculoskeletal</a>
+  <a href="#s14"><span class="nav-num">14</span>Vocabulary</a>
+  <a href="#s15"><span class="nav-num">15</span>Practice Questions</a>
+  <a href="#s16"><span class="nav-num">16</span>Cheat Sheet</a>
 </nav>
 
-<!-- LAYOUT -->
-<div class="page-layout">
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bubbles">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-badge">NUR 110 · UPMC Mercy School of Nursing · 2026</div>
+  <div class="hero-hearts">♥ ♥ ♥</div>
+  <h1>Physical Assessment<br><em>Study Guide</em></h1>
+  <p class="hero-sub">Complete review of everything you need to score 50 / 50</p>
+  <div class="hero-card">
+    <h2>Shayne Ramos</h2>
+    <p>You've got this, girl 💕</p>
+  </div>
+  <div class="hero-topics">
+    <span>♥ Assessment Fundamentals</span>
+    <span>♥ Types of Data</span>
+    <span>♥ Interviewing Techniques</span>
+    <span>♥ Vital Signs Across Lifespan</span>
+    <span>♥ Respiratory & Neuro</span>
+    <span>♥ Full Vocabulary</span>
+    <span>♥ 15 Practice Questions</span>
+    <span>♥ Quick Cheat Sheet</span>
+  </div>
+  <a href="#s1" class="hero-cta">Start Studying ↓</a>
+</section>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <p class="sidebar-section-title" style="margin-top:4px;">Settings</p>
+<!-- MAIN -->
+<main class="main">
 
-    <div class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      Edit profile
+<!-- ─── S1: WHY ASSESS ─────────────────────────────────────── -->
+<section class="section-block" id="s1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title"><small>Foundation</small>Why Do We Do Physical Assessments?</div>
+  </div>
+  <div class="card card-pink">
+    <p>Physical assessment is the process by which the nurse reviews the body of a client for signs of disease or disorders. It generally follows the taking of a health history and is the <strong>FIRST step of the nursing process.</strong></p>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>Core Purposes</h3>
+      <ul class="bullet-list">
+        <li>Reviews body for signs of disease or disorder</li>
+        <li>Follows the health history intake</li>
+        <li>Determines the client's individual needs</li>
+        <li>Is the <strong>FIRST step</strong> of the nursing process</li>
+        <li>Identifies problems and care needs</li>
+        <li>Establishes a baseline for future comparison</li>
+        <li>Helps make clinical judgments</li>
+      </ul>
     </div>
-    <div class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-      Password & security
-    </div>
-    <div class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-      Privacy
-    </div>
-    <div class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-      Notifications
-    </div>
-    <div class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      Messages
-    </div>
-    <div class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
-      Download your data
-    </div>
-
-    <div style="height:1px; background: var(--border-light); margin: 12px 0;"></div>
-    <p class="sidebar-section-title">Account</p>
-
-    <div class="sidebar-item active">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-      Delete account
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main-content">
-    <div class="flow-card">
-
-      <!-- ── SCREEN 1: CHOOSE ── -->
-      <div class="screen active" id="s1">
-        <div class="progress-header">
-          <div class="progress-meta">
-            <span class="progress-step-label">Manage account</span>
-            <span class="progress-step-count">Step 1 of 5</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
-        </div>
-        <div class="section-header">
-          <h2>Deactivate or delete your account?</h2>
-          <p>These are two different actions. Read carefully before choosing.</p>
-        </div>
-        <div class="screen-body">
-          <div class="choice-grid">
-            <div class="choice-card deactivate">
-              <span class="choice-badge badge-orange">Temporary</span>
-              <h3>Deactivate account</h3>
-              <p>Your profile, photos, and data are hidden. You can reactivate anytime by logging back in.</p>
-              <button class="btn btn-orange" onclick="goTo('s-deactivated')">Deactivate</button>
-            </div>
-            <div class="choice-card delete">
-              <span class="choice-badge badge-red">Permanent</span>
-              <h3>Delete account</h3>
-              <p>Your account and all data are permanently removed after 30 days. This cannot be undone.</p>
-              <button class="btn btn-red" onclick="goTo('s2')">Delete</button>
-            </div>
-          </div>
-        </div>
+    <div class="card">
+      <h3>The Nursing Process</h3>
+      <ul class="bullet-list">
+        <li><strong>Assessment</strong> — collect data (THIS IS WHERE WE ARE)</li>
+        <li><strong>Diagnosis</strong> — identify problems</li>
+        <li><strong>Planning</strong> — set goals</li>
+        <li><strong>Implementation</strong> — carry out care</li>
+        <li><strong>Evaluation</strong> — did it work?</li>
+      </ul>
+      <div class="info-box" style="margin-top:12px;">
+        <strong>★ Remember:</strong> Assessment always comes first — you can't plan care without data!
       </div>
-
-      <!-- ── SCREEN DEACTIVATED ── -->
-      <div class="screen" id="s-deactivated">
-        <div class="deactivated-wrap">
-          <div class="deactivated-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.94 17.94A10.07 10.07 0 0112 20a10 10 0 01-10-10c0-2.08.64-4.01 1.73-5.61M9.9 4.24A9.12 9.12 0 0112 4a10 10 0 0110 10c0 .97-.15 1.9-.42 2.79M3 3l18 18"/></svg>
-          </div>
-          <h2>Account deactivated</h2>
-          <p>Your account is now hidden. To reactivate, simply log back in to Instagram at any time.</p>
-          <button class="btn btn-outline" style="max-width:220px; margin: 0 auto;" onclick="goTo('s1')">← Restart prototype</button>
-        </div>
-      </div>
-
-      <!-- ── SCREEN 2: DOWNLOAD DATA ── -->
-      <div class="screen" id="s2">
-        <button class="back-link" onclick="goTo('s1')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          Back
-        </button>
-        <div class="progress-header">
-          <div class="progress-meta">
-            <span class="progress-step-label">Save your data</span>
-            <span class="progress-step-count">Step 2 of 5</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
-        </div>
-        <div class="section-header">
-          <h2>Download your data first?</h2>
-          <p>Before you delete, you can save a copy of everything. This is your last chance to do so.</p>
-        </div>
-        <div class="screen-body">
-          <div class="data-card">
-            <div class="data-row">
-              <div class="data-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              </div>
-              <span class="data-label">Photos &amp; videos</span>
-              <span class="data-count">342 items</span>
-            </div>
-            <div class="data-row">
-              <div class="data-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-              </div>
-              <span class="data-label">Messages</span>
-              <span class="data-count">1,204 threads</span>
-            </div>
-            <div class="data-row">
-              <div class="data-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-              </div>
-              <span class="data-label">Profile &amp; account info</span>
-              <span class="data-count">Bio, links, settings</span>
-            </div>
-          </div>
-          <button class="btn btn-outline" style="margin-bottom:10px;" onclick="goTo('s3')">Download my data</button>
-          <button class="btn-ghost" onclick="goTo('s3')">Skip and continue without downloading</button>
-        </div>
-      </div>
-
-      <!-- ── SCREEN 3: WHAT GETS DELETED ── -->
-      <div class="screen" id="s3">
-        <button class="back-link" onclick="goTo('s2')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          Back
-        </button>
-        <div class="progress-header">
-          <div class="progress-meta">
-            <span class="progress-step-label">What gets deleted</span>
-            <span class="progress-step-count">Step 3 of 5</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
-        </div>
-        <div class="section-header">
-          <h2>Here's what will be permanently removed</h2>
-          <p>All of this data will be deleted after a 30-day grace period. There is no partial recovery.</p>
-        </div>
-        <div class="screen-body">
-          <div class="data-card" style="margin-bottom:20px;">
-            <div class="data-row">
-              <div class="data-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              </div>
-              <span class="data-label">Photos &amp; videos</span>
-            </div>
-            <div class="data-row">
-              <div class="data-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-              </div>
-              <span class="data-label">Messages &amp; comments</span>
-            </div>
-            <div class="data-row">
-              <div class="data-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-              </div>
-              <span class="data-label">Followers &amp; following lists</span>
-            </div>
-            <div class="data-row">
-              <div class="data-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-              </div>
-              <span class="data-label">Likes, saves &amp; story views</span>
-            </div>
-          </div>
-
-          <div class="timeline">
-            <div class="tl-item">
-              <div class="tl-left">
-                <div class="tl-dot now"></div>
-                <div class="tl-connector"></div>
-              </div>
-              <div class="tl-right">
-                <h4>Today — Deletion scheduled</h4>
-                <p>Your account is immediately hidden from search and other users. You can still log in and cancel.</p>
-              </div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-left">
-                <div class="tl-dot soon"></div>
-                <div class="tl-connector"></div>
-              </div>
-              <div class="tl-right">
-                <h4>30 days — Last chance to cancel</h4>
-                <p>Log back in before this date to keep your account. After this, cancellation is no longer possible.</p>
-              </div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-left">
-                <div class="tl-dot final"></div>
-              </div>
-              <div class="tl-right">
-                <h4>After 30 days — Permanently deleted</h4>
-                <p>All data is removed from Instagram's servers and cannot be recovered under any circumstances.</p>
-              </div>
-            </div>
-          </div>
-
-          <button class="btn btn-red" onclick="goTo('s4')">I understand — continue to delete</button>
-          <button class="btn-ghost" onclick="goTo('s1')">Cancel — keep my account</button>
-        </div>
-      </div>
-
-      <!-- ── SCREEN 4: PASSWORD CONFIRM ── -->
-      <div class="screen" id="s4">
-        <button class="back-link" onclick="goTo('s3')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          Back
-        </button>
-        <div class="progress-header">
-          <div class="progress-meta">
-            <span class="progress-step-label">Confirm your identity</span>
-            <span class="progress-step-count">Step 4 of 5</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
-        </div>
-        <div class="section-header">
-          <h2>Enter your password to confirm</h2>
-          <p>This verifies it's really you requesting this deletion.</p>
-        </div>
-        <div class="screen-body">
-          <div class="warning-box">
-            <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <p>This will schedule your account for permanent deletion. After the 30-day window closes, this action cannot be reversed.</p>
-          </div>
-          <div class="input-group">
-            <label>Password</label>
-            <input type="password" id="pw" placeholder="Enter your Instagram password" />
-          </div>
-          <button class="btn btn-red" style="margin-bottom:10px;" onclick="goTo('s5')">Confirm deletion</button>
-          <button class="btn-ghost" onclick="goTo('s1')">Cancel — keep my account</button>
-        </div>
-      </div>
-
-      <!-- ── SCREEN 5: CONFIRMATION ── -->
-      <div class="screen" id="s5">
-        <div class="progress-header">
-          <div class="progress-meta">
-            <span class="progress-step-label">Deletion scheduled</span>
-            <span class="progress-step-count">Step 5 of 5</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
-        </div>
-        <div class="screen-body" style="padding-top:4px;">
-          <div class="success-banner">
-            <div class="success-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <h3>Deletion scheduled</h3>
-            <div class="deletion-date">April 16, 2026</div>
-            <p class="sub">Your account will be permanently deleted on this date.</p>
-          </div>
-
-          <div class="cancel-card">
-            <h4>Changed your mind? You have 30 days.</h4>
-            <p>Log back in to Instagram before <strong>April 16, 2026</strong> and your account will be fully restored. All your photos, messages, and followers will still be there.</p>
-            <button class="btn btn-green">Cancel deletion — restore my account</button>
-          </div>
-
-          <p class="fine-print">A confirmation email has been sent to your registered address. If you do not log in before April 16, 2026, all data will be permanently and irreversibly removed from Instagram's servers.</p>
-
-          <div class="divider"></div>
-          <button class="back-link" onclick="goTo('s1')" style="justify-content:center;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            Restart prototype
-          </button>
-        </div>
-      </div>
-
     </div>
-  </main>
-</div>
+  </div>
+</section>
+
+<!-- ─── S2: TYPES OF ASSESSMENTS ──────────────────────────── -->
+<section class="section-block" id="s2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title"><small>Core Concept</small>Types of Assessments</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Type</th><th>Purpose</th><th>Key Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Initial / Baseline</strong></td><td>Establish baseline; identify problems</td><td>Done at admission or start of care; <strong>always head-to-toe</strong></td></tr>
+        <tr><td><strong>Problem-Focused (Focused Assessment)</strong></td><td>Determine status of a specific problem</td><td>Targets one system identified in earlier assessment</td></tr>
+        <tr><td><strong>Emergency Assessment</strong></td><td>Identify life-threatening problems</td><td>Rapid, prioritized; ABCs first</td></tr>
+        <tr><td><strong>Time-Lapsed Reassessment</strong></td><td>Compare current status to baseline</td><td>Can also be a focused assessment</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info-box">
+    <strong>★ Exam tip:</strong> Initial assessments are always <em>head-to-toe</em>. Focused assessments target a specific system or problem identified earlier.
+  </div>
+</section>
+
+<!-- ─── S3: TYPES OF DATA ──────────────────────────────────── -->
+<section class="section-block" id="s3">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title"><small>Must Know</small>Types of Data & Sources</div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>Subjective Data</h3>
+      <p style="margin-bottom:10px;font-size:14px;">What the patient <strong>tells</strong> you — symptoms, feelings, perceptions. Only the client can provide this.</p>
+      <ul class="bullet-list">
+        <li>Pain, nausea, dizziness, anxiety</li>
+        <li>"I feel tired" / "My chest hurts"</li>
+        <li>Document in <strong>quotes</strong> whenever possible</li>
+        <li>Also called: <em>Symptoms</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Objective Data</h3>
+      <p style="margin-bottom:10px;font-size:14px;">What you <strong>observe, measure, or test</strong> — can be verified by another person.</p>
+      <ul class="bullet-list">
+        <li>BP 190/100, temp 38.5°C</li>
+        <li>Client appears pale, diaphoretic</li>
+        <li>Lab results, vital signs, exam findings</li>
+        <li>Also called: <em>Signs</em></li>
+      </ul>
+    </div>
+  </div>
+  <div class="info-box" style="margin-bottom:20px;">
+    <strong>★ Memory Trick:</strong> <strong>S</strong>ubjective = what the patient <strong>S</strong>ays. <strong>O</strong>bjective = what you <strong>O</strong>bserve.
+  </div>
+
+  <div class="card">
+    <h3>Sources of Data</h3>
+    <div class="tbl-wrap" style="margin-top:10px;box-shadow:none;">
+      <table>
+        <thead><tr><th>Source</th><th>Type</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Patient themselves</strong></td><td><span class="tag tag-good">PRIMARY ★ Best</span></td><td>Direct interview, patient-reported symptoms</td></tr>
+          <tr><td>Family members</td><td>Secondary</td><td>History when patient can't communicate</td></tr>
+          <tr><td>Other health professionals</td><td>Secondary</td><td>Nurses, physicians, therapists</td></tr>
+          <tr><td>Diagnostic reports</td><td>Secondary</td><td>Lab results, imaging, EKG</td></tr>
+          <tr><td>Textbooks / literature</td><td>Secondary</td><td>Reference material for clinical decision-making</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Embedded practice Qs for this section -->
+  <div class="q-block" id="qA">
+    <div class="q-head" onclick="toggleQ('qA')">
+      <div class="q-num">Q</div>
+      <div class="q-text">During an admission assessment, the nurse collects objective and subjective data. What is an example of <em>subjective</em> data?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. The patient is asleep.</li>
+        <li onclick="selectOpt(this,'wrong')">b. The patient is tearful.</li>
+        <li onclick="selectOpt(this,'wrong')">c. The patient has facial grimacing.</li>
+        <li onclick="selectOpt(this,'correct')">d. The patient states, "I hurt all over."</li>
+      </ul>
+      <div class="q-answer show"><strong>✔ D — </strong>"I hurt all over" is what the patient reports — subjective. Options A, B, and C are all things the nurse <em>observes</em> — objective data.</div>
+    </div>
+  </div>
+  <div class="q-block" id="qB">
+    <div class="q-head" onclick="toggleQ('qB')">
+      <div class="q-num">Q</div>
+      <div class="q-text">Which are acceptable <em>secondary</em> sources of data? (Select all that apply) — A. Patient &nbsp; B. Family members &nbsp; C. Other health professionals &nbsp; D. Diagnostic reports &nbsp; E. Textbooks</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="q-answer show"><strong>✔ B, C, D, E —</strong> The patient is the <em>PRIMARY</em> source. All others (family, professionals, reports, books) are secondary sources.</div>
+    </div>
+  </div>
+  <div class="q-block" id="qC">
+    <div class="q-head" onclick="toggleQ('qC')">
+      <div class="q-num">Q</div>
+      <div class="q-text">When documenting <em>subjective</em> data for the cardiovascular system, the nurse would include which of the following? — A. Vital Signs &nbsp; B. Peripheral pulses &nbsp; C. Chest pain &nbsp; D. Heart sounds</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="q-answer show"><strong>✔ C — Chest pain</strong> is what the patient reports. Vital signs, pulses, and heart sounds are all things the nurse measures/hears — objective data.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── S4: INTERVIEWING ────────────────────────────────────── -->
+<section class="section-block" id="s4">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title"><small>Communication</small>Data Collection & Interviewing</div>
+  </div>
+
+  <div class="q-block" id="qD">
+    <div class="q-head" onclick="toggleQ('qD')">
+      <div class="q-num">Q</div>
+      <div class="q-text">What are the two PRIMARY methods used to collect data? — A. Written report by patient and family &nbsp; B. Review of chart &nbsp; C. Interview and physical examination &nbsp; D. Review of physician's orders</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="q-answer show"><strong>✔ C — Interview and physical examination</strong> are the two primary methods of data collection.</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:20px;">
+    <div class="card">
+      <h3>Interview Types</h3>
+      <ul class="bullet-list">
+        <li><strong>Structured (Directive)</strong> — nurse-driven; follows a set format; efficient</li>
+        <li><strong>Non-structured (Non-directive)</strong> — client-controlled; rapport building; open-ended</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>3 Stages of an Interview</h3>
+      <ul class="bullet-list">
+        <li><strong>Stage 1 — Opening:</strong> Establish rapport, explain purpose</li>
+        <li><strong>Stage 2 — Working:</strong> Collect health history and data</li>
+        <li><strong>Stage 3 — Closing:</strong> Summarize, confirm accuracy, thank client</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>Question Types</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Type</th><th>Example</th><th>Best For</th><th>Watch Out</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Open-ended</strong></td><td>"Tell me about your pain."</td><td>Building rapport, broad info gathering</td><td>Takes more time</td></tr>
+          <tr><td><strong>Closed</strong></td><td>"Is your pain sharp?"</td><td>Quick facts, efficient charting</td><td>May miss emotional context</td></tr>
+          <tr><td><strong>Leading</strong> <span class="tag tag-warn">⚠ AVOID</span></td><td>"You're not in pain, are you?"</td><td>Never — biases the response</td><td>Skews patient answers</td></tr>
+          <tr><td><strong>Neutral</strong> <span class="tag tag-good">✓ Best</span></td><td>"How would you describe your pain?"</td><td>Professional, unbiased</td><td>Preferred in clinical practice</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>Open-Ended vs. Closed — Comparison</h3>
+    <div class="two-col" style="margin-top:12px;">
+      <div>
+        <p style="font-weight:700;color:var(--rose-deep);margin-bottom:8px;">✅ Open-Ended Advantages</p>
+        <ul class="bullet-list">
+          <li>Builds trust and rapport</li>
+          <li>Client does the talking</li>
+          <li>Reveals what patient finds important</li>
+          <li>May reveal lack of patient knowledge</li>
+          <li>Can uncover info nurse wouldn't think to ask</li>
+        </ul>
+        <p style="font-weight:700;color:#c62828;margin:12px 0 8px;">❌ Disadvantages</p>
+        <ul class="bullet-list">
+          <li>Takes more time</li>
+          <li>Difficult to document</li>
+          <li>Language barriers possible</li>
+          <li>Nurse must control the interview</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:700;color:var(--rose-deep);margin-bottom:8px;">✅ Closed Advantages</p>
+        <ul class="bullet-list">
+          <li>More controlled / efficient</li>
+          <li>Requires less effort from client</li>
+          <li>Takes less time</li>
+          <li>Easily documented</li>
+          <li>Can get info sooner</li>
+        </ul>
+        <p style="font-weight:700;color:#c62828;margin:12px 0 8px;">❌ Disadvantages</p>
+        <ul class="bullet-list">
+          <li>May miss emotional information</li>
+          <li>Nurse may dominate interview</li>
+          <li>Doesn't allow volunteered info</li>
+          <li>May inhibit communication</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>Factors That May Influence Assessment / Interview</h3>
+    <div class="chip-grid">
+      <span class="chip">Communication</span>
+      <span class="chip">Developmental factors</span>
+      <span class="chip">Psychosocial factors</span>
+      <span class="chip">Cultural factors</span>
+      <span class="chip">Environmental factors</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>Components of a Health History</h3>
+    <div class="chip-grid">
+      <span class="chip">Chief complaint</span>
+      <span class="chip">History of present illness (HPI)</span>
+      <span class="chip">Past medical history (PMH)</span>
+      <span class="chip">Family history</span>
+      <span class="chip">Social history</span>
+      <span class="chip">Review of systems (ROS)</span>
+      <span class="chip">Medications & allergies</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── S5: EXAM TECHNIQUES ────────────────────────────────── -->
+<section class="section-block" id="s5">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title"><small>Skills</small>Physical Examination Techniques — IAPP</div>
+  </div>
+  <div class="info-box">
+    <strong>★ Memory trick: I-A-P-P</strong> → Inspect · Auscultate · Palpate · Percuss<br>
+    For the <strong>abdomen</strong>, always follow this exact order so palpation doesn't alter bowel sounds!
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Technique</th><th>Description</th><th>Tools / Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>INSPECTION</strong></td><td>Visual examination using the senses — look at the client systematically</td><td>Eyes; adequate lighting; compare bilateral sides</td></tr>
+        <tr><td><strong>AUSCULTATION — Direct</strong></td><td>Listening without an instrument (e.g., hearing a cough or stridor across the room)</td><td>Ear only; rare in clinical practice</td></tr>
+        <tr><td><strong>AUSCULTATION — Indirect</strong></td><td>Listening with a stethoscope to heart, lungs, bowel, vessels</td><td>Bell = low-pitched sounds; Diaphragm = high-pitched sounds</td></tr>
+        <tr><td><strong>PALPATION — Light/Superficial</strong></td><td>Gentle pressing 1–2 cm deep; assess skin texture, temperature, moisture, tenderness</td><td>Fingertips / finger pads; reveals surface abnormalities</td></tr>
+        <tr><td><strong>PALPATION — Deep (Bimanual)</strong></td><td>Pressing 4–6 cm; assess organs, masses, deeper structures</td><td>Two hands overlapped; requires skill and cooperation</td></tr>
+        <tr><td><strong>PERCUSSION — Direct</strong></td><td>Striking body surface directly; reveals tenderness</td><td>One or two fingers strike body surface</td></tr>
+        <tr><td><strong>PERCUSSION — Indirect</strong></td><td>Striking a finger placed on skin; elicits sounds from underlying tissue</td><td>Most common method; reveals resonance vs. dullness</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <h3>Percussion Sound Types</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Sound</th><th>Quality</th><th>Heard Over</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Resonance</strong></td><td>Loud, low, hollow</td><td>Normal lung tissue</td></tr>
+          <tr><td><strong>Hyperresonance</strong></td><td>Very loud, boom-like</td><td>Emphysema, pneumothorax</td></tr>
+          <tr><td><strong>Tympany</strong></td><td>Musical, drum-like</td><td>Stomach, intestines (air)</td></tr>
+          <tr><td><strong>Dullness</strong></td><td>Soft, thudding</td><td>Liver, spleen, fluid-filled areas</td></tr>
+          <tr><td><strong>Flatness</strong></td><td>Very soft, no resonance</td><td>Muscle, bone, pleural effusion</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ─── S6: POSITIONING ────────────────────────────────────── -->
+<section class="section-block" id="s6">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title"><small>Clinical Skills</small>Client Positioning</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Position</th><th>HOB Angle</th><th>Used For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Semi-Fowler's</strong></td><td>30–45°</td><td>Respiratory difficulty, tube feedings, general comfort</td></tr>
+        <tr><td><strong>High Fowler's</strong></td><td>60–90°</td><td>Maximum respiratory expansion, eating, cardiac patients</td></tr>
+        <tr><td><strong>Orthopneic (Tripod)</strong></td><td>Sitting upright, leaning forward on arms</td><td>Severe dyspnea, COPD — maximizes diaphragm movement</td></tr>
+        <tr><td><strong>Trendelenburg</strong></td><td>Head lower than feet</td><td>Historically used for shock (controversial)</td></tr>
+        <tr><td><strong>Reverse Trendelenburg</strong></td><td>Head higher than feet</td><td>GERD, some surgical procedures</td></tr>
+        <tr><td><strong>Supine (Flat)</strong></td><td>0°</td><td>General assessment, cardiovascular, CPR</td></tr>
+        <tr><td><strong>Prone</strong></td><td>Face down</td><td>Posterior assessment, some spinal procedures, ARDS</td></tr>
+        <tr><td><strong>Lateral (Side-lying)</strong></td><td>On side</td><td>Pressure relief, ear assessment, sleeping</td></tr>
+        <tr><td><strong>Lithotomy</strong></td><td>Supine, legs in stirrups</td><td>Gynecological / urological exam</td></tr>
+        <tr><td><strong>Sims'</strong></td><td>Semi-prone, left side</td><td>Rectal exam, enema administration</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── S7: VITAL SIGNS ────────────────────────────────────── -->
+<section class="section-block" id="s7">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title"><small>Critical Content</small>Vital Signs</div>
+  </div>
+  <div class="highlight">
+    <h3>The 6 Vital Signs — Know These Cold!</h3>
+    <ul>
+      <li>Temperature (T)</li>
+      <li>Pulse / Heart Rate (P or HR)</li>
+      <li>Respirations (R)</li>
+      <li>Blood Pressure (BP) — Systolic &amp; Diastolic</li>
+      <li>Oxygen Saturation (SpO₂)</li>
+      <li>Pain — the <strong>6th vital sign</strong></li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <h3>Normal Vital Signs Across the Lifespan</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Age Group</th><th>HR (bpm)</th><th>RR (breaths/min)</th><th>BP (mmHg)</th><th>Temp (°F / °C)</th><th>SpO₂</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Newborn</strong></td><td>120–160</td><td>30–60</td><td>60–90 / 20–60</td><td>97.7–99.5°F / 36.5–37.5°C</td><td>≥95%</td></tr>
+          <tr><td><strong>Infant (1–12 mo)</strong></td><td>80–140</td><td>25–50</td><td>70–100 / 45–65</td><td>97.7–99.5°F / 36.5–37.5°C</td><td>≥95%</td></tr>
+          <tr><td><strong>Toddler (1–3 yr)</strong></td><td>80–130</td><td>20–40</td><td>80–110 / 50–80</td><td>97.7–99.5°F / 36.5–37.5°C</td><td>≥95%</td></tr>
+          <tr><td><strong>Preschool (3–6 yr)</strong></td><td>70–120</td><td>20–30</td><td>80–115 / 50–80</td><td>97.7–99.5°F / 36.5–37.5°C</td><td>≥95%</td></tr>
+          <tr><td><strong>School-age (6–12 yr)</strong></td><td>60–100</td><td>18–25</td><td>85–120 / 55–80</td><td>97.7–99.5°F / 36.5–37.5°C</td><td>≥95%</td></tr>
+          <tr><td><strong>Adolescent (12–18 yr)</strong></td><td>60–100</td><td>12–20</td><td>90–135 / 60–85</td><td>97.7–99.5°F / 36.5–37.5°C</td><td>≥95%</td></tr>
+          <tr><td><strong>Adult</strong></td><td>60–100</td><td>12–20</td><td>120/80 (ideal)</td><td>97.7–99.5°F / 36.5–37.5°C</td><td>≥95%</td></tr>
+          <tr><td><strong>Older Adult (65+)</strong></td><td>60–100</td><td>12–20</td><td>May trend higher</td><td>Slightly lower (less subcutaneous fat)</td><td>≥95%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Temperature -->
+  <div class="card" style="margin-top:20px;">
+    <h3>Temperature — Routes & Accuracy</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Route</th><th>Normal Range</th><th>Accuracy</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Oral</strong></td><td>98.6°F / 37°C</td><td>Standard</td><td>Most common; avoid after hot/cold foods</td></tr>
+          <tr><td><strong>Rectal</strong></td><td>99.6°F / 37.6°C</td><td>Most accurate</td><td>+1°F above oral; invasive</td></tr>
+          <tr><td><strong>Axillary</strong></td><td>97.6°F / 36.4°C</td><td>Least accurate</td><td>–1°F below oral; non-invasive</td></tr>
+          <tr><td><strong>Temporal</strong></td><td>~98.6°F / 37°C</td><td>Good</td><td>Non-invasive; infrared scanner</td></tr>
+          <tr><td><strong>Tympanic</strong></td><td>~98.6°F / 37°C</td><td>Good</td><td>Fast; affected by ear wax or positioning</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box" style="margin-top:12px;">
+      <strong>★ Special Considerations:</strong> Newborns lose heat rapidly to the environment — monitor closely! Older adults have a lower baseline temperature due to loss of subcutaneous fat.
+    </div>
+    <div class="info-box" style="margin-top:8px;">
+      <strong>★ Fever =</strong> temperature &gt;100.4°F (38°C). Signs: flushed skin, diaphoresis, chills, tachycardia, tachypnea, fatigue, headache, confusion (especially in elderly).
+    </div>
+  </div>
+
+  <!-- Pulse -->
+  <div class="card" style="margin-top:20px;">
+    <h3>Pulse — Assessment & Abnormalities</h3>
+    <p style="margin-bottom:12px;font-size:14px;">Use <strong>pads of index and middle fingers</strong>. Palpate both sides and compare for symmetry. All pulses should be regular in rhythm and equal in strength.</p>
+    <div class="info-box" style="margin-bottom:12px;"><strong>Radial Pulse:</strong> Below the base of the thumb — medial and ventral side of the wrist. Most common site for routine checks.</div>
+    <div class="sx-grid">
+      <div class="sx-card">
+        <h4>✓ Normal (60–100 bpm)</h4>
+        <ul><li>Regular rhythm</li><li>Equal bilateral strength</li><li>Strong and bounding</li></ul>
+      </div>
+      <div class="sx-card">
+        <h4>⚡ Tachycardia (&gt;100 bpm)</h4>
+        <ul><li>Fainting / lightheadedness</li><li>Rapid palpitations</li><li>Fluttering in chest</li><li>Bounding pulse</li><li>Chest pressure, SOB</li><li>Fatigue</li></ul>
+      </div>
+      <div class="sx-card">
+        <h4>🐌 Bradycardia (&lt;60 bpm)</h4>
+        <ul><li>Fatigue or weakness</li><li>Dizziness</li><li>Confusion</li><li>Fainting (syncope)</li><li>SOB</li><li>Difficulty exercising</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blood Pressure -->
+  <div class="card" style="margin-top:20px;">
+    <h3>Blood Pressure — Classification</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Classification</th><th>Systolic (mmHg)</th><th>Diastolic (mmHg)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Normal</strong> <span class="tag tag-good">✓</span></td><td>&lt;120</td><td>&lt;80</td></tr>
+          <tr><td><strong>Elevated</strong></td><td>120–129</td><td>&lt;80</td></tr>
+          <tr><td><strong>HTN Stage 1</strong></td><td>130–139</td><td>80–89</td></tr>
+          <tr><td><strong>HTN Stage 2</strong> <span class="tag tag-warn">⚠</span></td><td>≥140</td><td>≥90</td></tr>
+          <tr><td><strong>Hypertensive Crisis</strong> <span class="tag tag-bad">🚨</span></td><td>&gt;180</td><td>&gt;120</td></tr>
+          <tr><td><strong>Hypotension</strong> <span class="tag tag-bad">⬇</span></td><td>&lt;90</td><td>&lt;60</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box" style="margin-top:12px;">
+      <strong>★ Cuff size matters!</strong> Too small = falsely HIGH reading. Too large = falsely LOW reading. Always use the correct size!
+    </div>
+    <div class="two-col" style="margin-top:16px;">
+      <div>
+        <p style="font-weight:700;color:var(--rose-deep);font-size:14px;margin-bottom:8px;">⛔ NEVER take BP on:</p>
+        <ul class="bullet-list">
+          <li>Arm with injury or cast</li>
+          <li>Arm with IV site</li>
+          <li>Mastectomy side</li>
+          <li>Arm with dialysis access</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:700;color:var(--rose-deep);font-size:14px;margin-bottom:8px;">✅ BP can be taken on:</p>
+        <ul class="bullet-list">
+          <li>Upper arm (most common)</li>
+          <li>Lower arm</li>
+          <li>Thigh</li>
+          <li>Lower extremity</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sx-grid" style="margin-top:16px;">
+      <div class="sx-card">
+        <h4>🔺 Hypertension Signs</h4>
+        <ul><li>Severe headache</li><li>SOB / difficulty breathing</li><li>Nosebleeds (epistaxis)</li><li>Vision problems</li><li>Fatigue or confusion</li><li>Chest pain</li><li>Irregular heartbeat</li></ul>
+      </div>
+      <div class="sx-card">
+        <h4>🔻 Hypotension Signs</h4>
+        <ul><li>Dizziness / lightheadedness</li><li>Nausea</li><li>Fainting (syncope)</li><li>Lack of concentration</li><li>Blurred vision</li><li>Cold, clammy, cool skin</li></ul>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:12px;">
+      <strong>★ Orthostatic Hypotension:</strong> Measure BP lying → sitting → standing. A drop of ≥20 mmHg systolic OR ≥10 mmHg diastolic when changing positions = orthostatic hypotension. Patient may feel dizzy or faint when standing. Also called <em>postural hypotension</em>. Common in elderly, dehydrated, or patients on antihypertensives.
+    </div>
+    <div class="info-box" style="margin-top:8px;">
+      <strong>★ Which arm?</strong> Check: limb restriction band · sign over the bed · ask client · jewelry/IVs · whiteboard notation.
+    </div>
+  </div>
+
+  <!-- Respirations -->
+  <div class="card" style="margin-top:20px;">
+    <h3>Respirations — Patterns & Abnormalities</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Pattern</th><th>Rate / Description</th><th>Signs & Symptoms / Association</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Eupnea (Normal)</strong></td><td>12–20/min (adult)</td><td>Regular rhythm, adequate depth</td></tr>
+          <tr><td><strong>Tachypnea</strong></td><td>&gt;20/min — rapid, shallow</td><td>SOB, cyanosis (blue tint to fingers/nails/lips), retractions</td></tr>
+          <tr><td><strong>Bradypnea</strong></td><td>&lt;10/min — abnormally slow</td><td>Lightheadedness, dizziness, chronic fatigue, headaches, weakness, confusion</td></tr>
+          <tr><td><strong>Apnea</strong></td><td>No breathing</td><td>🚨 EMERGENCY — requires immediate intervention</td></tr>
+          <tr><td><strong>Orthopnea</strong></td><td>Difficulty breathing lying flat</td><td>Must sit upright to breathe — CHF, COPD</td></tr>
+          <tr><td><strong>Dyspnea</strong></td><td>Labored breathing (subjective)</td><td>Patient reports difficulty breathing / shortness of breath</td></tr>
+          <tr><td><strong>Kussmaul</strong></td><td>Deep, rapid, labored</td><td>Diabetic ketoacidosis (DKA) — compensatory mechanism</td></tr>
+          <tr><td><strong>Cheyne-Stokes</strong></td><td>Alternating fast/slow with periods of apnea</td><td>Brain injury, heart failure, drug overdose, end of life</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SpO2 & Pain -->
+  <div class="two-col" style="margin-top:16px;">
+    <div class="card">
+      <h3>Oxygen Saturation (SpO₂)</h3>
+      <div class="tbl-wrap" style="box-shadow:none;margin-top:8px;">
+        <table>
+          <thead><tr><th>SpO₂</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>≥95%</td><td><span class="tag tag-good">Normal</span></td><td>Continue monitoring</td></tr>
+            <tr><td>91–94%</td><td>Mild hypoxemia</td><td>Notify provider; O₂ supplement</td></tr>
+            <tr><td>86–90%</td><td><span class="tag tag-warn">Moderate</span></td><td>Urgent intervention</td></tr>
+            <tr><td>&lt;85%</td><td><span class="tag tag-bad">Severe 🚨</span></td><td>Emergency — act NOW</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13px;margin-top:10px;color:var(--muted);">Place pulse oximeter over finger; read result from dynamap monitor.</p>
+    </div>
+    <div class="card">
+      <h3>Pain — The 6th Vital Sign</h3>
+      <ul class="bullet-list">
+        <li><strong>Numeric Rating Scale (NRS):</strong> Adults — rate pain 0–10; 0 = no pain, 10 = worst imaginable</li>
+        <li><strong>Wong-Baker FACES:</strong> Children ages 3–7; also used for adults with communication barriers</li>
+        <li><strong>FLACC Scale:</strong> Infants & non-verbal patients; Face, Legs, Activity, Cry, Consolability</li>
+        <li><strong>PAINAD:</strong> Dementia patients — breathing, vocalization, facial expression, body language, consolability</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── S8: LIFESPAN ───────────────────────────────────────── -->
+<section class="section-block" id="s8">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title"><small>Developmental</small>Assessment Across the Lifespan</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Stage</th><th>Key Assessment Focus</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Newborn / Infant</strong></td><td>APGAR score, reflexes, fontanelles, weight/length, temperature regulation, jaundice, feeding patterns, growth charts</td></tr>
+        <tr><td><strong>Toddler (1–3 yr)</strong></td><td>Language development, stranger anxiety, parallel play, autonomy, walking & coordination; approach gently and non-threateningly</td></tr>
+        <tr><td><strong>Preschooler (3–6 yr)</strong></td><td>Initiative vs. guilt stage; magical thinking; can describe some symptoms; likes to "help" — involve them in the exam</td></tr>
+        <tr><td><strong>School-age (6–12 yr)</strong></td><td>Industry vs. inferiority; understands cause/effect; privacy is important; can give a detailed health history</td></tr>
+        <tr><td><strong>Adolescent (12–18 yr)</strong></td><td>Identity development; <strong>confidentiality is critical</strong>; sexual development; substance use, mental health, body image screening</td></tr>
+        <tr><td><strong>Pregnant Woman</strong></td><td>Fundal height, fetal heart tones, weight gain, edema, BP (preeclampsia risk), gestational age, fetal movement</td></tr>
+        <tr><td><strong>Young Adult (18–40)</strong></td><td>Lifestyle habits, STIs, mental health, reproductive health, hypertension/diabetes screening</td></tr>
+        <tr><td><strong>Middle-Age (40–65)</strong></td><td>Cancer screenings, cardiovascular risk, menopause, vision/hearing changes, bone density, chronic disease management</td></tr>
+        <tr><td><strong>Older Adult (65+)</strong></td><td>Comprehensive / holistic; memory, dentition, senses, nutrition, falls, bowel/bladder; standardized instruments; extra time needed</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h3>Older Adult — Special Considerations</h3>
+    <div class="two-col">
+      <ul class="bullet-list">
+        <li>Review PMH, medications (OTC/herbal), immunization records</li>
+        <li>Assess for falls, frailty, polypharmacy, delirium</li>
+        <li>Accuracy of health history — may underreport symptoms</li>
+        <li>Social history: support systems, living situation, ADLs</li>
+      </ul>
+      <ul class="bullet-list">
+        <li>Barriers: hearing, vision, cognitive, language</li>
+        <li>Active lifestyle → self-worth, relationships, intellectual function</li>
+        <li>Unresolved crisis → despair, hopelessness, bitterness</li>
+        <li>Evaluate environment; allow extra time; involve family</li>
+      </ul>
+    </div>
+    <div class="info-box" style="margin-top:12px;">
+      <strong>★ Geriatric Health History includes:</strong> Memory · Dentition · Alterations in senses · Nutrition · Falls · Injuries · Bowel/bladder function · Social history · Risk factors
+    </div>
+  </div>
+</section>
+
+<!-- ─── S9: SKIN & GENERAL SURVEY ─────────────────────────── -->
+<section class="section-block" id="s9">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title"><small>Inspection</small>Skin Color Changes & General Survey</div>
+  </div>
+  <div class="info-box" style="margin-bottom:16px;">
+    The <strong>General Survey</strong> is your FIRST overall impression — appearance, behavior, LOC, hygiene, gait, affect, dress. Use all your senses!
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Finding</th><th>Color</th><th>Cause / Meaning</th><th>Where to Check</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Erythema</strong></td><td>Red</td><td>Inflammation, infection, allergic reaction, heat</td><td>Skin surface, affected area</td></tr>
+        <tr><td><strong>Cyanosis</strong></td><td>Blue / Gray</td><td>Hypoxia — low oxygen saturation</td><td>Fingertips, nail beds, lips, circumoral (around mouth)</td></tr>
+        <tr><td><strong>Jaundice</strong></td><td>Yellow</td><td>Liver disease, bile duct obstruction, hemolysis</td><td>Skin, sclerae (whites of eyes)</td></tr>
+        <tr><td><strong>Pallor</strong></td><td>Pale / colorless</td><td>Anemia, shock, vasoconstriction, poor perfusion</td><td>Face, nail beds, conjunctiva</td></tr>
+        <tr><td><strong>Ecchymosis</strong></td><td>Black / Blue (bruising)</td><td>Trauma, clotting disorders, medication side effects</td><td>Site of injury or random (if coagulopathy)</td></tr>
+        <tr><td><strong>Diaphoresis</strong></td><td>Profuse sweating</td><td>Fever, pain, anxiety, MI, hypoglycemia, shock</td><td>Skin; often described as "clammy"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <h3>Wound Drainage & Tissue Terms</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Term</th><th>Appearance</th><th>Meaning / Action</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Serous</strong></td><td>Clear, watery</td><td>Normal in early healing</td></tr>
+          <tr><td><strong>Serosanguinous</strong></td><td>Pale pink, watery</td><td>Mix of serum and blood — normal</td></tr>
+          <tr><td><strong>Sanguinous</strong></td><td>Bright red blood</td><td>Active bleeding — monitor closely</td></tr>
+          <tr><td><strong>Purulent</strong></td><td>Thick, yellow/green/cloudy</td><td>🚨 INFECTION — notify provider</td></tr>
+          <tr><td><strong>Eschar</strong></td><td>Thick, black/brown, leathery</td><td>Necrotic (dead) tissue — requires debridement</td></tr>
+          <tr><td><strong>Slough</strong></td><td>Yellow/tan, soft, stringy</td><td>Necrotic tissue in wound bed — requires treatment</td></tr>
+          <tr><td><strong>Bony Prominence</strong></td><td>Where bone is close to skin</td><td>High pressure ulcer risk — offload!</td></tr>
+          <tr><td><strong>Offload</strong></td><td>Relieve pressure</td><td>Reposition, use padding/specialty beds</td></tr>
+          <tr><td><strong>Invasive</strong></td><td>Enters the body</td><td>E.g., IV insertion, catheterization, surgery</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ─── S10: NEURO / LOC ───────────────────────────────────── -->
+<section class="section-block" id="s10">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title"><small>Neurological</small>Level of Consciousness (LOC)</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Level</th><th>Description</th><th>Response to Stimuli</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ALERT</strong></td><td>Fully awake and aware</td><td>Responds appropriately to all stimuli</td></tr>
+        <tr><td><strong>ORIENTED</strong></td><td>Aware of Person, Place, Time, Situation</td><td>Answers orientation questions correctly</td></tr>
+        <tr><td><strong>LETHARGIC</strong></td><td>Excessive sleepiness, drowsy but arousable</td><td>Responds slowly; returns to sleep quickly</td></tr>
+        <tr><td><strong>OBTUNDED</strong></td><td>Difficult to arouse; very confused</td><td>Responds only to vigorous stimulation</td></tr>
+        <tr><td><strong>STUPOROUS</strong></td><td>Very minimal responsiveness</td><td>Responds only to painful stimuli; minimal verbal response</td></tr>
+        <tr><td><strong>COMATOSE</strong></td><td>Unconscious</td><td>No response to stimuli (or only reflex responses)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info-box" style="margin-top:12px;">
+    <strong>★ Memory Aid:</strong> Alert → Lethargic → Obtunded → Stuporous → Comatose (progressively worse)
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <h3>PERRLA</h3>
+    <p style="font-size:20px;font-family:'DM Mono',monospace;color:var(--rose-deep);margin-bottom:12px;"><strong>P</strong>upils <strong>E</strong>qual, <strong>R</strong>ound, <strong>R</strong>eactive to <strong>L</strong>ight and <strong>A</strong>ccommodation</p>
+    <ul class="bullet-list">
+      <li>Normal: pupils equal in size (2–5mm), round, react briskly to light</li>
+      <li>Unequal pupils = <strong>anisocoria</strong> → possible brain injury, stroke, herniation — 🚨 report immediately</li>
+      <li>Fixed and dilated pupils = severe brain injury or death</li>
+      <li>Constricted pupils (miosis) = opioids, certain eye drops</li>
+      <li>Dilated pupils (mydriasis) = stimulants, fear, certain medications</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─── S11: RESPIRATORY ───────────────────────────────────── -->
+<section class="section-block" id="s11">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title"><small>Pulmonary</small>Respiratory Assessment</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Sound</th><th>Description</th><th>Normal or Adventitious?</th><th>Associated With</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Vesicular</strong></td><td>Soft, low-pitched, rustling</td><td><span class="tag tag-good">NORMAL</span></td><td>Most lung fields</td></tr>
+        <tr><td><strong>Bronchovesicular</strong></td><td>Medium pitch; mix of bronchial and vesicular</td><td><span class="tag tag-good">NORMAL</span></td><td>Mainstem bronchi (between scapulae)</td></tr>
+        <tr><td><strong>Bronchial (Tracheal)</strong></td><td>Loud, high-pitched, hollow</td><td><span class="tag tag-good">NORMAL at trachea</span></td><td>Over trachea only</td></tr>
+        <tr><td><strong>CRACKLES</strong> (rales)</td><td>Discontinuous popping/bubbling, like rubbing hair together near ear</td><td><span class="tag tag-bad">ADVENTITIOUS</span></td><td>Fluid in alveoli — pneumonia, CHF, atelectasis</td></tr>
+        <tr><td><strong>RHONCHI</strong></td><td>Low-pitched, continuous gurgling/snoring; <em>clears with cough</em></td><td><span class="tag tag-bad">ADVENTITIOUS</span></td><td>Secretions in large airways</td></tr>
+        <tr><td><strong>WHEEZING</strong></td><td>High-pitched musical whistling; usually on expiration</td><td><span class="tag tag-bad">ADVENTITIOUS</span></td><td>Bronchospasm — asthma, COPD</td></tr>
+        <tr><td><strong>STRIDOR</strong></td><td>Harsh, high-pitched inspiratory sound; <em>audible without stethoscope</em></td><td><span class="tag tag-bad">🚨 EMERGENCY</span></td><td>Upper airway obstruction — act immediately!</td></tr>
+        <tr><td><strong>Pleural Friction Rub</strong></td><td>Grating, leathery sound; does NOT clear with cough</td><td><span class="tag tag-bad">ADVENTITIOUS</span></td><td>Pleural inflammation (pleuritis)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <h3>Atelectasis</h3>
+    <p style="font-size:14px;">Collapse of lung tissue (alveoli). Very common <strong>postoperatively</strong> due to shallow breathing under anesthesia. Causes decreased breath sounds over the affected area, possible fever, and SOB.</p>
+    <div class="info-box" style="margin-top:10px;">
+      <strong>★ Prevention:</strong> Deep breathing exercises, incentive spirometry, early ambulation, coughing and splinting the incision.
+    </div>
+  </div>
+</section>
+
+<!-- ─── S12: ABDOMEN & URINARY ────────────────────────────── -->
+<section class="section-block" id="s12">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title"><small>Abdomen & Urinary</small>Abdominal & Urinary Assessment</div>
+  </div>
+  <div class="card">
+    <h3>Bowel Sounds</h3>
+    <div class="info-box" style="margin-bottom:12px;">
+      <strong>★ Abdomen assessment order: I-A-P-P</strong> — Auscultate BEFORE palpation/percussion to avoid altering bowel sounds!
+    </div>
+    <div class="tbl-wrap" style="box-shadow:none;">
+      <table>
+        <thead><tr><th>Finding</th><th>Definition</th><th>Clinical Significance</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Normal</strong></td><td>5–30 sounds/min; gurgling, irregular</td><td>Healthy peristalsis</td></tr>
+          <tr><td><strong>Hyperactive</strong></td><td>Loud, frequent, rushing (borborygmi)</td><td>Diarrhea, early bowel obstruction, gastroenteritis, hunger</td></tr>
+          <tr><td><strong>Hypoactive</strong></td><td>Infrequent, quiet, or absent</td><td>Post-op ileus, peritonitis, constipation, late bowel obstruction</td></tr>
+          <tr><td><strong>Distention</strong></td><td>Visible enlargement of abdomen</td><td>Gas, ascites, tumor, bowel obstruction</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>Urinary Output Terms</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Term</th><th>Definition</th><th>Normal / Abnormal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Normal output</strong></td><td>30–60 mL/hr (~1 mL/kg/hr)</td><td><span class="tag tag-good">Normal</span></td></tr>
+          <tr><td><strong>Nocturia</strong></td><td>Urinating more than once at night; disrupts sleep</td><td>Abnormal if frequent</td></tr>
+          <tr><td><strong>Diuresis</strong></td><td>Increased urine production; can be therapeutic (diuretics) or pathological</td><td>Context-dependent</td></tr>
+          <tr><td><strong>Polyuria</strong></td><td>Abnormally large volume (&gt;2.5–3 L/day)</td><td><span class="tag tag-warn">Abnormal</span> — DM, DI</td></tr>
+          <tr><td><strong>Oliguria</strong></td><td>Decreased output (&lt;400 mL/day or &lt;30 mL/hr)</td><td><span class="tag tag-bad">🚨 Report!</span> — renal insufficiency</td></tr>
+          <tr><td><strong>Anuria</strong></td><td>Absence of urine output (&lt;100 mL/day)</td><td><span class="tag tag-bad">🚨 EMERGENCY</span> — renal failure</td></tr>
+          <tr><td><strong>Continence</strong></td><td>Ability to voluntarily control urination</td><td>Normal</td></tr>
+          <tr><td><strong>Incontinence</strong></td><td>Involuntary loss of urine or stool</td><td>Abnormal; many types</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>Vascular — Arterial vs. Venous Insufficiency</h3>
+    <div class="two-col" style="margin-top:12px;">
+      <div>
+        <p style="font-weight:700;color:var(--rose-deep);font-size:14px;margin-bottom:8px;">Venous Insufficiency</p>
+        <ul class="bullet-list">
+          <li>Inadequate blood <em>return</em> via veins</li>
+          <li>Edema in legs/ankles</li>
+          <li>Varicosities (varicose veins)</li>
+          <li>Brown/rust discoloration (hemosiderin)</li>
+          <li>Stasis ulcers near ankle/gaiter area</li>
+          <li>Skin may be warm</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:700;color:var(--rose-deep);font-size:14px;margin-bottom:8px;">Arterial Insufficiency</p>
+        <ul class="bullet-list">
+          <li>Inadequate arterial blood <em>flow</em></li>
+          <li>Pain with walking (claudication)</li>
+          <li>Pale, cool, hairless skin</li>
+          <li>Weak or absent pulses</li>
+          <li>Ulcers on toes or pressure points</li>
+          <li>Shiny, taut skin</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:12px;">
+      <strong>★ Edema:</strong> Abnormal accumulation of fluid in interstitial spaces. Can be pitting (finger leaves an indentation) or non-pitting. Grade 1–4+ scale.
+    </div>
+  </div>
+</section>
+
+<!-- ─── S13: MUSCULOSKELETAL ──────────────────────────────── -->
+<section class="section-block" id="s13">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title"><small>Movement</small>Musculoskeletal & Range of Motion</div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>Active ROM (AROM)</h3>
+      <p style="font-size:14px;">Patient moves the joint <strong>themselves</strong> through full range — tests both <em>strength AND mobility</em>. No assistance from nurse.</p>
+    </div>
+    <div class="card">
+      <h3>Passive ROM (PROM)</h3>
+      <p style="font-size:14px;">Nurse moves the patient's joint — patient does <strong>not assist</strong>. Tests <em>joint mobility only</em> (not strength).</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead><tr><th>Term</th><th>Definition</th><th>Memory Tip</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Flexion</strong></td><td>Bending a joint; decreasing the angle between bones (e.g., bending elbow)</td><td>Fold</td></tr>
+        <tr><td><strong>Extension</strong></td><td>Straightening a joint; increasing the angle between bones</td><td>Elongate</td></tr>
+        <tr><td><strong>Hyperextension</strong></td><td>Extending beyond the normal anatomical range (e.g., tilting head back)</td><td>Extra extension</td></tr>
+        <tr><td><strong>Rotation</strong></td><td>Turning around a central axis (turning head side to side)</td><td>Rotate</td></tr>
+        <tr><td><strong>Lateral Flexion</strong></td><td>Bending to the side (e.g., ear toward shoulder)</td><td>Side bend</td></tr>
+        <tr><td><strong>Abduction</strong></td><td>Moving <em>AWAY</em> from the body midline (raising arm out to side)</td><td><strong>AB</strong>duction = <strong>A</strong>way</td></tr>
+        <tr><td><strong>Adduction</strong></td><td>Moving <em>TOWARD</em> the body midline (lowering arm back down)</td><td><strong>AD</strong>duction = <strong>Add</strong> back</td></tr>
+        <tr><td><strong>Outward Rotation</strong></td><td>Rotating limb laterally away from center</td><td>External rotation</td></tr>
+        <tr><td><strong>Inward Rotation</strong></td><td>Rotating limb medially toward center</td><td>Internal rotation</td></tr>
+        <tr><td><strong>Circumduction</strong></td><td>Circular movement combining flexion, extension, abduction, adduction</td><td>Circle</td></tr>
+        <tr><td><strong>Supination</strong></td><td>Turning palm <em>UPWARD</em></td><td><strong>SUP</strong>ination = hold <strong>SOUP</strong> (palm up)</td></tr>
+        <tr><td><strong>Pronation</strong></td><td>Turning palm <em>DOWNWARD</em></td><td>Pour the soup out (palm down)</td></tr>
+        <tr><td><strong>Dorsiflexion</strong></td><td>Flexing the ankle so toes point <em>UPWARD</em> (toward nose)</td><td>Toes up (like a door opening)</td></tr>
+        <tr><td><strong>Plantar Flexion</strong></td><td>Extending the foot so toes point <em>DOWNWARD</em> (pointing toes)</td><td>Ballet dancer / pointing</td></tr>
+        <tr><td><strong>Lateral</strong></td><td>Away from the midline of the body</td><td>Side</td></tr>
+        <tr><td><strong>Medial</strong></td><td>Toward the midline of the body</td><td>Middle</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── S14: VOCABULARY ────────────────────────────────────── -->
+<section class="section-block" id="s14">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title"><small>All Terms</small>Complete Vocabulary with Definitions</div>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="vocabSearch" placeholder="Search vocabulary terms..." oninput="filterVocab()" />
+  </div>
+  <div class="vocab-grid" id="vocabGrid">
+    <!-- Injected by JS -->
+  </div>
+</section>
+
+<!-- ─── S15: PRACTICE QUESTIONS ───────────────────────────── -->
+<section class="section-block" id="s15">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title"><small>Exam Prep</small>Practice Questions</div>
+  </div>
+  <div class="info-box" style="margin-bottom:20px;">
+    <strong>★ Instructions:</strong> Click a question to expand it. Click the answer choices to test yourself, then reveal the full explanation.
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-block" id="q1">
+    <div class="q-head" onclick="toggleQ('q1')"><div class="q-num">1</div><div class="q-text">The nurse is preparing to assess a client's abdomen. In which order should the nurse use assessment techniques?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Palpation, percussion, inspection, auscultation</li>
+        <li onclick="selectOpt(this,'correct')">b. Inspection, auscultation, percussion, palpation</li>
+        <li onclick="selectOpt(this,'wrong')">c. Auscultation, inspection, percussion, palpation</li>
+        <li onclick="selectOpt(this,'wrong')">d. Inspection, percussion, palpation, auscultation</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ B — Inspection → Auscultation → Percussion → Palpation</strong><br>For the abdomen, auscultation comes BEFORE palpation and percussion because palpating or percussing first can stimulate or alter bowel sounds, giving you an inaccurate assessment.</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-block" id="q2">
+    <div class="q-head" onclick="toggleQ('q2')"><div class="q-num">2</div><div class="q-text">A nurse measures a client's blood pressure as 158/96 mmHg. How should this be classified?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Normal</li>
+        <li onclick="selectOpt(this,'wrong')">b. Elevated</li>
+        <li onclick="selectOpt(this,'wrong')">c. Hypertension Stage 1</li>
+        <li onclick="selectOpt(this,'correct')">d. Hypertension Stage 2</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ D — Hypertension Stage 2</strong><br>Stage 2 = systolic ≥140 OR diastolic ≥90. This patient has BOTH (158 systolic and 96 diastolic), firmly placing them in Stage 2 hypertension.</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-block" id="q3">
+    <div class="q-head" onclick="toggleQ('q3')"><div class="q-num">3</div><div class="q-text">Which respiratory pattern is associated with diabetic ketoacidosis (DKA)?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Cheyne-Stokes</li>
+        <li onclick="selectOpt(this,'correct')">b. Kussmaul breathing</li>
+        <li onclick="selectOpt(this,'wrong')">c. Bradypnea</li>
+        <li onclick="selectOpt(this,'wrong')">d. Orthopnea</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ B — Kussmaul Breathing</strong><br>Kussmaul is deep, rapid, labored breathing — the body's attempt to blow off CO₂ to compensate for the metabolic acidosis in DKA. It's a compensatory mechanism, not a primary problem.</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-block" id="q4">
+    <div class="q-head" onclick="toggleQ('q4')"><div class="q-num">4</div><div class="q-text">A nurse notes bluish discoloration around the client's mouth. How should this be documented?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Jaundice</li>
+        <li onclick="selectOpt(this,'wrong')">b. Pallor</li>
+        <li onclick="selectOpt(this,'correct')">c. Circumoral cyanosis</li>
+        <li onclick="selectOpt(this,'wrong')">d. Erythema</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ C — Circumoral Cyanosis</strong><br>Circumoral = around the mouth. Cyanosis = bluish discoloration from low oxygen. This is a sign of hypoxia and should be assessed and reported immediately.</div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-block" id="q5">
+    <div class="q-head" onclick="toggleQ('q5')"><div class="q-num">5</div><div class="q-text">The nurse auscultates a high-pitched, musical, whistling sound on expiration. This is BEST described as:</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Crackles</li>
+        <li onclick="selectOpt(this,'wrong')">b. Rhonchi</li>
+        <li onclick="selectOpt(this,'wrong')">c. Stridor</li>
+        <li onclick="selectOpt(this,'correct')">d. Wheezing</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ D — Wheezing</strong><br>Wheezing is a high-pitched musical whistling sound, typically on expiration, caused by bronchospasm (narrowed airways). Classic in asthma and COPD. Stridor is similar but is inspiratory and is a medical emergency from upper airway obstruction.</div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-block" id="q6">
+    <div class="q-head" onclick="toggleQ('q6')"><div class="q-num">6</div><div class="q-text">Which finding indicates the nurse should assess for orthostatic hypotension?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'correct')">a. Client reports dizziness when standing</li>
+        <li onclick="selectOpt(this,'wrong')">b. Client has a BP of 120/80</li>
+        <li onclick="selectOpt(this,'wrong')">c. Client has a resting heart rate of 72</li>
+        <li onclick="selectOpt(this,'wrong')">d. Client reports difficulty sleeping</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ A — Dizziness when standing</strong><br>This is the classic symptom of orthostatic hypotension. The nurse should then measure BP in all three positions (lying, sitting, standing). A drop of ≥20 mmHg systolic or ≥10 mmHg diastolic confirms orthostatic hypotension.</div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-block" id="q7">
+    <div class="q-head" onclick="toggleQ('q7')"><div class="q-num">7</div><div class="q-text">A client's urine output is 20 mL/hour. How should the nurse interpret this?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Normal output</li>
+        <li onclick="selectOpt(this,'wrong')">b. Diuresis</li>
+        <li onclick="selectOpt(this,'correct')">c. Oliguria</li>
+        <li onclick="selectOpt(this,'wrong')">d. Polyuria</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ C — Oliguria</strong><br>Oliguria = urine output &lt;30 mL/hr. 20 mL/hr is below this threshold and must be reported to the provider immediately. Normal urine output is 30–60 mL/hr (or ~1 mL/kg/hr).</div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-block" id="q8">
+    <div class="q-head" onclick="toggleQ('q8')"><div class="q-num">8</div><div class="q-text">The nurse asks a patient, "Tell me about what brought you to the hospital today." This is an example of:</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Closed question</li>
+        <li onclick="selectOpt(this,'wrong')">b. Leading question</li>
+        <li onclick="selectOpt(this,'correct')">c. Open-ended question</li>
+        <li onclick="selectOpt(this,'wrong')">d. Directive question</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ C — Open-ended question</strong><br>Open-ended questions invite the patient to elaborate and lead the conversation. They typically start with "tell me," "describe," "what," or "how." This type of question builds rapport and reveals what the patient thinks is important.</div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-block" id="q9">
+    <div class="q-head" onclick="toggleQ('q9')"><div class="q-num">9</div><div class="q-text">The nurse notes a client's pupils are unequal in size. What is the correct term for this finding?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. PERRLA</li>
+        <li onclick="selectOpt(this,'correct')">b. Anisocoria</li>
+        <li onclick="selectOpt(this,'wrong')">c. Miosis</li>
+        <li onclick="selectOpt(this,'wrong')">d. Mydriasis</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ B — Anisocoria</strong><br>Anisocoria = unequal pupil size. This can indicate a neurological emergency such as increasing intracranial pressure, stroke, or uncal herniation. Report immediately!</div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-block" id="q10">
+    <div class="q-head" onclick="toggleQ('q10')"><div class="q-num">10</div><div class="q-text">A client's SpO₂ is 88%. What is the nurse's PRIORITY action?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Document the finding and continue monitoring</li>
+        <li onclick="selectOpt(this,'wrong')">b. Reposition the client and reassess</li>
+        <li onclick="selectOpt(this,'correct')">c. Notify the provider and anticipate supplemental O₂</li>
+        <li onclick="selectOpt(this,'wrong')">d. Offer the client a glass of water</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ C — Notify provider and apply supplemental O₂</strong><br>SpO₂ of 88% = moderate hypoxemia (&lt;90%). This requires urgent intervention — notify the provider immediately and apply supplemental oxygen per protocol. Do NOT just document and monitor.</div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="q-block" id="q11">
+    <div class="q-head" onclick="toggleQ('q11')"><div class="q-num">11</div><div class="q-text">Which breath sound is considered a medical emergency?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Crackles</li>
+        <li onclick="selectOpt(this,'wrong')">b. Rhonchi</li>
+        <li onclick="selectOpt(this,'correct')">c. Stridor</li>
+        <li onclick="selectOpt(this,'wrong')">d. Wheezing</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ C — Stridor</strong><br>Stridor is a harsh, high-pitched inspiratory sound indicating upper airway obstruction. It is audible WITHOUT a stethoscope and requires immediate intervention. Think: anaphylaxis, foreign body, croup, epiglottitis.</div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="q-block" id="q12">
+    <div class="q-head" onclick="toggleQ('q12')"><div class="q-num">12</div><div class="q-text">The nurse notes a client responds only to painful stimuli. This LOC level is documented as:</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Lethargic</li>
+        <li onclick="selectOpt(this,'wrong')">b. Obtunded</li>
+        <li onclick="selectOpt(this,'correct')">c. Stuporous</li>
+        <li onclick="selectOpt(this,'wrong')">d. Comatose</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ C — Stuporous</strong><br>Stuporous = responds only to painful stimuli; very minimal verbal or motor response. Remember the order: Alert → Lethargic → Obtunded → Stuporous → Comatose.</div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="q-block" id="q13">
+    <div class="q-head" onclick="toggleQ('q13')"><div class="q-num">13</div><div class="q-text">A postoperative patient has no bowel movement and the nurse hears very infrequent, low-pitched bowel sounds. This is:</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Hyperactive bowel sounds</li>
+        <li onclick="selectOpt(this,'correct')">b. Hypoactive bowel sounds</li>
+        <li onclick="selectOpt(this,'wrong')">c. Normal bowel sounds</li>
+        <li onclick="selectOpt(this,'wrong')">d. Borborygmi</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ B — Hypoactive bowel sounds</strong><br>Hypoactive bowel sounds are infrequent and quiet; very common after surgery (paralytic ileus) due to anesthesia effects on peristalsis. Document and report; encourage ambulation and assess for signs of obstruction.</div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="q-block" id="q14">
+    <div class="q-head" onclick="toggleQ('q14')"><div class="q-num">14</div><div class="q-text">Which position BEST promotes oxygenation for a patient in severe respiratory distress?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Trendelenburg</li>
+        <li onclick="selectOpt(this,'wrong')">b. Supine</li>
+        <li onclick="selectOpt(this,'correct')">c. Orthopneic (tripod)</li>
+        <li onclick="selectOpt(this,'wrong')">d. Prone</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ C — Orthopneic / Tripod Position</strong><br>Sitting upright and leaning forward on arms maximizes chest expansion and allows the diaphragm to move freely downward. This is the position patients with severe COPD or CHF naturally assume when they can't breathe.</div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="q-block" id="q15">
+    <div class="q-head" onclick="toggleQ('q15')"><div class="q-num">15</div><div class="q-text">A patient has an IV in the left arm and had a right-side mastectomy. Where should the nurse take the blood pressure?</div><span class="q-arrow">▾</span></div>
+    <div class="q-body">
+      <ul class="q-options">
+        <li onclick="selectOpt(this,'wrong')">a. Left arm above the IV</li>
+        <li onclick="selectOpt(this,'wrong')">b. Right arm</li>
+        <li onclick="selectOpt(this,'wrong')">c. Ask the provider which arm to use</li>
+        <li onclick="selectOpt(this,'correct')">d. Thigh or lower extremity</li>
+      </ul>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Reveal Full Explanation</button>
+      <div class="q-answer"><strong>✔ D — Thigh or lower extremity</strong><br>Never take BP on an arm with an IV (disrupts flow, inaccurate reading) OR on the side of a mastectomy (lymphedema risk). With both arms unavailable, use the thigh or lower extremity instead.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── S16: CHEAT SHEET ───────────────────────────────────── -->
+<section class="section-block" id="s16">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title"><small>Last-Minute Review</small>Quick Reference Cheat Sheet</div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;">
+    <h3>Critical Values to Memorize</h3>
+    <div class="tbl-wrap" style="box-shadow:none;margin-top:10px;">
+      <table>
+        <thead><tr><th>Parameter</th><th>Normal (Adult)</th><th>Too Low → Name</th><th>Too High → Name</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Temperature</strong></td><td>97.7–99.5°F / 36.5–37.5°C</td><td>&lt;96.8°F → Hypothermia</td><td>&gt;100.4°F → Fever/Hyperthermia</td></tr>
+          <tr><td><strong>Heart Rate</strong></td><td>60–100 bpm</td><td>&lt;60 → Bradycardia</td><td>&gt;100 → Tachycardia</td></tr>
+          <tr><td><strong>Respirations</strong></td><td>12–20 breaths/min</td><td>&lt;10 → Bradypnea</td><td>&gt;20 → Tachypnea</td></tr>
+          <tr><td><strong>BP (Systolic)</strong></td><td>90–120 mmHg</td><td>&lt;90 → Hypotension</td><td>≥130 → Hypertension</td></tr>
+          <tr><td><strong>SpO₂</strong></td><td>≥95%</td><td>&lt;95% → Hypoxemia / &lt;85% → Emergency</td><td>100% is fine</td></tr>
+          <tr><td><strong>Urine Output</strong></td><td>30–60 mL/hr</td><td>&lt;30 mL/hr → Oliguria / &lt;100 mL/day → Anuria</td><td>&gt;2.5 L/day → Polyuria</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>★ Memory Tricks — The Best Ones</h3>
+    <ul class="trick-list">
+      <li><strong>IAPP</strong> = Inspect → Auscultate → Palpate → Percuss (abdomen exam order — always!)</li>
+      <li><strong>Subjective = Symptoms</strong> (patient SAYS it). <strong>Objective = Signs</strong> (you SEE/measure it).</li>
+      <li><strong>PRIMARY</strong> source = Patient. <strong>SECONDARY</strong> = Everyone and everything else.</li>
+      <li><strong>ABduction = Away</strong> from midline. <strong>ADduction = ADD</strong> back toward midline.</li>
+      <li><strong>SUPination = hold SOUP</strong> in your palm (palm UP). Pronation = pour it out (palm DOWN).</li>
+      <li><strong>PERRLA</strong> = Pupils Equal, Round, Reactive to Light and Accommodation.</li>
+      <li><strong>Crackles = fluid</strong> (CHF, pneumonia). <strong>Wheezing = bronchospasm</strong> (asthma). <strong>Stridor = EMERGENCY</strong> (obstruction).</li>
+      <li><strong>Cyanosis = blue = low O₂</strong>. <strong>Jaundice = yellow = liver</strong>. <strong>Pallor = pale = anemia/shock</strong>.</li>
+      <li><strong>Oliguria = &lt;30 mL/hr = CALL the doctor!</strong> Anuria = no urine = EMERGENCY!</li>
+      <li><strong>Cuff too small = falsely HIGH</strong>. <strong>Cuff too large = falsely LOW</strong>.</li>
+      <li><strong>Never take BP:</strong> IV side, mastectomy side, cast/injury, dialysis access side.</li>
+      <li><strong>Fever &gt; 100.4°F (38°C)</strong>. Normal oral = 98.6°F. Rectal = +1°F. Axillary = –1°F.</li>
+      <li><strong>Dorsiflexion = toes UP</strong> (like a door opening upward). <strong>Plantar flexion = toes DOWN</strong> (ballet dancer).</li>
+      <li><strong>Alert → Lethargic → Obtunded → Stuporous → Comatose</strong> (LOC getting progressively worse).</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="hero-hearts">♥ ♥ ♥</div>
+  <h2>You've Got This, Shayne!</h2>
+  <p>Study this guide, know your vocabulary, practice every question, and trust yourself.</p>
+  <p style="margin-top:12px;font-size:13px;opacity:.7;">NUR 110 · UPMC Mercy School of Nursing · Physical Assessment · 2026 · Score: 50 / 50 💕</p>
+</footer>
+
+<!-- Back to top -->
+<a href="#top" class="back-top" id="backTop">↑</a>
 
 <script>
-  function goTo(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// ── Vocabulary Data ───────────────────────────────────────────────────────────
+const vocab = [
+  ["Inspect","To visually examine the client using sight, smell, and hearing"],
+  ["Auscultate","To listen to body sounds — directly (ear) or indirectly (stethoscope)"],
+  ["Palpation","To use touch to assess texture, temperature, moisture, tenderness, and masses"],
+  ["Percussion","To tap body surface to elicit sounds or assess tenderness of underlying tissue"],
+  ["Objective Data","Measurable, observable data (signs); can be verified by another person"],
+  ["Subjective Data","Reported by the client (symptoms); how the patient feels — only they can provide this"],
+  ["Primary Source of Data","The patient themselves — the best and most direct source of information"],
+  ["Secondary Source of Data","Anyone or anything other than the patient (family, records, labs, textbooks)"],
+  ["Observation","Purposeful, systematic watching using all senses"],
+  ["LOC (Level of Consciousness)","Degree of wakefulness and awareness; ranges from alert to comatose"],
+  ["Alert","Fully awake and aware; responds appropriately to all stimuli"],
+  ["Oriented","Aware of person, place, time, and situation (×4)"],
+  ["Lethargy","Excessive drowsiness; patient can be aroused but returns to sleep quickly"],
+  ["Obtunded","Difficult to arouse; responds only to vigorous stimulation; very confused"],
+  ["Stuporous","Responds only to painful stimuli; very minimal verbal or motor response"],
+  ["Comatose","Unconscious; does not respond to any stimuli (or only reflex responses)"],
+  ["Erythema","Redness of the skin due to increased blood flow (inflammation, heat, infection)"],
+  ["Cyanosis","Bluish/gray discoloration of skin due to oxygen deficiency (hypoxia)"],
+  ["Jaundice","Yellow discoloration of skin and sclerae due to excess bilirubin (liver disease)"],
+  ["Pallor","Paleness or lack of color due to decreased circulation, anemia, or vasoconstriction"],
+  ["Ecchymosis","Bruising; extravasation of blood into subcutaneous tissue (black/blue)"],
+  ["Diaphoretic","Profuse sweating; associated with fever, pain, shock, MI, hypoglycemia"],
+  ["Benign","Not cancerous or harmful; not life-threatening"],
+  ["Circumoral","Around the mouth (e.g., circumoral cyanosis = blue color around the mouth)"],
+  ["PERRLA","Pupils Equal, Round, Reactive to Light and Accommodation"],
+  ["Distention","Swelling or enlargement of the abdomen due to gas, fluid, or solid masses"],
+  ["Symmetry / Symmetrical","Both sides of the body are equal or mirror images of each other"],
+  ["Asymmetry / Asymmetrical","Inequality between the two sides of the body; one side differs from the other"],
+  ["Tachypnea","Rapid breathing rate (>20 breaths/min in adults)"],
+  ["Bradypnea","Abnormally slow breathing (<10 breaths/min)"],
+  ["Apnea","Complete absence of breathing — medical emergency"],
+  ["Orthopnea","Difficulty breathing unless in an upright position; common in CHF, COPD"],
+  ["Dyspnea","Subjective sensation of difficulty breathing or shortness of breath"],
+  ["Kussmaul Breathing","Deep, rapid, labored breathing; compensatory response in DKA (metabolic acidosis)"],
+  ["Cheyne-Stokes","Breathing pattern alternating between fast/slow with periods of apnea; brain injury, heart failure"],
+  ["Bronchovesicular","Normal breath sounds heard over the mainstem bronchi; medium pitch"],
+  ["Atelectasis","Collapse of lung alveoli; common postoperatively; causes decreased breath sounds"],
+  ["Adventitious Breath Sounds","Abnormal breath sounds superimposed over normal sounds"],
+  ["Crackles","Fine crackling/bubbling sounds; fluid in alveoli — pneumonia, CHF, atelectasis"],
+  ["Rhonchi","Low-pitched snoring/gurgling; large airway secretions; clears with coughing"],
+  ["Stridor","Harsh, high-pitched inspiratory sound audible without stethoscope; upper airway obstruction — EMERGENCY"],
+  ["Wheezing","High-pitched musical whistling; bronchospasm — asthma, COPD"],
+  ["Venous Insufficiency","Poor venous return → stasis, edema, varicosities, skin changes, stasis ulcers near ankle"],
+  ["Arterial Insufficiency","Poor arterial blood flow → claudication, pale/cool/hairless skin, weak pulses, arterial ulcers on toes"],
+  ["Edema","Abnormal fluid accumulation in interstitial spaces; pitting or non-pitting"],
+  ["Hyperactive Bowel Sounds","Loud, frequent, rushing bowel sounds; diarrhea, gastroenteritis, early obstruction"],
+  ["Hypoactive Bowel Sounds","Infrequent, quiet, or absent bowel sounds; ileus, peritonitis, late obstruction"],
+  ["Incontinence","Involuntary loss of urine or stool; many types (stress, urge, overflow)"],
+  ["Continence","Voluntary control of urination and defecation"],
+  ["Nocturia","Waking to urinate more than once per night; disrupts sleep"],
+  ["Diuresis","Increased urine production; can be therapeutic or pathological"],
+  ["Polyuria","Abnormally large urine output (>2.5–3 L/day); diabetes mellitus or insipidus"],
+  ["Oliguria","Decreased urine output (<30 mL/hr or <400 mL/day); renal insufficiency — report!"],
+  ["Anuria","No urine output (<100 mL/day); renal failure — EMERGENCY"],
+  ["Serous","Clear, watery drainage; normal in early wound healing"],
+  ["Serosanguinous","Pale pink drainage; normal mix of serum and blood"],
+  ["Eschar","Thick, black/brown leathery dead tissue in a wound; requires debridement"],
+  ["Slough","Yellow/tan soft necrotic tissue in wound bed; requires treatment"],
+  ["Bony Prominence","Area where bone is close to the skin surface; high pressure ulcer risk"],
+  ["Offload","To relieve pressure from a bony prominence to prevent or treat pressure injuries"],
+  ["Invasive","Involving entry into the body (e.g., IV insertion, catheterization, surgery)"],
+  ["Semi-Fowler's","HOB elevated 30–45°; used for respiratory issues, tube feedings, general comfort"],
+  ["High Fowler's","HOB elevated 60–90°; maximizes respiratory expansion; eating, cardiac patients"],
+  ["Orthopneic Position","Sitting upright and leaning forward on arms (tripod); severe dyspnea, COPD"],
+  ["Trendelenburg","Head lower than feet; historically used for shock (controversial)"],
+  ["Reverse Trendelenburg","Head higher than feet; used for GERD, some surgical procedures"],
+  ["Open-ended Questions","Questions that invite elaboration; allow patient to lead ('Tell me about...')"],
+  ["Closed Questions","Questions with specific answers (yes/no); efficient but may miss context"],
+  ["Leading Questions","Questions that suggest the desired answer; should be AVOIDED in clinical practice"],
+  ["Neutral Questions","Unbiased, professional questions; preferred in clinical interviewing"],
+  ["Active Range of Motion (AROM)","Patient moves the joint independently through full range; tests strength and mobility"],
+  ["Passive Range of Motion (PROM)","Nurse moves the patient's joint with no patient assistance; tests mobility only"],
+  ["Flexion","Bending a joint; decreasing the angle between bones"],
+  ["Extension","Straightening a joint; increasing the angle between bones"],
+  ["Hyperextension","Extending a joint beyond the normal anatomical range"],
+  ["Rotation","Turning a body part around a central axis"],
+  ["Lateral Flexion","Bending to the side (e.g., ear toward shoulder)"],
+  ["Abduction","Moving a limb AWAY from the body midline"],
+  ["Adduction","Moving a limb TOWARD the body midline"],
+  ["Outward Rotation","Rotating a limb laterally away from the center of the body"],
+  ["Inward Rotation","Rotating a limb medially toward the center of the body"],
+  ["Circumduction","Circular movement combining flexion, extension, abduction, and adduction"],
+  ["Supination","Turning the palm UPWARD (as if holding a bowl of soup)"],
+  ["Pronation","Turning the palm DOWNWARD (as if pouring out the soup)"],
+  ["Dorsiflexion","Flexing the ankle so the toes point UPWARD toward the nose"],
+  ["Plantar Flexion","Extending the foot so the toes point DOWNWARD (pointing toes, ballet dancer)"],
+  ["Lateral","Away from the midline of the body; to the side"],
+  ["Medial","Toward the midline of the body; toward the center"],
+];
+
+// Render vocab cards
+function renderVocab(filter='') {
+  const grid = document.getElementById('vocabGrid');
+  const fl = filter.toLowerCase();
+  grid.innerHTML = '';
+  vocab.forEach(([term,def]) => {
+    if (fl && !term.toLowerCase().includes(fl) && !def.toLowerCase().includes(fl)) return;
+    const card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.innerHTML = `<div class="vocab-term">${term}</div><div class="vocab-def">${def}</div>`;
+    grid.appendChild(card);
+  });
+}
+function filterVocab() {
+  renderVocab(document.getElementById('vocabSearch').value);
+}
+renderVocab();
+
+// ── Q Accordion ───────────────────────────────────────────────────────────────
+function toggleQ(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// ── Option Selection ──────────────────────────────────────────────────────────
+function selectOpt(li, result) {
+  const list = li.parentElement;
+  list.querySelectorAll('li').forEach(l => l.className = '');
+  li.className = result;
+  if (result === 'correct') {
+    // show answer automatically
+    const body = li.closest('.q-body');
+    const ans = body.querySelector('.q-answer');
+    const btn = body.querySelector('.show-ans-btn');
+    if (ans) ans.classList.add('show');
+    if (btn) btn.style.display = 'none';
   }
+}
+
+// ── Nav Toggle ────────────────────────────────────────────────────────────────
+const toggle = document.getElementById('navToggle');
+const nav = document.getElementById('sidenav');
+const overlay = document.getElementById('overlay');
+
+toggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  toggle.classList.toggle('open', open);
+  overlay.classList.toggle('show', open);
+});
+overlay.addEventListener('click', () => {
+  nav.classList.remove('open');
+  toggle.classList.remove('open');
+  overlay.classList.remove('show');
+});
+
+// ── Progress Bar ──────────────────────────────────────────────────────────────
+const prog = document.getElementById('progress');
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  prog.style.width = pct + '%';
+  backTop.classList.toggle('show', window.scrollY > 400);
+
+  // Active nav link
+  const sections = document.querySelectorAll('section[id]');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  document.querySelectorAll('.sidenav a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
 </script>
 </body>
 </html>
