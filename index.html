@@ -579,7 +579,7 @@ footer p{opacity:.82;font-size:14px;margin-bottom:4px}
 
 <!-- Bubu companion -->
 <div id="bubu" title="Bubu cheers you on! 💕" onclick="bubuClick()">
-  <img src="./bubu-cute-dancing.gif" alt="Bubu dancing" onerror="this.src='https://media.tenor.com/images/bubu-dance.gif'" />
+  <img src="https://media.tenor.com/kDoxO3OQKTEAAAAC/bubu-dudu.gif" alt="Bubu dancing" onerror="this.src='https://media.tenor.com/images/bubu-dance.gif'" />
 </div>
 <div id="bubu-msg" style="display:none"></div>
 
@@ -622,7 +622,8 @@ footer p{opacity:.82;font-size:14px;margin-bottom:4px}
   <a href="#s19"><span class="nav-dot">19</span>Vocabulary</a>
   <a href="#s20"><span class="nav-dot">20</span>Cheat Sheet</a>
   <div class="nav-section-label">Exam Prep</div>
-  <a href="#s21"><span class="nav-dot">🎓</span>ATI Practice Exam</a>
+  <a href="#sq-vocab"><span class="nav-dot">📝</span>Vocab Quiz</a>
+  <a href="#s21"><span class="nav-dot">🎓</span>ATI Practice Tests</a>
 </nav>
 
 <!-- ════════════════════════════════════════
@@ -1188,20 +1189,84 @@ footer p{opacity:.82;font-size:14px;margin-bottom:4px}
 
 <!-- S21: ATI EXAM -->
 <section class="sec" id="s21">
-  <div class="sec-head"><div class="sec-num">🎓</div><div class="sec-title"><small>Test Your Knowledge</small>ATI-Style Practice Exam</div></div>
-  <div class="exam-launch-card" onclick="launchExam()">
-    <div class="exam-launch-info">
-      <h3>Physical Assessment — ATI Practice Test</h3>
-      <p>Timed exam with 25 questions covering Parts I & II. Submit each answer before moving on — just like the real thing.</p>
-      <div class="pills">
-        <span class="pill">25 Questions</span>
-        <span class="pill">Timed</span>
-        <span class="pill">SATA included</span>
-        <span class="pill">Detailed Rationales</span>
-        <span class="pill">Score Report</span>
+  <div class="sec-head"><div class="sec-num">🎓</div><div class="sec-title"><small>Test Your Knowledge</small>ATI-Style Practice Tests</div></div>
+  <div class="info" style="margin-bottom:20px"><strong>★ Real ATI format:</strong> Select your answer, then hit Submit. Read the full rationale. Navigate with Previous/Next. Timer runs down. Score report at the end. <strong>3 different tests — try all of them!</strong></div>
+  <div class="ati-test-grid">
+    <div class="ati-test-card">
+      <h3>Test A — Foundations</h3>
+      <p>Assessment techniques, vital signs, data types, respiratory, cardiovascular, and more.</p>
+      <div class="tc-pills"><span class="tc-pill">30 Questions</span><span class="tc-pill">45 min</span><span class="tc-pill">SATA</span><span class="tc-pill">Situational</span></div>
+      <button class="tc-btn" onclick="launchExam(0)">Start Test A →</button>
+    </div>
+    <div class="ati-test-card">
+      <h3>Test B — Clinical Reasoning</h3>
+      <p>Complex situational questions: prioritization, lifespan, communication, documentation, safety.</p>
+      <div class="tc-pills"><span class="tc-pill">10 Questions</span><span class="tc-pill">20 min</span><span class="tc-pill">SATA</span><span class="tc-pill">Priority Qs</span></div>
+      <button class="tc-btn" onclick="launchExam(1)">Start Test B →</button>
+    </div>
+    <div class="ati-test-card">
+      <h3>Test C — Mixed Mastery</h3>
+      <p>All question types shuffled — the ultimate practice test before the real exam.</p>
+      <div class="tc-pills"><span class="tc-pill">All Qs Mixed</span><span class="tc-pill">45 min</span><span class="tc-pill">All Types</span><span class="tc-pill">Random Order</span></div>
+      <button class="tc-btn" onclick="launchExam(2)">Start Test C →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     VOCAB QUIZ SECTION
+══════════════════════════════════════════════════════════ -->
+<section class="sec" id="sq-vocab">
+  <div class="sec-head"><div class="sec-num">📝</div><div class="sec-title"><small>All 80 Terms from Your Docx</small>Vocabulary Quiz</div></div>
+  <div class="card" style="background:linear-gradient(135deg,#fff 60%,var(--blush-soft))">
+    <p style="font-size:14px;margin-bottom:16px">You'll be shown a definition — type or select the matching term. Work through all 80 vocabulary words from your Physical Assessment docx.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="vq-mode-btn active" id="vqm-mc" onclick="setVQMode('mc')">Multiple Choice</button>
+      <button class="vq-mode-btn" id="vqm-type" onclick="setVQMode('type')">Type It In</button>
+    </div>
+    <div id="vq-progress-wrap" style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px">
+        <span id="vq-prog-label">Term 1 of 80</span>
+        <span id="vq-score-label">Score: 0 / 0</span>
+      </div>
+      <div style="height:6px;background:var(--blush-mid);border-radius:99px;overflow:hidden">
+        <div id="vq-prog-bar" style="height:100%;background:linear-gradient(90deg,var(--rose),#f48fb1);width:1.25%;transition:width .3s"></div>
       </div>
     </div>
-    <button class="exam-launch-btn">Start Exam →</button>
+
+    <div id="vq-card">
+      <div style="background:linear-gradient(135deg,var(--rose-deep),var(--rose));border-radius:14px;padding:24px 26px;margin-bottom:18px;text-align:center">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:8px" id="vq-card-label">Define this term:</div>
+        <div style="font-size:22px;font-weight:700;color:#fff;font-family:'Playfair Display',serif" id="vq-term-display">—</div>
+      </div>
+
+      <!-- MC mode -->
+      <div id="vq-mc-opts" class="ati-options" style="margin-bottom:16px"></div>
+
+      <!-- Type mode -->
+      <div id="vq-type-wrap" style="display:none;margin-bottom:16px">
+        <input type="text" id="vq-type-input" placeholder="Type the definition…" autocomplete="off"
+          style="width:100%;padding:14px 18px;border:2px solid var(--blush-mid);border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:all .2s"
+          onkeydown="if(event.key==='Enter')submitVQ()" />
+        <button onclick="submitVQ()" style="margin-top:10px;width:100%;padding:13px;background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">Submit Answer</button>
+      </div>
+
+      <div id="vq-feedback" style="display:none;border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:14px"></div>
+
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button id="vq-next-btn" onclick="nextVQ()" style="flex:1;padding:13px;background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;display:none">Next Term →</button>
+        <button onclick="skipVQ()" style="padding:13px 20px;background:rgba(123,79,99,.1);border:1.5px solid var(--blush-mid);color:var(--muted);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer">Skip</button>
+      </div>
+    </div>
+
+    <div id="vq-results" style="display:none;text-align:center;padding:20px 0">
+      <div style="font-size:56px;margin-bottom:8px" id="vq-res-emoji">🌟</div>
+      <div style="font-size:28px;font-weight:700;color:var(--rose-deep);margin-bottom:4px" id="vq-res-score"></div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:20px" id="vq-res-msg"></div>
+      <button onclick="restartVQ()" style="padding:13px 30px;background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;margin-right:8px">Retry Vocab Quiz</button>
+      <button onclick="restartVQ(true)" style="padding:13px 30px;background:rgba(123,79,99,.1);border:1.5px solid var(--blush-mid);color:var(--muted);border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">Only Wrong Ones</button>
+    </div>
   </div>
 </section>
 
@@ -1211,44 +1276,33 @@ footer p{opacity:.82;font-size:14px;margin-bottom:4px}
 <footer>
   <div style="font-size:30px;margin-bottom:14px;animation:heartbeat 1.8s ease-in-out infinite">♥ ♥ ♥</div>
   <h2>You've Got This, Shayne!</h2>
-  <p>Study every section, know your vocab, crush the ATI exam.</p>
+  <p>Master every section quiz, ace the vocab, crush all three ATI tests.</p>
   <p style="margin-top:10px;font-size:12px;opacity:.65">NUR 110 · UPMC Mercy School of Nursing · Physical Assessment · 2026 · Score: 50/50 💕</p>
 </footer>
 
-<!-- ═══════════════════════════════════════════════════════════
-     ATI EXAM OVERLAY
-═══════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════ ATI EXAM OVERLAY ═════ -->
 <div id="exam-overlay">
-
-  <!-- ATI Top Bar -->
   <div class="ati-bar">
-    <div class="ati-logo">💕 <span>NUR 110</span> Physical Assessment Exam</div>
+    <div class="ati-logo">💕 <span>NUR 110</span> Physical Assessment — ATI Exam</div>
     <div class="ati-meta">
-      <div class="ati-meta-item ati-timer"><div class="lbl">Time</div><div class="val" id="timer-display">30:00</div></div>
-      <div class="ati-meta-item"><div class="lbl">Question</div><div class="val" id="q-counter-top">1 / 25</div></div>
+      <div class="ati-meta-item ati-timer"><div class="lbl">Time</div><div class="val" id="timer-display">45:00</div></div>
+      <div class="ati-meta-item"><div class="lbl">Question</div><div class="val" id="q-counter-top">1 / 40</div></div>
       <div class="ati-meta-item"><div class="lbl">Answered</div><div class="val" id="answered-count">0</div></div>
       <button id="close-exam" onclick="confirmCloseExam()">✕ Exit</button>
     </div>
   </div>
-
-  <!-- Progress Track -->
-  <div class="ati-progress-track"><div class="ati-progress-fill" id="ati-prog" style="width:4%"></div></div>
-
-  <!-- Body -->
+  <div class="ati-progress-track"><div class="ati-progress-fill" id="ati-prog" style="width:2.5%"></div></div>
   <div class="ati-body" id="exam-body">
-    <!-- Question Panel -->
     <div class="ati-q-panel" id="q-panel">
       <div class="ati-q-header">
-        <span class="ati-q-counter" id="q-label">QUESTION 1 OF 25</span>
+        <span class="ati-q-counter" id="q-label">QUESTION 1 OF 40</span>
         <span class="ati-q-badge" id="q-type-badge">Multiple Choice</span>
       </div>
       <div class="ati-q-stem" id="q-stem">
         <span class="topic-tag" id="q-topic"></span>
         <p id="q-text"></p>
       </div>
-      <div class="ati-sata-note" id="sata-note" style="display:none">
-        ★ SELECT ALL THAT APPLY — Choose ALL correct answers before submitting.
-      </div>
+      <div class="ati-sata-note" id="sata-note" style="display:none">★ SELECT ALL THAT APPLY — Choose ALL correct answers before submitting.</div>
       <div class="ati-options" id="q-options"></div>
       <button class="ati-submit-btn" id="submit-btn" onclick="submitAnswer()" disabled>Submit Answer</button>
       <div class="ati-feedback" id="feedback"></div>
@@ -1257,15 +1311,9 @@ footer p{opacity:.82;font-size:14px;margin-bottom:4px}
         <button class="ati-nav-btn primary" id="next-btn" onclick="goQ(1)">Next Question →</button>
       </div>
     </div>
-
-    <!-- Sidebar -->
     <div class="ati-sidebar">
-      <div class="ati-sidebar-card">
-        <h4>Question Map</h4>
-        <div class="q-dots" id="q-dots"></div>
-      </div>
-      <div class="ati-sidebar-card">
-        <h4>Legend</h4>
+      <div class="ati-sidebar-card"><h4>Question Map</h4><div class="q-dots" id="q-dots"></div></div>
+      <div class="ati-sidebar-card"><h4>Legend</h4>
         <div class="ati-legend">
           <div class="ati-legend-item"><div class="legend-dot" style="background:var(--rose)"></div>Current</div>
           <div class="ati-legend-item"><div class="legend-dot" style="background:#43a047"></div>Correct</div>
@@ -1275,583 +1323,1242 @@ footer p{opacity:.82;font-size:14px;margin-bottom:4px}
       </div>
     </div>
   </div>
-
-  <!-- Results Screen -->
   <div class="ati-results" id="results-screen">
-    <div class="results-circle">
-      <div class="results-pct" id="res-pct">0%</div>
-      <div class="results-label">Score</div>
-    </div>
+    <div class="results-circle"><div class="results-pct" id="res-pct">0%</div><div class="results-label">Score</div></div>
     <h2 class="results-h" id="res-heading">Results</h2>
     <p class="results-sub" id="res-sub"></p>
     <div class="results-grid">
       <div class="results-stat"><div class="n green" id="res-correct">0</div><div class="l">Correct</div></div>
       <div class="results-stat"><div class="n red" id="res-wrong">0</div><div class="l">Incorrect</div></div>
-      <div class="results-stat"><div class="n" id="res-total">25</div><div class="l">Total</div></div>
+      <div class="results-stat"><div class="n" id="res-total">40</div><div class="l">Total</div></div>
     </div>
     <div>
-      <button class="results-btn" onclick="retakeExam()">🔄 Retake Exam</button>
+      <button class="results-btn" onclick="retakeExam()">🔄 Retake This Test</button>
+      <button class="results-btn" onclick="launchExam(currentExamSet===0?1:0)" style="background:linear-gradient(135deg,#00519e,#003a70)">📋 Switch Test</button>
       <button class="results-btn outline" onclick="closeExam()">📚 Back to Study Guide</button>
     </div>
   </div>
-
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     JAVASCRIPT
-═══════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════ EXTRA CSS ═════ -->
+<style>
+/* ── Section Quiz ─────────────────────────────────────────── */
+.sq-wrap{
+  background:#fff;border:2px solid var(--blush-mid);border-radius:var(--radius);
+  overflow:hidden;margin-top:24px;box-shadow:var(--shadow);
+}
+.sq-header{
+  background:linear-gradient(90deg,var(--rose-deep),var(--rose-dark));
+  padding:14px 22px;display:flex;align-items:center;gap:12px;cursor:pointer;
+  user-select:none;
+}
+.sq-header h4{color:#fff;font-size:14px;font-weight:700;flex:1}
+.sq-header .sq-badge{background:rgba(255,255,255,.18);color:#fff;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
+.sq-header .sq-arrow{color:rgba(255,255,255,.7);font-size:18px;transition:transform .25s}
+.sq-wrap.open .sq-arrow{transform:rotate(180deg)}
+.sq-body{display:none;padding:22px}
+.sq-wrap.open .sq-body{display:block}
+
+.sq-q{margin-bottom:18px;border-bottom:1.5px solid var(--blush-soft);padding-bottom:18px}
+.sq-q:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+.sq-q-text{font-size:14px;font-weight:600;color:var(--rose-deep);margin-bottom:12px;line-height:1.5}
+.sq-opts{display:flex;flex-direction:column;gap:8px}
+.sq-opt{
+  display:flex;align-items:flex-start;gap:12px;
+  border:1.5px solid var(--blush-mid);border-radius:10px;
+  padding:12px 14px;cursor:pointer;transition:all .15s;font-size:13.5px;
+}
+.sq-opt:hover:not(.sq-locked){background:var(--blush-soft);border-color:var(--rose)}
+.sq-opt-letter{min-width:26px;height:26px;background:var(--blush);color:var(--rose-deep);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .15s}
+.sq-opt.sq-selected{background:var(--blush-soft);border-color:var(--rose)}
+.sq-opt.sq-selected .sq-opt-letter{background:var(--rose);color:#fff}
+.sq-opt.sq-correct{background:var(--green-bg)!important;border-color:#43a047!important}
+.sq-opt.sq-correct .sq-opt-letter{background:#43a047!important;color:#fff!important}
+.sq-opt.sq-wrong{background:var(--red-bg)!important;border-color:#ef5350!important}
+.sq-opt.sq-wrong .sq-opt-letter{background:#ef5350!important;color:#fff!important}
+.sq-opt.sq-locked{cursor:default}
+.sq-rationale{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;font-size:13px;line-height:1.55;border-left:4px solid}
+.sq-rationale.show{display:block}
+.sq-rationale.correct{background:var(--green-bg);border-color:#43a047;color:var(--green)}
+.sq-rationale.wrong{background:var(--red-bg);border-color:#ef5350;color:var(--red)}
+
+.sq-submit{
+  width:100%;padding:13px;background:linear-gradient(135deg,var(--rose-dark),var(--rose));
+  color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;
+  cursor:pointer;margin-top:16px;transition:all .2s;
+}
+.sq-submit:disabled{opacity:.4;cursor:not-allowed}
+.sq-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 20px rgba(233,30,140,.4)}
+.sq-result-bar{
+  display:none;margin-top:16px;padding:16px;border-radius:12px;text-align:center;
+  border:2px solid;
+}
+.sq-result-bar.show{display:block}
+.sq-result-bar.pass{background:var(--green-bg);border-color:#43a047;color:var(--green)}
+.sq-result-bar.fail{background:var(--red-bg);border-color:#ef5350;color:var(--red)}
+.sq-unlock-note{
+  background:linear-gradient(90deg,var(--rose-deep),var(--rose-dark));
+  color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;
+  font-weight:600;text-align:center;margin-top:10px;
+}
+
+/* Section lock overlay */
+.sec-locked-overlay{
+  position:absolute;inset:0;background:rgba(255,249,252,.92);
+  backdrop-filter:blur(4px);border-radius:var(--radius);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:10;border:2px dashed var(--blush-mid);
+}
+.sec.locked{position:relative;overflow:hidden}
+.sec-locked-overlay h4{color:var(--rose-deep);font-family:'Playfair Display',serif;font-size:20px;margin-bottom:6px}
+.sec-locked-overlay p{color:var(--muted);font-size:13px;text-align:center;max-width:280px}
+.sec-locked-overlay .lock-icon{font-size:40px;margin-bottom:12px}
+
+/* Vocab quiz mode btns */
+.vq-mode-btn{padding:8px 20px;border-radius:99px;border:2px solid var(--blush-mid);background:#fff;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.vq-mode-btn.active{background:var(--rose);border-color:var(--rose);color:#fff}
+
+/* ATI test select cards */
+.ati-test-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:640px){.ati-test-grid{grid-template-columns:1fr}}
+.ati-test-card{
+  background:linear-gradient(135deg,var(--ati-blue),#00519e);
+  border-radius:var(--radius);padding:22px 20px;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.15);transition:all .25s;
+  box-shadow:0 8px 24px rgba(0,58,112,.3);
+}
+.ati-test-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,58,112,.45)}
+.ati-test-card h3{color:#fff;font-family:'Playfair Display',serif;font-size:16px;margin-bottom:6px}
+.ati-test-card p{color:rgba(255,255,255,.7);font-size:12px;margin-bottom:12px}
+.ati-test-card .tc-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.ati-test-card .tc-pill{background:rgba(255,255,255,.12);color:#fff;padding:3px 10px;border-radius:99px;font-size:11px}
+.ati-test-card .tc-btn{width:100%;padding:10px;background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.ati-test-card .tc-btn:hover{transform:scale(1.02)}
+</style>
+
 <script>
-/* ── Vocabulary ──────────────────────────────────────────────── */
-const VOCAB = [
-  ["Inspect","To visually examine the client using sight, smell, and hearing"],
-  ["Auscultate","To listen to body sounds — directly (ear) or indirectly (stethoscope)"],
-  ["Palpation","To use touch to assess texture, temperature, moisture, tenderness, and masses"],
-  ["Percussion","To tap body surface to elicit sounds or assess tenderness of underlying tissue"],
-  ["Objective Data","Measurable, observable data (signs); can be verified by another person"],
-  ["Subjective Data","Reported by the client (symptoms); only the patient can provide this"],
-  ["Primary Source","The patient themselves — best and most direct source of information"],
-  ["Secondary Source","Anyone or anything other than the patient (family, records, labs, textbooks)"],
-  ["LOC","Level of Consciousness — ranges from Alert to Comatose"],
-  ["Alert","Fully awake and aware; responds appropriately to all stimuli"],
-  ["Lethargic","Excessive drowsiness; arousable but returns to sleep quickly"],
-  ["Obtunded","Difficult to arouse; responds only to vigorous stimulation"],
-  ["Stuporous","Responds only to painful stimuli; minimal verbal or motor response"],
-  ["Comatose","Unconscious; no response to any stimuli"],
-  ["PERRLA","Pupils Equal, Round, Reactive to Light and Accommodation"],
-  ["Anisocoria","Unequal pupil size — possible neurological emergency"],
-  ["Erythema","Redness of skin due to increased blood flow (inflammation, heat, infection)"],
-  ["Cyanosis","Bluish/gray discoloration due to oxygen deficiency (hypoxia)"],
-  ["Jaundice","Yellow discoloration of skin and sclerae due to excess bilirubin"],
-  ["Pallor","Paleness due to decreased circulation, anemia, or vasoconstriction"],
-  ["Ecchymosis","Bruising — extravasation of blood into subcutaneous tissue"],
-  ["Diaphoretic","Profuse sweating; associated with fever, pain, shock, MI, hypoglycemia"],
-  ["Circumoral","Around the mouth (e.g., circumoral cyanosis)"],
-  ["Tachypnea","Rapid breathing rate (>20 breaths/min in adults)"],
-  ["Bradypnea","Abnormally slow breathing (<10 breaths/min)"],
-  ["Apnea","Complete absence of breathing — medical emergency"],
-  ["Orthopnea","Difficulty breathing unless upright; common in CHF, COPD"],
-  ["Dyspnea","Subjective sensation of difficulty breathing / SOB"],
-  ["Kussmaul Breathing","Deep, rapid, labored — compensatory response in DKA"],
-  ["Cheyne-Stokes","Alternating fast/slow breathing with apneic periods; brain injury, heart failure"],
-  ["Atelectasis","Collapse of lung alveoli; common postoperatively"],
-  ["Adventitious Sounds","Abnormal breath sounds superimposed over normal sounds"],
-  ["Crackles (Rales)","Fine or coarse popping/bubbling sounds; fluid in airways — pneumonia, CHF"],
-  ["Rhonchi","Low-pitched snoring/gurgling; large airway secretions; may clear with cough"],
-  ["Stridor","Harsh, high-pitched inspiratory sound; upper airway obstruction — EMERGENCY"],
-  ["Wheezing","High-pitched musical whistling; bronchospasm — asthma, COPD"],
-  ["Bronchovesicular","Normal breath sounds at mainstem bronchi; medium pitch; equal I/E ratio"],
-  ["S1 (Heart Sound)","'Lub' — closure of mitral and tricuspid valves; beginning of systole"],
-  ["S2 (Heart Sound)","'Dub' — closure of pulmonic and aortic valves; beginning of diastole"],
-  ["Apical Rate","Heart rate measured at 5th ICS, midclavicular line for 1 full minute"],
-  ["CRT","Capillary Refill Time — normal <3 seconds; prolonged ≥3 sec = poor perfusion"],
-  ["Venous Insufficiency","Poor venous return → edema, varicosities, stasis ulcers near ankle, brown discoloration"],
-  ["Arterial Insufficiency","Poor arterial flow → pain (claudication), pale/cool/hairless skin, weak/absent pulses, toe ulcers"],
-  ["Edema","Abnormal fluid accumulation in interstitial spaces; pitting or non-pitting"],
-  ["Hyperactive Bowel Sounds","Loud, frequent, rushing (borborygmi); diarrhea, gastroenteritis"],
-  ["Hypoactive Bowel Sounds","Infrequent, quiet, or absent; post-op ileus, peritonitis"],
-  ["Oliguria","Urine output <30 mL/hr or <400 mL/day — report to provider!"],
-  ["Anuria","No urine output (<100 mL/day) — EMERGENCY — renal failure"],
-  ["Polyuria","Abnormally large urine output (>2.5–3 L/day) — DM, DI"],
-  ["Nocturia","Waking to urinate more than once per night"],
-  ["Incontinence","Involuntary loss of urine or stool"],
-  ["Serous","Clear, watery drainage — normal early healing"],
-  ["Serosanguinous","Pale pink drainage — normal mix of serum and blood"],
-  ["Purulent","Thick, yellow/green/cloudy drainage — INFECTION"],
-  ["Eschar","Thick, black/brown dead tissue — requires debridement"],
-  ["Slough","Yellow/tan soft necrotic tissue in wound bed"],
-  ["Bony Prominence","Area where bone is close to skin surface; high pressure ulcer risk"],
-  ["Braden Scale","Standardized tool to evaluate pressure injury risk"],
-  ["Abduction","Moving a limb AWAY from the body midline"],
-  ["Adduction","Moving a limb TOWARD the body midline"],
-  ["Supination","Turning palm UPWARD (hold SOUP)"],
-  ["Pronation","Turning palm DOWNWARD (pour it out)"],
-  ["Dorsiflexion","Flexing ankle — toes point UPWARD toward nose"],
-  ["Plantar Flexion","Extending foot — toes point DOWNWARD (ballet dancer)"],
-  ["Active ROM","Patient moves joint independently — tests strength AND mobility"],
-  ["Passive ROM","Nurse moves joint for patient — tests mobility only (not strength)"],
-  ["Semi-Fowler's","HOB 30–45°; respiratory difficulty, tube feedings"],
-  ["High Fowler's","HOB 60–90°; maximum respiratory expansion, eating"],
-  ["Orthopneic Position","Sitting upright, leaning forward on arms (tripod); severe dyspnea"],
-  ["Benign","Not cancerous or harmful; not life-threatening"],
-  ["Distention","Swelling or enlargement of abdomen due to gas, fluid, or solid masses"],
-];
-
-function renderVocab(f=''){
-  const g=document.getElementById('vgrid'); const fl=f.toLowerCase(); g.innerHTML='';
-  VOCAB.forEach(([t,d])=>{
-    if(fl&&!t.toLowerCase().includes(fl)&&!d.toLowerCase().includes(fl))return;
-    g.innerHTML+=`<div class="vocab-card"><div class="vterm">${t}</div><div class="vdef">${d}</div></div>`;
-  });
-}
-function filterVocab(){renderVocab(document.getElementById('vsearch').value)}
-renderVocab();
-
-/* ── Scroll effects ──────────────────────────────────────────── */
-const pb=document.getElementById('progress-bar');
-const bt=document.getElementById('back-top');
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.08});
-document.querySelectorAll('.sec').forEach(s=>obs.observe(s));
-
-window.addEventListener('scroll',()=>{
-  const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
-  pb.style.width=pct+'%';
-  bt.classList.toggle('show',window.scrollY>400);
-  document.querySelectorAll('#sidenav a').forEach(a=>{
-    const sec=document.querySelector(a.getAttribute('href'));
-    if(sec) a.classList.toggle('active',window.scrollY>=sec.offsetTop-130);
-  });
-});
-
-/* ── Nav ─────────────────────────────────────────────────────── */
-const tog=document.getElementById('nav-toggle');
-const nav=document.getElementById('sidenav');
-const ovl=document.getElementById('overlay');
-tog.addEventListener('click',()=>{
-  const o=nav.classList.toggle('open');
-  tog.classList.toggle('open',o);ovl.classList.toggle('show',o);
-});
-ovl.addEventListener('click',()=>{nav.classList.remove('open');tog.classList.remove('open');ovl.classList.remove('show')});
-
-/* ── Bubu ────────────────────────────────────────────────────── */
-const msgs=["You got this! 💕","Study hard! ♥","So proud of you!","Keep going! 🌟","Almost there! 💪","You're a star! ✨","Believe in you! 💕","NUR 110 queen! 👑","Go Shayne go! 🎉","50/50 incoming! 🏆"];
-let mIdx=0;
-function bubuClick(){
-  const msg=document.getElementById('bubu-msg');
-  msg.textContent=msgs[mIdx++ % msgs.length];
-  msg.style.display='block';
-  clearTimeout(bubuClick._t);
-  bubuClick._t=setTimeout(()=>msg.style.display='none',2800);
-}
-// Bubu responds when scrolling fast
-let lastScroll=0; let bubuScrollTimer;
-window.addEventListener('scroll',()=>{
-  const diff=Math.abs(window.scrollY-lastScroll);
-  lastScroll=window.scrollY;
-  if(diff>300){clearTimeout(bubuScrollTimer);bubuClick();bubuScrollTimer=setTimeout(()=>{},100);}
-},{ passive:true });
-
-/* ══════════════════════════════════════════════════════════════
-   ATI EXAM ENGINE
-══════════════════════════════════════════════════════════════ */
-const QUESTIONS = [
-  {
-    topic:"Assessment Fundamentals",
-    type:"mc",
-    q:"The nurse is preparing to assess a client's abdomen. Which order of assessment techniques is CORRECT?",
-    opts:["Palpation → Percussion → Inspection → Auscultation","Inspection → Auscultation → Percussion → Palpation","Auscultation → Inspection → Percussion → Palpation","Inspection → Percussion → Palpation → Auscultation"],
-    correct:[1],
-    rationale:"For the abdomen, the correct sequence is Inspection → Auscultation → Percussion → Palpation (I-A-P-P). Auscultation must come before palpation and percussion because mechanical stimulation can alter bowel sounds, giving a falsely abnormal result."
+/* ═══════════════════════════════════════════════════════
+   SECTION QUIZ DATA
+═══════════════════════════════════════════════════════ */
+const SECTION_QUIZZES = {
+  s1:{
+    title:"Section 1: Why We Assess",
+    qs:[
+      {q:"A newly admitted client tells the nurse 'I've had this cough for three weeks.' The nurse recognizes this statement as which type of data, and from which source?",
+       opts:["Objective data from a secondary source","Subjective data from the primary source","Subjective data from a secondary source","Objective data from the primary source"],
+       correct:1,r:"The patient's own verbal report is SUBJECTIVE data (a symptom they describe) and comes from the PRIMARY source — the patient themselves. Objective data is what the nurse directly observes or measures."},
+      {q:"Which of the following BEST describes the purpose of physical assessment in the nursing process?",
+       opts:["To implement nursing interventions based on physician orders","To establish a baseline, identify problems, and guide clinical judgment","To evaluate whether previous nursing care was effective","To document the client's social and family history"],
+       correct:1,r:"Physical assessment is the FIRST step of the nursing process. Its core purpose is to establish a baseline, identify problems, and provide data that guides clinical judgment and care planning."},
+      {q:"A nurse is caring for a postoperative client. The nurse checks the surgical site, takes vital signs, and asks the client how they are feeling. Which statement BEST describes what the nurse is doing?",
+       opts:["Performing an emergency assessment","Performing a time-lapsed reassessment","Performing an initial baseline assessment","Implementing nursing interventions"],
+       correct:1,r:"A time-lapsed reassessment (or focused reassessment) compares the client's CURRENT status to a previously established baseline. The nurse is checking on how the client is progressing after surgery, not establishing a first baseline (initial) or responding to an emergency."},
+    ]
   },
-  {
-    topic:"Types of Data",
-    type:"mc",
-    q:"During an admission assessment, the nurse collects data. Which of the following is an example of SUBJECTIVE data?",
-    opts:["The patient has facial grimacing","Temperature is 38.8°C","The patient states, 'I hurt all over'","The patient is diaphoretic"],
-    correct:[2],
-    rationale:"Subjective data is what the patient REPORTS — symptoms only the patient can describe. 'I hurt all over' is a direct patient statement. Facial grimacing, elevated temperature, and diaphoresis are all objective findings the nurse observes or measures."
+  s2:{
+    title:"Section 2: Types of Assessments",
+    qs:[
+      {q:"A client is admitted to the hospital with chest pain. The nurse performs a complete head-to-toe assessment. This is BEST described as a:",
+       opts:["Time-lapsed reassessment","Problem-focused assessment","Initial baseline assessment","Emergency assessment"],
+       correct:2,r:"An INITIAL BASELINE assessment is done at admission or the start of care. It is always comprehensive (head-to-toe) and establishes the data against which all future assessments are compared."},
+      {q:"A nurse was assigned to a client at the start of the shift and performed a head-to-toe assessment. Two hours later, the nurse returns to specifically assess the client's respiratory status because of a new complaint of shortness of breath. The second assessment is BEST described as a:",
+       opts:["Initial assessment","Problem-focused assessment","Emergency assessment","Time-lapsed assessment"],
+       correct:1,r:"A PROBLEM-FOCUSED assessment targets a specific identified problem — in this case, the new respiratory complaint. It does not cover all systems; it zeros in on the relevant system."},
+      {q:"A client in the emergency department suddenly becomes unresponsive. The nurse immediately checks for a pulse and assesses for breathing. This type of assessment is:",
+       opts:["Initial assessment","Time-lapsed reassessment","Problem-focused assessment","Emergency assessment"],
+       correct:3,r:"An EMERGENCY assessment is rapid and prioritized to identify life-threatening problems (airway, breathing, circulation — ABCs) when time is critical."},
+    ]
   },
-  {
-    topic:"Sources of Data",
-    type:"sata",
-    q:"Which of the following are acceptable SECONDARY sources of data? SELECT ALL THAT APPLY.",
-    opts:["The patient themselves","Family members","Other health care professionals","Diagnostic reports (lab, imaging)","Textbooks and clinical references"],
-    correct:[1,2,3,4],
-    rationale:"The patient is the PRIMARY source. All others — family members, healthcare professionals, diagnostic reports, and textbooks — are SECONDARY sources. Secondary sources support and supplement the primary data."
+  s3:{
+    title:"Section 3: Types of Data & Sources",
+    qs:[
+      {q:"A nurse is documenting assessment findings. Which of the following BEST represents objective data?",
+       opts:["The client states 'I feel nauseous'","The client's blood pressure is 148/92 mmHg","The client reports feeling anxious about surgery","The client says 'My pain is a 7 out of 10'"],
+       correct:1,r:"Objective data is MEASURABLE and VERIFIABLE by another person. A blood pressure reading of 148/92 mmHg is objective. The other options are all patient-reported symptoms — subjective data."},
+      {q:"A nurse is caring for an unconscious trauma patient with no family present. The nurse reviews the patient's previous medical records to obtain health history. This is an example of using a:",
+       opts:["Primary source of data","Secondary source of data","Subjective source of data","Validated source of data"],
+       correct:1,r:"Medical records are a SECONDARY source of data. The PRIMARY source is always the patient themselves. Since the patient cannot communicate, the nurse appropriately turns to secondary sources."},
+      {q:"When documenting cardiovascular subjective data, which finding would the nurse document?",
+       opts:["Blood pressure 188/100 mmHg","Apical pulse 110 bpm and irregular","Client states 'My chest feels tight'","Client has 2+ pitting edema bilateral lower extremities"],
+       correct:2,r:"'My chest feels tight' is what the CLIENT REPORTS — a symptom only they can describe — making it subjective data. BP, pulse rate/rhythm, and edema assessment are all objective findings the nurse measures or observes."},
+    ]
   },
-  {
-    topic:"Vital Signs",
-    type:"mc",
-    q:"A nurse measures a client's blood pressure as 158/96 mmHg on two separate occasions. How should the nurse classify this finding?",
-    opts:["Normal blood pressure","Elevated blood pressure","Hypertension Stage 1","Hypertension Stage 2"],
-    correct:[3],
-    rationale:"Hypertension Stage 2 is defined as systolic ≥140 mmHg OR diastolic ≥90 mmHg. This client has both (158 systolic and 96 diastolic), firmly placing them in Stage 2. Stage 1 is 130–139/80–89."
+  s4:{
+    title:"Section 4: Interviewing",
+    qs:[
+      {q:"A nurse asks a client, 'Tell me what brought you to the hospital today.' This is an example of which type of question?",
+       opts:["Leading question","Closed question","Open-ended question","Neutral closed question"],
+       correct:2,r:"Open-ended questions begin with 'tell me,' 'describe,' 'what,' or 'how' and invite the client to elaborate freely. They build rapport and allow the client to lead the conversation with what they find most important."},
+      {q:"A nurse asks, 'You don't drink alcohol, do you?' The nurse recognizes this as a problematic interview technique because:",
+       opts:["It is too open-ended and will take too long","It is a leading question that suggests the desired answer","It is a closed question that does not build rapport","It violates patient confidentiality"],
+       correct:1,r:"A LEADING question implies the expected answer, potentially causing the client to give an inaccurate response to match what they think the nurse wants to hear. Leading questions should ALWAYS be avoided in clinical interviewing."},
+      {q:"During a patient interview, the nurse notices the client is becoming tearful and seems reluctant to discuss their home situation. Which is the nurse's BEST response?",
+       opts:["Continue with the structured interview questions to stay on schedule","Ask the client's family member to answer the remaining questions","Acknowledge the client's feelings and gently explore what is making them uncomfortable","Tell the client they must answer all questions before the doctor can see them"],
+       correct:2,r:"Therapeutic communication requires acknowledging the client's emotional state before pressing on with structured questions. Recognizing non-verbal cues and creating a safe space allows the client to open up. Continuing to push questions or delegating to family dismisses the client's experience."},
+    ]
   },
-  {
-    topic:"Vital Signs",
-    type:"mc",
-    q:"A client's oxygen saturation reads 87%. What is the nurse's PRIORITY action?",
-    opts:["Document the finding and monitor every 4 hours","Offer the client a glass of water and reposition","Notify the provider immediately and anticipate supplemental oxygen","Place the client in the Trendelenburg position"],
-    correct:[2],
-    rationale:"SpO₂ of 87% indicates moderate-to-severe hypoxemia (below 90%). The priority is to notify the provider and apply supplemental oxygen per protocol. Documentation alone or repositioning without oxygen would not address the life-threatening low oxygen level. Trendelenburg is not indicated for hypoxia."
+  s5:{
+    title:"Section 5: Exam Techniques (IAPP)",
+    qs:[
+      {q:"A nurse is preparing to perform a complete abdominal assessment. In which order should the nurse proceed?",
+       opts:["Palpation → Percussion → Inspection → Auscultation","Inspection → Palpation → Percussion → Auscultation","Inspection → Auscultation → Percussion → Palpation","Auscultation → Inspection → Palpation → Percussion"],
+       correct:2,r:"For the ABDOMEN, the correct sequence is I-A-P-P: Inspection → Auscultation → Percussion → Palpation. Auscultation MUST occur before palpation and percussion because mechanical stimulation can alter bowel sounds, leading to inaccurate assessment."},
+      {q:"The nurse places the diaphragm of the stethoscope on the client's back and listens during each breath. This technique is BEST described as:",
+       opts:["Direct auscultation","Indirect auscultation","Light palpation","Indirect percussion"],
+       correct:1,r:"INDIRECT auscultation uses a stethoscope (an instrument) to amplify and transmit body sounds. The diaphragm of the stethoscope is best for high-pitched sounds such as breath sounds. Direct auscultation uses only the ear without a device."},
+      {q:"A nurse is assessing a client's abdomen by tapping a finger placed on the skin surface. The nurse notes a dull sound over the right upper quadrant. This technique is called:",
+       opts:["Direct percussion","Light palpation","Indirect percussion","Deep palpation"],
+       correct:2,r:"INDIRECT (mediated) percussion involves placing one finger flat on the skin and striking it with another finger to elicit sounds from underlying structures. Dullness over the right upper quadrant corresponds to the liver."},
+    ]
   },
-  {
-    topic:"Respiratory Assessment",
-    type:"mc",
-    q:"The nurse auscultates a client's lungs and hears high-pitched, musical, whistling sounds on expiration. Which finding should the nurse document?",
-    opts:["Fine crackles","Rhonchi","Wheezing","Stridor"],
-    correct:[2],
-    rationale:"Wheezing is a high-pitched, musical, whistling sound typically heard on expiration, caused by bronchospasm or narrowed airways (asthma, COPD). Crackles are popping/crackling sounds from fluid. Rhonchi are low-pitched, snoring-type sounds that may clear with cough. Stridor is an inspiratory emergency sound."
+  s6:{
+    title:"Section 6: Client Positioning",
+    qs:[
+      {q:"A client with severe COPD is gasping for breath and instinctively leans forward with hands on knees. The nurse should assist the client into which position?",
+       opts:["High Fowler's","Semi-Fowler's","Orthopneic (tripod) position","Reverse Trendelenburg"],
+       correct:2,r:"The ORTHOPNEIC (tripod) position — sitting upright and leaning forward with arms supported — is the priority for a patient with severe dyspnea. This position maximizes chest expansion and allows the diaphragm to drop freely, significantly improving breathing. Patients with COPD and CHF naturally assume this position."},
+      {q:"A client is scheduled for a gynecological examination. The nurse prepares the client in which position?",
+       opts:["Sims' position","Lithotomy position","Prone position","Left lateral position"],
+       correct:1,r:"The LITHOTOMY position (supine with legs elevated and supported in stirrups) is used for gynecological examinations, urological procedures, and childbirth. Sims' is used for rectal exams and enemas."},
+      {q:"A postoperative client is prescribed tube feedings. The nurse places the client in which position to REDUCE the risk of aspiration?",
+       opts:["Supine (flat)","Trendelenburg","Semi-Fowler's (head of bed 30–45°)","Prone"],
+       correct:2,r:"SEMI-FOWLER'S (HOB 30–45°) reduces aspiration risk during tube feedings by using gravity to keep gastric contents from refluxing into the esophagus. Supine or Trendelenburg positions increase aspiration risk significantly."},
+    ]
   },
-  {
-    topic:"Respiratory Assessment",
-    type:"mc",
-    q:"A nurse hears a harsh, high-pitched inspiratory sound in a client without using a stethoscope. What is the nurse's FIRST priority action?",
-    opts:["Document the finding in the medical record","Encourage the client to cough and deep breathe","Recognize this as an emergency and call for help immediately","Place the client in Semi-Fowler's position and reassess"],
-    correct:[2],
-    rationale:"Stridor is a harsh, high-pitched inspiratory sound audible WITHOUT a stethoscope, indicating upper airway obstruction (anaphylaxis, foreign body, croup, epiglottitis). This is a medical EMERGENCY requiring immediate action. Simply documenting or repositioning would delay life-saving intervention."
+  s7:{
+    title:"Section 7: Vital Signs",
+    qs:[
+      {q:"A nurse assesses a client's blood pressure and obtains 176/102 mmHg. The client's previous reading was 122/78 mmHg. Which action should the nurse take FIRST?",
+       opts:["Recheck the blood pressure in the other arm using the same cuff","Document the finding as a normal variation and continue care","Administer an antihypertensive medication from the medication dispensing cabinet","Notify the provider and continue monitoring the client closely"],
+       correct:0,r:"When an unexpected BP reading occurs, the nurse should FIRST recheck it — ideally in the other arm — to rule out measurement error (wrong cuff size, incorrect positioning, artifact). Documenting a critical finding without verification is unsafe. Independently administering antihypertensives without an order is outside the nurse's scope."},
+      {q:"A nurse is assessing an infant. Which vital sign finding is consistent with NORMAL for this age group?",
+       opts:["Heart rate 60 bpm","Respiratory rate 14 breaths/min","Heart rate 130 bpm","Blood pressure 120/80 mmHg"],
+       correct:2,r:"A heart rate of 120–160 bpm is normal for newborns; infants (1–12 months) have a normal HR of 80–140 bpm. A rate of 130 bpm is well within normal. Adult normal values (HR 60–100, RR 12–20, BP 120/80) do NOT apply to infants."},
+      {q:"A client's SpO₂ suddenly drops to 88%. The nurse correctly identifies this as indicating:",
+       opts:["Normal oxygen saturation; continue monitoring","Mild hypoxemia; encourage deep breathing","Moderate hypoxemia; notify provider and apply supplemental oxygen","Severe hypoxemia; prepare for immediate intubation"],
+       correct:2,r:"SpO₂ of 86–90% indicates MODERATE hypoxemia requiring urgent intervention. The nurse should notify the provider immediately and anticipate supplemental oxygen. SpO₂ below 85% would indicate severe hypoxemia requiring emergency intervention. SpO₂ ≥95% is normal."},
+      {q:"A nurse obtains a rectal temperature of 101.8°F. What is the approximate oral equivalent of this temperature?",
+       opts:["100.8°F","102.8°F","101.8°F","99.8°F"],
+       correct:0,r:"Rectal temperature is approximately 1°F HIGHER than oral temperature. Therefore, oral equivalent = 101.8 – 1 = 100.8°F. Axillary is 1°F LOWER than oral. This patient has a fever (>100.4°F/38°C) regardless of route."},
+    ]
   },
-  {
-    topic:"Neurological Assessment",
-    type:"mc",
-    q:"The nurse assesses a client who responds only to painful stimuli with minimal motor response. The nurse correctly documents the client's LOC as:",
-    opts:["Lethargic","Obtunded","Stuporous","Comatose"],
-    correct:[2],
-    rationale:"Stuporous describes a client who responds ONLY to painful stimuli with minimal verbal or motor response. LOC progression: Alert → Lethargic (drowsy but arousable) → Obtunded (responds to vigorous stimulation) → Stuporous (responds only to pain) → Comatose (no response)."
+  s8:{
+    title:"Section 8: Lifespan Assessment",
+    qs:[
+      {q:"A nurse is assessing a 14-year-old client. Which action demonstrates BEST practice regarding confidentiality?",
+       opts:["Insist that a parent remain in the room at all times","Ask the parent to step out so the adolescent can speak privately","Tell the teen that everything they say will be shared with parents","Refuse to assess the teen without parental consent"],
+       correct:1,r:"Adolescents require CONFIDENTIALITY to develop trust with healthcare providers and to disclose sensitive information (substance use, sexual activity, mental health). Best practice is to speak with the adolescent privately for at least part of the visit. Note: there are legal exceptions (abuse, imminent danger) that require disclosure."},
+      {q:"A nurse is performing an assessment on an 80-year-old client. Which modification is MOST appropriate?",
+       opts:["Speak loudly and use medical terminology to command authority","Rush through the assessment because older adults tire easily","Allow extra time and speak clearly; assess for hearing and vision changes","Rely solely on family members to provide the health history"],
+       correct:2,r:"Older adults may have hearing loss, vision changes, cognitive changes, or take longer to process and respond. The nurse should allow extra time, speak clearly (not necessarily louder), assess senses, and still include the patient as the primary source. Relying solely on family dismisses the patient's autonomy."},
+    ]
   },
-  {
-    topic:"Cardiovascular",
-    type:"mc",
-    q:"The nurse is assessing peripheral pulses. The nurse correctly identifies which statement about carotid pulse assessment?",
-    opts:["Both carotid pulses should be palpated simultaneously to compare","The carotid pulse should never be palpated on patients over 65","Only one carotid artery should be palpated at a time","The carotid pulse is best assessed with the bell of the stethoscope"],
-    correct:[2],
-    rationale:"NEVER palpate both carotid arteries at the same time. Bilateral carotid compression reduces blood flow to the brain and can trigger a vasovagal response, syncope, or cardiac arrest. Palpate only one side at a time, comparing each side separately."
+  s9:{
+    title:"Section 9: General Survey",
+    qs:[
+      {q:"During the general survey, a nurse observes a client who is sitting hunched forward, grimacing, and breathing rapidly. Which is the MOST accurate interpretation of this finding?",
+       opts:["The client appears comfortable and should not be disturbed","This represents a normal postoperative presentation","These findings suggest the client may be in pain or respiratory distress requiring further assessment","The client is displaying normal resting behavior"],
+       correct:2,r:"The general survey relies on observation of OVERALL appearance. Hunching forward (orthopneic positioning), grimacing (pain behavior), and rapid breathing (tachypnea) are all signs of distress that require IMMEDIATE further assessment and intervention."},
+      {q:"A nurse notes that a client's speech is rapid, pressured, and louder than normal. This is documented as an abnormal finding in which component of the general survey?",
+       opts:["Body structure","Hygiene and grooming","Speech quality and quantity","Signs of physical illness"],
+       correct:2,r:"Speech assessment during the general survey includes QUANTITY (amount, pace) and QUALITY (loudness, clarity, inflection). Normal speech is understandable, moderate pace, and clear. Rapid, pressured, loud speech can indicate anxiety, mania, or neurological changes."},
+    ]
   },
-  {
-    topic:"Cardiovascular",
-    type:"mc",
-    q:"A nurse assesses a client's capillary refill time (CRT) and finds it takes 4 seconds for the nail bed to return to its baseline color. How should the nurse interpret this finding?",
-    opts:["Normal finding; continue monitoring","Slightly elevated; reassess in 30 minutes","Prolonged CRT suggesting impaired perfusion","Expected finding in older adults"],
-    correct:[2],
-    rationale:"Normal CRT is less than 3 seconds. A CRT of ≥3 seconds is prolonged and suggests impaired peripheral perfusion, dehydration, shock, or cardiovascular compromise. This finding should be reported and further assessed. While slightly prolonged CRT can occur in cold environments, 4 seconds in a clinical context warrants concern."
+  s10:{
+    title:"Section 10: Mental Status & Neuro",
+    qs:[
+      {q:"A nurse calls a client's name and shakes their shoulder firmly. The client opens their eyes briefly, mumbles incoherently, and immediately falls back asleep. Which LOC level does the nurse document?",
+       opts:["Alert","Lethargic","Obtunded","Stuporous"],
+       correct:2,r:"OBTUNDED describes a client who is difficult to arouse and responds only to VIGOROUS stimulation. They may briefly respond but quickly return to an unresponsive state, with confused minimal responses. Lethargic clients can be more easily aroused and are drowsy but arousable. Stuporous clients respond only to PAIN, not just vigorous stimulation."},
+      {q:"A nurse assesses a client's pupils and documents: Right pupil 6mm, fixed and non-reactive. Left pupil 3mm, reacts briskly to light. Which action is the nurse's PRIORITY?",
+       opts:["Document PERRLA and continue the assessment","Darken the room and reassess in 30 minutes","Report this finding to the provider IMMEDIATELY — this is a neurological emergency","Remind the client not to rub their eyes"],
+       correct:2,r:"Unequal pupils (anisocoria) with one being FIXED and DILATED is a critical neurological emergency suggesting uncal herniation, brain injury, or stroke. This requires IMMEDIATE provider notification. Time is brain — delay equals permanent damage."},
+      {q:"A nurse is assessing a client's mental status and notices the client is giving irrelevant answers and jumping between unrelated topics. This finding is BEST documented as:",
+       opts:["Appropriate thought content","Flight of ideas with illogical thought sequence","Cooperative and oriented behavior","Appropriate affect and mood"],
+       correct:1,r:"FLIGHT OF IDEAS (jumping between unrelated topics) and ILLOGICAL THOUGHT SEQUENCE are abnormal findings in mental status assessment. Normal findings include logical sequence, relevant answers, and a clear sense of reality. These findings should be reported and further evaluated."},
+    ]
   },
-  {
-    topic:"Blood Pressure",
-    type:"sata",
-    q:"A nurse is preparing to measure a client's blood pressure. Which of the following situations require the nurse to AVOID using that arm? SELECT ALL THAT APPLY.",
-    opts:["The client had a right-side mastectomy (using right arm)","The client has a peripheral IV in the left arm","The client has a cast on the right arm","The client has an AV fistula for dialysis in the left arm","The client has mild arthritis in both hands"],
-    correct:[0,1,2,3],
-    rationale:"BP should not be obtained on: (1) mastectomy side — lymphedema risk; (2) arm with IV — disrupts infusion and gives inaccurate readings; (3) arm with cast — cannot access, inaccurate; (4) dialysis access/AV fistula — can damage the access and give inaccurate readings. Arthritis alone is NOT a contraindication."
+  s11:{
+    title:"Section 11: HEENT",
+    qs:[
+      {q:"A nurse asks a client to smile and notices the left side of the client's face does not move. This finding MOST likely indicates involvement of which cranial nerve?",
+       opts:["Cranial Nerve II (optic)","Cranial Nerve III (oculomotor)","Cranial Nerve VII (facial)","Cranial Nerve VIII (vestibulocochlear)"],
+       correct:2,r:"CRANIAL NERVE VII (the FACIAL nerve) controls the muscles of facial expression. Asymmetrical facial movement (one side not moving) suggests facial nerve damage, which can occur in stroke, Bell's palsy, or trauma. This is why the nurse asks clients to smile and puff their cheeks during assessment."},
+      {q:"A nurse assesses a client's oral cavity and notes the breath has an acetone (fruity) odor. This finding MOST suggests:",
+       opts:["Normal finding from recent coffee consumption","Uremic fetor associated with renal failure","Diabetic ketoacidosis (DKA)","Alcohol intoxication"],
+       correct:2,r:"A FRUITY or ACETONE breath odor is a classic sign of DIABETIC KETOACIDOSIS (DKA). The body metabolizes fat for energy, producing ketones which are exhaled. Ammonia-smelling breath suggests uremia (renal failure). Alcohol has a distinctly different odor. This is an abnormal oral assessment finding."},
+    ]
   },
-  {
-    topic:"Vital Signs",
-    type:"mc",
-    q:"Which respiratory pattern does the nurse MOST associate with diabetic ketoacidosis (DKA)?",
-    opts:["Cheyne-Stokes breathing","Kussmaul breathing","Biot's breathing","Orthopnea"],
-    correct:[1],
-    rationale:"Kussmaul breathing is deep, rapid, labored breathing — the body's compensatory response to metabolic acidosis in DKA. It's the body's attempt to blow off excess CO₂ to raise pH. Cheyne-Stokes is alternating fast/slow with apnea (brain injury, CHF). Biot's is irregular bursts of breathing. Orthopnea is difficulty breathing when lying flat."
+  s12:{
+    title:"Section 12: Respiratory Assessment",
+    qs:[
+      {q:"A nurse is auscultating a client's lungs and hears a high-pitched crowing sound on inspiration that is audible across the room without a stethoscope. The nurse's PRIORITY action is to:",
+       opts:["Document 'adventitious breath sounds noted' and continue the assessment","Encourage the client to cough and breathe deeply","Recognize STRIDOR and immediately call for emergency assistance","Place the client in Semi-Fowler's position and administer a nebulizer treatment"],
+       correct:2,r:"STRIDOR is a harsh, high-pitched inspiratory sound audible WITHOUT a stethoscope, indicating UPPER AIRWAY OBSTRUCTION (anaphylaxis, foreign body, croup, epiglottitis). This is a LIFE-THREATENING EMERGENCY requiring immediate action. Simply repositioning or nebulizing will not clear an obstruction."},
+      {q:"A nurse auscultates fine crackles (rales) bilaterally at the bases of a client with heart failure. Which pathophysiological process BEST explains this finding?",
+       opts:["Bronchospasm causing airway narrowing","Fluid accumulation in the alveoli from heart failure","Excessive mucus secretions in the large airways","Pleural membrane inflammation causing friction"],
+       correct:1,r:"FINE CRACKLES (rales) are caused by fluid in the ALVEOLI (small airways). In heart failure, the left ventricle fails to pump adequately, causing fluid to back up into the pulmonary circulation and leak into alveoli. This produces the characteristic popping/crackling sound on inspiration."},
+      {q:"A client with asthma has an acute exacerbation. The nurse expects to auscultate which adventitious breath sound?",
+       opts:["Fine crackles bilaterally","Pleural friction rub","Coarse rhonchi that clear with cough","Wheezing on expiration"],
+       correct:3,r:"WHEEZING on expiration is the hallmark of BRONCHOSPASM — the hallmark of asthma. During an asthma attack, the bronchi are narrowed and inflamed, causing air to squeeze through, producing the high-pitched musical whistling sound. Wheezing can also occur on inspiration in severe cases."},
+    ]
   },
-  {
-    topic:"Skin Assessment",
-    type:"mc",
-    q:"The nurse observes a client with yellowing of the skin and sclerae. The nurse recognizes this finding as:",
-    opts:["Erythema","Jaundice","Pallor","Cyanosis"],
-    correct:[1],
-    rationale:"Jaundice is the yellow discoloration of the skin AND sclerae (whites of the eyes) caused by excess bilirubin. It is associated with liver disease, bile duct obstruction, or hemolysis. The key distinguishing feature is the yellowing of the SCLERAE, which differentiates it from other skin color changes."
+  s13:{
+    title:"Section 13: Cardiovascular",
+    qs:[
+      {q:"A nurse is assessing bilateral lower extremity pulses and notes the right dorsalis pedis pulse is absent. The client's right foot is cool, pale, and painful at rest. These findings MOST suggest:",
+       opts:["Venous insufficiency of the right lower extremity","Normal variant — the dorsalis pedis is often absent","Arterial insufficiency of the right lower extremity","Deep vein thrombosis of the right leg"],
+       correct:2,r:"ARTERIAL INSUFFICIENCY presents with absent/weak pulses, pallor, cool/cold extremity, pain at rest (severe), thin/shiny/hairless skin, and arterial ulcers on toes. These are all signs of inadequate ARTERIAL BLOOD FLOW. Venous insufficiency presents with edema, brown discoloration, and stasis ulcers near the ankle."},
+      {q:"The nurse is about to assess the carotid pulse bilaterally. Which action is ESSENTIAL for client safety?",
+       opts:["Palpate both carotid arteries simultaneously for an accurate comparison","Only palpate ONE carotid artery at a time","Use the bell of the stethoscope to auscultate both carotids simultaneously","Apply firm sustained pressure to accurately assess pulse volume"],
+       correct:1,r:"NEVER palpate both carotid arteries at the same time. Bilateral carotid compression reduces cerebral blood flow and can trigger a vasovagal response, cardiac arrhythmia, or syncope. Always palpate one side at a time and compare separately."},
+      {q:"A nurse assesses a client's capillary refill time (CRT) by pressing on the nail bed for 5 seconds and releasing. Color returns in 4 seconds. The nurse correctly interprets this as:",
+       opts:["Normal CRT; adequate peripheral perfusion","Prolonged CRT; possible impaired perfusion requiring further assessment","Rapid CRT; possible hypertension","Indeterminate; repeat in the opposite hand only"],
+       correct:1,r:"Normal CRT is LESS THAN 3 seconds. A return time of 4 seconds is PROLONGED (≥3 seconds), suggesting impaired peripheral perfusion from dehydration, shock, hypothermia, or cardiovascular compromise. This finding requires further assessment and provider notification."},
+    ]
   },
-  {
-    topic:"Wound Assessment",
-    type:"mc",
-    q:"A nurse assesses a client's surgical wound and notes thick, yellow-green, foul-smelling drainage. The nurse should FIRST:",
-    opts:["Document the finding and change the dressing as scheduled","Note it is normal serosanguinous drainage","Notify the provider — this is a sign of infection","Irrigate the wound with sterile saline and repack"],
-    correct:[2],
-    rationale:"Thick, yellow-green, foul-smelling drainage is purulent — a classic sign of INFECTION. The nurse must notify the provider immediately. Serosanguinous drainage is clear/pale pink (normal). Independent wound irrigation or simply documenting without reporting would delay necessary treatment."
+  s14:{
+    title:"Section 14: Abdominal Assessment",
+    qs:[
+      {q:"A nurse is assessing a postoperative client who had abdominal surgery 18 hours ago. On auscultation, the nurse hears only 2 bowel sounds in 5 minutes of listening. The nurse documents this as:",
+       opts:["Hyperactive bowel sounds; call the provider","Normal bowel sounds for a postoperative client","Hypoactive bowel sounds; monitor and report","Absent bowel sounds; begin feeding immediately"],
+       correct:2,r:"HYPOACTIVE bowel sounds (infrequent, quiet) are common after abdominal surgery due to anesthesia's effect on peristalsis (paralytic ileus). Normal bowel sounds occur every 5–15 seconds. Two sounds in 5 minutes (24 sounds/hour) is well below normal — this is hypoactive and should be monitored, documented, and reported if worsening."},
+      {q:"During an abdominal inspection, the nurse notes the client's abdomen appears distended and tympanic on percussion. The client reports they have not had a bowel movement in 5 days. The MOST likely cause of these findings is:",
+       opts:["Ascites (fluid accumulation)","Gas or constipation causing abdominal distention","Liver enlargement (hepatomegaly)","Normal finding in this client"],
+       correct:1,r:"TYMPANY (drum-like, high-pitched percussion sound) indicates air or GAS in the bowel. Combined with 5 days of no bowel movements and visible distention, constipation with gas accumulation is the most likely cause. Ascites would produce dullness (fluid), not tympany. Hepatomegaly produces dullness."},
+    ]
   },
-  {
-    topic:"Urinary Assessment",
-    type:"mc",
-    q:"A postoperative client's urinary output has been 18 mL/hour for the past 3 hours. The nurse correctly identifies this as:",
-    opts:["Normal postoperative output","Diuresis requiring careful monitoring","Oliguria requiring provider notification","Anuria requiring catheterization"],
-    correct:[2],
-    rationale:"Oliguria is defined as urine output less than 30 mL/hr (or less than 400 mL/day). At 18 mL/hr, this client is clearly oliguric. This is a critical finding that must be reported to the provider immediately, as it may indicate dehydration, renal insufficiency, or other serious conditions. Anuria is complete absence (<100 mL/day total)."
+  s15:{
+    title:"Section 15: Genitourinary",
+    qs:[
+      {q:"A postoperative client's urine output over the past 2 hours has been 28 mL and 22 mL respectively. The nurse's PRIORITY action is to:",
+       opts:["Document the output and reassess at the next scheduled assessment","Encourage the client to drink more water","Notify the provider — this output is below the acceptable threshold","Increase the IV rate without a provider order"],
+       correct:2,r:"Normal urine output is 30–60 mL/hour. This client's output (28 mL and 22 mL) is below 30 mL/hr — this is OLIGURIA. The nurse must notify the provider immediately. Oliguria can indicate dehydration, renal insufficiency, urinary retention, or hemodynamic compromise. Independently increasing IV fluids requires a provider order."},
+      {q:"A client tells the nurse 'I get up 3 or 4 times every night to urinate.' The nurse documents this finding as:",
+       opts:["Diuresis","Nocturia","Polyuria","Urinary retention"],
+       correct:1,r:"NOCTURIA is defined as waking more than once per night to urinate. It disrupts sleep and can indicate urinary tract infection, benign prostatic hyperplasia (in males), diabetes, heart failure, or excessive fluid intake before bedtime. Polyuria is abnormally large volume; diuresis is increased production; retention is inability to void."},
+    ]
   },
-  {
-    topic:"Interviewing",
-    type:"mc",
-    q:"The nurse asks a client, 'You don't smoke, do you?' This is an example of which type of interview question?",
-    opts:["Open-ended question","Closed question","Leading question","Neutral question"],
-    correct:[2],
-    rationale:"A leading question suggests the expected or desired answer, potentially biasing the client's response. 'You don't smoke, do you?' implies the nurse expects a 'no' answer. This type of question should be AVOIDED. A better approach would be: 'Do you smoke?' (closed) or 'Tell me about any tobacco use' (open-ended)."
+  s16:{
+    title:"Section 16: Musculoskeletal",
+    qs:[
+      {q:"A nurse asks a client to push their feet against the nurse's hands. The client is unable to perform this movement on the left side. This assessment tests:",
+       opts:["Active range of motion","Passive range of motion","Lower extremity muscle strength (pedal pushes)","Dorsiflexion reflex"],
+       correct:2,r:"PEDAL PUSHES test LOWER EXTREMITY MUSCLE STRENGTH. The nurse applies resistance and asks the client to push — asymmetry (one side weaker) indicates neurological or musculoskeletal dysfunction and must be reported. This is different from passive ROM (nurse moves the limb) or active ROM (client moves freely)."},
+      {q:"A nurse instructs a client to turn their palm upward. Which movement is the nurse assessing?",
+       opts:["Pronation","Dorsiflexion","Supination","Lateral rotation"],
+       correct:2,r:"SUPINATION is the movement of turning the palm UPWARD (as if holding a bowl of soup). PRONATION is turning the palm downward (pouring the soup out). Memory trick: SUPination = SOUP in your palm = palm UP."},
+    ]
   },
-  {
-    topic:"Assessment Fundamentals",
-    type:"sata",
-    q:"A client reports dizziness and states 'I feel like I might pass out.' The nurse understands this represents which types of data? SELECT ALL THAT APPLY.",
-    opts:["Subjective data","Objective data","Primary source data","Secondary source data","Assessment data requiring further investigation"],
-    correct:[0,2,4],
-    rationale:"'I feel like I might pass out' and 'I feel dizzy' are SUBJECTIVE data (patient-reported symptoms). They come from the PRIMARY source (the patient themselves). This type of data requires further objective investigation (vital signs, orthostatic BP, neuro check). It is NOT objective (not measurable/observable) and NOT secondary (patient is speaking directly)."
+  s17:{
+    title:"Section 17: Integumentary",
+    qs:[
+      {q:"A nurse assesses a client who has been on bed rest for 5 days. The nurse notes a reddened, non-blanching area over the sacrum. The nurse FIRST should:",
+       opts:["Apply a warm compress to the area","Document it as expected and continue care","Recognize this as a pressure injury and implement a pressure relief plan immediately","Massage the area vigorously to increase circulation"],
+       correct:2,r:"A NON-BLANCHING redness over a bony prominence (sacrum) is a Stage 1 pressure injury requiring IMMEDIATE intervention. The nurse should implement pressure relief (offloading, repositioning every 2 hours, specialty mattress) and document using the Braden Scale. Massaging over a bony prominence is CONTRAINDICATED — it can worsen tissue damage."},
+      {q:"A nurse assesses a client's wound and notes thick, leathery, black tissue covering the wound bed. The nurse correctly identifies this as:",
+       opts:["Serosanguinous drainage","Slough","Eschar","Granulation tissue"],
+       correct:2,r:"ESCHAR is thick, leathery, black or brown NECROTIC (dead) tissue. It requires debridement to allow healing. SLOUGH is softer, yellow/tan necrotic tissue. Serosanguinous is drainage (not tissue). Granulation tissue is healthy red/pink tissue that indicates healing."},
+    ]
   },
-  {
-    topic:"Cardiovascular",
-    type:"mc",
-    q:"The nurse is assessing a client's lower extremities and notes pitting edema, brown discoloration around the ankles, and varicosities. These findings are MOST consistent with:",
-    opts:["Arterial insufficiency","Venous insufficiency","Deep vein thrombosis","Lymphedema"],
-    correct:[1],
-    rationale:"Pitting edema, brown/rust discoloration (hemosiderin staining from RBC breakdown), and varicosities are classic signs of VENOUS insufficiency — impaired blood return through the veins. Arterial insufficiency presents with pallor, cool/cold skin, absent pulses, and claudication. DVT may have some edema but also includes pain and warmth. Lymphedema is typically non-pitting."
+  s18:{
+    title:"Section 18: Skin Color Changes & Wounds",
+    qs:[
+      {q:"A nurse observes that a client's lips and fingertips are bluish in color. The client's SpO₂ is 86%. The nurse documents this skin color change as:",
+       opts:["Jaundice","Erythema","Cyanosis","Pallor"],
+       correct:2,r:"CYANOSIS is the bluish/gray discoloration of skin and mucous membranes caused by HYPOXIA (inadequate oxygenation). It is best observed at the lips, fingertips, nail beds, and around the mouth (circumoral cyanosis). An SpO₂ of 86% confirms the hypoxia causing this finding."},
+      {q:"A nurse notes pale yellow, thin, watery drainage on a client's postoperative dressing. This should be documented as:",
+       opts:["Purulent drainage — requires provider notification","Sanguinous drainage — monitor for active bleeding","Serosanguinous drainage — normal finding","Serous drainage — normal early healing finding"],
+       correct:3,r:"SEROUS drainage is clear to pale yellow, thin, and watery — it is NORMAL in early wound healing and represents plasma seeping from the wound. Serosanguinous is slightly pink (mix of serum and blood). Sanguinous is bright red (active bleeding). Purulent is thick, cloudy, yellow/green (infection)."},
+    ]
   },
-  {
-    topic:"Neurological Assessment",
-    type:"mc",
-    q:"A nurse notes that a client's pupils are 5 mm and 3 mm respectively. The nurse should FIRST:",
-    opts:["Document as a normal variant and continue assessment","Report the finding immediately to the provider","Shine a light in both eyes and re-examine in 15 minutes","Have the client look at a near and far object to test accommodation"],
-    correct:[1],
-    rationale:"Anisocoria (unequal pupil size) is a NEUROLOGICAL EMERGENCY. It can indicate increased intracranial pressure, uncal herniation, or stroke. The nurse should report this finding IMMEDIATELY to the provider. While anisocoria can occasionally be a benign congenital variant, in a clinical setting it must be treated as an emergency until proven otherwise."
-  },
-  {
-    topic:"Vital Signs — Temperature",
-    type:"mc",
-    q:"The nurse is comparing temperature measurement routes. Which temperature route provides the MOST accurate reading?",
-    opts:["Oral","Axillary","Temporal","Rectal"],
-    correct:[3],
-    rationale:"Rectal temperature is the MOST accurate because it measures core body temperature in a closed body cavity with minimal influence from environmental factors. Normal rectal temp is 99.6°F (37.6°C) — approximately 1°F HIGHER than oral. Axillary is least accurate (1°F lower than oral). Temporal and tympanic are good but may be affected by technique."
-  },
-  {
-    topic:"Positioning",
-    type:"mc",
-    q:"A client with severe COPD is found sitting upright in bed, leaning forward with arms resting on the overbed table. The nurse recognizes this as which client position?",
-    opts:["High Fowler's position","Semi-Fowler's position","Orthopneic (tripod) position","Reverse Trendelenburg position"],
-    correct:[2],
-    rationale:"The orthopneic (tripod) position — sitting upright and leaning forward with arms supported — is used by patients with severe dyspnea (COPD, CHF, asthma). This position maximizes chest expansion and allows the diaphragm to move downward freely, greatly improving breathing effort. Patients often assume this position instinctively when severely short of breath."
-  },
-  {
-    topic:"Cardiovascular",
-    type:"mc",
-    q:"When assessing the apical heart rate, the nurse places the stethoscope at:",
-    opts:["Right sternal border, 2nd intercostal space","Left sternal border, 4th intercostal space","Left midclavicular line, 5th intercostal space","Right sternal border, 4th intercostal space"],
-    correct:[2],
-    rationale:"The apical pulse is auscultated at the Point of Maximal Impulse (PMI) — the left midclavicular line at the 5th intercostal space (mitral area) in adults. This is where the apex of the heart is closest to the chest wall. Listen for one full minute. Each 'lub-dub' (S1-S2) counts as one beat."
-  },
-  {
-    topic:"Musculoskeletal",
-    type:"mc",
-    q:"The nurse asks a client to turn the palm of the hand downward. The nurse is assessing which movement?",
-    opts:["Supination","Pronation","Dorsiflexion","Inward rotation"],
-    correct:[1],
-    rationale:"Pronation is the movement of turning the palm DOWNWARD (facing the floor). Supination is the opposite — turning the palm UPWARD (as if holding a bowl of soup). Memory trick: SUPination = hold SOUP in your palm (palm UP). Dorsiflexion is ankle/foot movement (toes toward nose). Inward rotation refers to rotating a limb toward the midline."
-  },
-  {
-    topic:"Mental Status",
-    type:"sata",
-    q:"The nurse is documenting a client's mental status assessment. Which of the following findings would the nurse identify as ABNORMAL? SELECT ALL THAT APPLY.",
-    opts:["Client is cooperative and follows instructions","Client demonstrates flight of ideas and illogical thought sequence","Client's mood changes suddenly and is inappropriate to the situation","Client gives relevant, organized answers","Client expresses paranoid ideation"],
-    correct:[1,2,4],
-    rationale:"Abnormal mental status findings include: flight of ideas / illogical thinking (should be logical and organized), sudden inappropriate mood changes (appropriate affect is normal), and paranoid ideation (should have a realistic sense of reality). Being cooperative and giving relevant/organized answers are NORMAL findings."
-  },
-  {
-    topic:"General Survey",
-    type:"mc",
-    q:"A nurse is performing a general survey. Which assessment finding would require the nurse to FOLLOW UP?",
-    opts:["Client speaks at a moderate pace with clear articulation","Client is well-groomed and neatly dressed","Client shows no apparent signs of distress","Client is speaking very rapidly and appears to be in pain, wincing"],
-    correct:[3],
-    rationale:"During the general survey, the nurse observes for signs of distress — rapid or abnormal speech, wincing, grimacing, labored breathing, and pain behaviors are all abnormal findings requiring follow-up. Normal findings include: moderate speech pace, neat grooming, and no apparent distress."
-  }
-];
-
-/* ── Exam State ──────────────────────────────────────────────── */
-let examState = {
-  current: 0,
-  answers: new Array(QUESTIONS.length).fill(null),
-  results: new Array(QUESTIONS.length).fill(null),
-  submitted: new Array(QUESTIONS.length).fill(false),
-  timerSec: 30 * 60,
-  timerInt: null,
-  started: false,
 };
 
-function launchExam(){
+/* ═══════════════════════════════════════════════════════
+   VOCABULARY DATA (all terms from docx)
+═══════════════════════════════════════════════════════ */
+const VOCAB_QUIZ_DATA = [
+  ["Inspect","To visually examine the client using sight, smell, and hearing in a systematic manner"],
+  ["Auscultate","To listen to body sounds using a stethoscope (indirect) or the ear alone (direct)"],
+  ["Palpation","To use touch to assess texture, temperature, moisture, tenderness, and underlying masses"],
+  ["Percussion","To tap body surface to elicit sounds or assess tenderness of underlying tissue"],
+  ["Erythema","Redness of the skin due to increased blood flow — seen in inflammation, infection, or heat"],
+  ["Cyanosis","Bluish or gray discoloration of the skin due to oxygen deficiency (hypoxia)"],
+  ["Jaundice","Yellow discoloration of the skin and sclerae (whites of the eyes) due to excess bilirubin"],
+  ["Pallor","Abnormal paleness of the skin due to anemia, shock, or poor perfusion"],
+  ["Ecchymosis","Bruising caused by extravasation of blood into subcutaneous tissue"],
+  ["Atelectasis","Collapse of lung alveoli; very common postoperatively; causes decreased breath sounds"],
+  ["Adventitious Breath Sounds","Abnormal breath sounds superimposed over normal breath sounds"],
+  ["Crackles","Intermittent popping or bubbling sounds in the airways; caused by fluid — pneumonia, CHF"],
+  ["Rhonchi","Low-pitched snoring or gurgling breath sounds that may clear with coughing"],
+  ["Stridor","Harsh, high-pitched inspiratory sound audible without stethoscope; upper airway obstruction — EMERGENCY"],
+  ["Wheezing","High-pitched musical whistling breath sound from bronchospasm — asthma or COPD"],
+  ["Diaphoretic","Experiencing profuse sweating; associated with fever, pain, shock, MI, or hypoglycemia"],
+  ["PERRLA","Pupils Equal, Round, Reactive to Light and Accommodation — normal pupil finding"],
+  ["Distention","Visible swelling or enlargement of the abdomen due to gas, fluid, or solid masses"],
+  ["Hyperactive Bowel Sounds","Loud, frequent, rushing bowel sounds associated with diarrhea or gastroenteritis"],
+  ["Hypoactive Bowel Sounds","Infrequent or quiet bowel sounds associated with ileus or peritonitis"],
+  ["Incontinence","Involuntary loss of urine or stool"],
+  ["Edema","Abnormal accumulation of fluid in interstitial spaces; can be pitting or non-pitting"],
+  ["Alert","Fully awake, aware, and responds appropriately to all stimuli"],
+  ["Oriented","Aware of person (who they are), place (where they are), time (date), and situation"],
+  ["Objective Data","Measurable, observable data (signs) that can be verified by another person"],
+  ["Subjective Data","Data reported by the client (symptoms) that only the patient can describe"],
+  ["Primary Source of Data","The patient themselves — the most direct and best source of information"],
+  ["Secondary Source of Data","Any source other than the patient — family, records, labs, or textbooks"],
+  ["Observation","Purposeful, systematic watching using all senses to collect assessment data"],
+  ["LOC (Level of Consciousness)","Degree of a client's wakefulness and awareness — ranges from alert to comatose"],
+  ["Lethargy","Excessive drowsiness; client can be aroused but quickly returns to sleep"],
+  ["Obtunded","Difficult to arouse; client responds only to vigorous stimulation"],
+  ["Stuporous","Client responds ONLY to painful stimuli with minimal verbal or motor response"],
+  ["Comatose","Unconscious; no response to any stimuli (or only reflex responses)"],
+  ["Symmetry/Symmetrical","Both sides of the body are equal or mirror images of each other"],
+  ["Asymmetry/Asymmetrical","Inequality between the two sides of the body; one side differs from the other"],
+  ["Tachypnea","Abnormally rapid respiratory rate — greater than 20 breaths per minute in adults"],
+  ["Bradypnea","Abnormally slow respiratory rate — less than 10 breaths per minute"],
+  ["Apnea","Complete absence of breathing — requires immediate emergency intervention"],
+  ["Orthopnea","Difficulty breathing unless in an upright position — common in CHF and COPD"],
+  ["Dyspnea","Subjective sensation of difficulty breathing or shortness of breath"],
+  ["Kussmaul Breathing","Deep, rapid, labored breathing — compensatory response to metabolic acidosis in DKA"],
+  ["Cheyne-Stokes","Breathing pattern alternating between fast and slow with periods of apnea — brain injury, heart failure"],
+  ["Bronchovesicular","Normal breath sounds heard over mainstem bronchi; medium pitch; equal inspiration and expiration"],
+  ["Venous Insufficiency","Inadequate venous return causing edema, varicosities, stasis ulcers, and brown discoloration"],
+  ["Arterial Insufficiency","Inadequate arterial blood flow causing pallor, cool skin, absent pulses, claudication, and toe ulcers"],
+  ["Nocturia","Waking more than once per night to urinate; disrupts sleep patterns"],
+  ["Diuresis","Increased urine production; can be therapeutic (diuretics) or pathological"],
+  ["Polyuria","Abnormally large urine output greater than 2.5–3 liters per day — seen in DM and DI"],
+  ["Oliguria","Decreased urine output less than 30 mL/hr — indicates possible renal insufficiency"],
+  ["Anuria","Complete absence of urine output (less than 100 mL/day) — renal failure emergency"],
+  ["Continence","The ability to voluntarily control urination and defecation"],
+  ["Benign","Not cancerous or harmful; not life-threatening"],
+  ["Circumoral","Around the mouth — as in circumoral cyanosis (blue coloring around the mouth)"],
+  ["Lateral","Away from the midline of the body; to the side"],
+  ["Medial","Toward the midline of the body; toward the center"],
+  ["Semi-Fowler's","HOB elevated 30–45 degrees — used for respiratory difficulty and tube feedings"],
+  ["High Fowler's","HOB elevated 60–90 degrees — maximizes respiratory expansion; used for eating and cardiac clients"],
+  ["Orthopneic","Position in which the client sits upright and leans forward on arms (tripod) to relieve severe dyspnea"],
+  ["Trendelenburg","Position with head lower than feet — historically used for shock (controversial)"],
+  ["Reverse Trendelenburg","Position with head higher than feet — used for GERD and some surgical procedures"],
+  ["Active Range of Motion","The client moves a joint through its full range independently — tests strength AND mobility"],
+  ["Passive Range of Motion","The nurse moves the client's joint with no patient assistance — tests mobility ONLY, not strength"],
+  ["Flexion","Bending a joint — decreasing the angle between two bones"],
+  ["Extension","Straightening a joint — increasing the angle between two bones"],
+  ["Hyperextension","Extending a joint beyond its normal anatomical range"],
+  ["Rotation","Turning a body part around a central axis"],
+  ["Lateral Flexion","Bending the spine or neck to the side — ear toward shoulder"],
+  ["Abduction","Moving a limb AWAY from the body midline"],
+  ["Adduction","Moving a limb TOWARD the body midline"],
+  ["Outward Rotation","Rotating a limb laterally away from the center of the body"],
+  ["Inward Rotation","Rotating a limb medially toward the center of the body"],
+  ["Circumduction","Circular movement that combines flexion, extension, abduction, and adduction"],
+  ["Supination","Turning the palm UPWARD — memory: hold SOUP in your palm"],
+  ["Pronation","Turning the palm DOWNWARD — memory: pour the soup out"],
+  ["Dorsiflexion","Flexing the ankle so the toes point UPWARD toward the nose"],
+  ["Plantar Flexion","Extending the foot so the toes point DOWNWARD — like a ballet dancer pointing toes"],
+  ["Closed Questions","Interview questions that require specific short answers — yes/no or a specific fact"],
+  ["Leading Questions","Interview questions that suggest the desired answer — should be AVOIDED in clinical practice"],
+  ["Open-Ended Questions","Interview questions that invite the client to elaborate freely — 'Tell me about your pain'"],
+  ["Neutral Questions","Unbiased interview questions that do not suggest any particular answer — preferred in clinical practice"],
+  ["Invasive","Involving entry into the body — such as IV insertion, catheterization, or surgery"],
+  ["Bony Prominence","Area where bone is close to the skin surface — high risk for pressure injury"],
+  ["Offload","To relieve pressure from a bony prominence to prevent or treat a pressure injury"],
+  ["Serous","Clear, watery wound drainage — normal finding in early wound healing"],
+  ["Serosanguinous","Pale pink, thin wound drainage — normal mix of serum and blood"],
+  ["Eschar","Thick, leathery, black or brown necrotic (dead) tissue in a wound — requires debridement"],
+  ["Slough","Yellow or tan soft necrotic tissue found in a wound bed — requires treatment"],
+];
+
+/* ═══════════════════════════════════════════════════════
+   SECTION QUIZ ENGINE
+═══════════════════════════════════════════════════════ */
+const sqState = {}; // {sectionId: {answered, score, unlocked}}
+const letters = ['A','B','C','D','E'];
+
+function initSectionQuiz(secId) {
+  if (sqState[secId]) return;
+  sqState[secId] = { answered: {}, score: 0, done: false };
+}
+
+function toggleSQ(secId) {
+  const wrap = document.getElementById('sq-' + secId);
+  if (!wrap) return;
+  wrap.classList.toggle('open');
+}
+
+function selectSQOpt(el, secId, qIdx, optIdx) {
+  const qs = SECTION_QUIZZES[secId].qs;
+  if (sqState[secId].answered[qIdx] !== undefined) return; // already answered
+  // Mark selected
+  const opts = el.parentElement.querySelectorAll('.sq-opt');
+  opts.forEach(o => o.classList.remove('sq-selected'));
+  el.classList.add('sq-selected');
+  // Store pending
+  if (!sqState[secId].pending) sqState[secId].pending = {};
+  sqState[secId].pending[qIdx] = optIdx;
+  // Enable submit if all answered
+  checkSQSubmitReady(secId);
+}
+
+function checkSQSubmitReady(secId) {
+  const qs = SECTION_QUIZZES[secId].qs;
+  const pending = sqState[secId].pending || {};
+  const answered = sqState[secId].answered || {};
+  let allDone = true;
+  for (let i = 0; i < qs.length; i++) {
+    if (answered[i] === undefined && pending[i] === undefined) { allDone = false; break; }
+  }
+  const btn = document.getElementById('sqsubmit-' + secId);
+  if (btn) btn.disabled = !allDone;
+}
+
+function submitSQ(secId) {
+  const qs = SECTION_QUIZZES[secId].qs;
+  const pending = sqState[secId].pending || {};
+  let score = 0;
+  qs.forEach((q, qi) => {
+    const chosen = pending[qi];
+    sqState[secId].answered[qi] = chosen;
+    const correct = chosen === q.correct;
+    if (correct) score++;
+    // Update UI
+    const opts = document.querySelectorAll(`#sqopts-${secId}-${qi} .sq-opt`);
+    opts.forEach((o, oi) => {
+      o.classList.add('sq-locked');
+      if (oi === q.correct) o.classList.add('sq-correct');
+      else if (oi === chosen && chosen !== q.correct) o.classList.add('sq-wrong');
+    });
+    // Show rationale
+    const rat = document.getElementById(`sqrat-${secId}-${qi}`);
+    if (rat) { rat.classList.add('show'); rat.classList.add(correct ? 'correct' : 'wrong'); }
+  });
+  sqState[secId].score = score;
+  sqState[secId].done = true;
+  // Hide submit
+  const btn = document.getElementById('sqsubmit-' + secId);
+  if (btn) btn.style.display = 'none';
+  // Show result
+  const res = document.getElementById('sqres-' + secId);
+  const pct = Math.round(score / qs.length * 100);
+  const pass = pct >= 67;
+  if (res) {
+    res.classList.add('show');
+    res.classList.add(pass ? 'pass' : 'fail');
+    res.innerHTML = pass
+      ? `✅ <strong>${score}/${qs.length} — ${pct}% — Section Passed!</strong> You can move on 💕`
+      : `❌ <strong>${score}/${qs.length} — ${pct}% — Review & Retry!</strong> Read the rationales and try again.`;
+  }
+  // Unlock next section if passed
+  if (pass) {
+    unlockNextSection(secId);
+    // Pulse bubu
+    bubuClick();
+  }
+  // Show retry if failed
+  const retryBtn = document.getElementById('sqretry-' + secId);
+  if (retryBtn) retryBtn.style.display = pass ? 'none' : 'inline-block';
+}
+
+function retrySQ(secId) {
+  sqState[secId] = { answered: {}, score: 0, done: false, pending: {} };
+  buildSectionQuiz(secId);
+}
+
+const SECTION_ORDER = ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16','s17','s18'];
+
+function unlockNextSection(passedId) {
+  const idx = SECTION_ORDER.indexOf(passedId);
+  if (idx === -1 || idx >= SECTION_ORDER.length - 1) return;
+  const nextId = SECTION_ORDER[idx + 1];
+  const nextSec = document.getElementById(nextId);
+  if (!nextSec) return;
+  const overlay = nextSec.querySelector('.sec-locked-overlay');
+  if (overlay) {
+    overlay.style.transition = 'opacity .5s';
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.remove(); nextSec.classList.remove('locked'); }, 500);
+    // Scroll hint
+    setTimeout(() => {
+      nextSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 600);
+  }
+}
+
+function buildSectionQuiz(secId) {
+  const container = document.getElementById('sqbody-' + secId);
+  if (!container) return;
+  initSectionQuiz(secId);
+  const data = SECTION_QUIZZES[secId];
+  let html = '';
+  data.qs.forEach((q, qi) => {
+    html += `<div class="sq-q">
+      <div class="sq-q-text">Q${qi+1}. ${q.q}</div>
+      <div class="sq-opts" id="sqopts-${secId}-${qi}">`;
+    q.opts.forEach((opt, oi) => {
+      html += `<div class="sq-opt" onclick="selectSQOpt(this,'${secId}',${qi},${oi})">
+        <div class="sq-opt-letter">${letters[oi]}</div>
+        <div>${opt}</div>
+      </div>`;
+    });
+    html += `</div>
+      <div class="sq-rationale" id="sqrat-${secId}-${qi}"><strong>Rationale:</strong> ${q.r}</div>
+    </div>`;
+  });
+  html += `<button class="sq-submit" id="sqsubmit-${secId}" onclick="submitSQ('${secId}')" disabled>Submit Section Quiz</button>`;
+  html += `<div class="sq-result-bar" id="sqres-${secId}"></div>`;
+  html += `<button id="sqretry-${secId}" onclick="retrySQ('${secId}')" style="display:none;margin-top:10px;padding:10px 22px;background:var(--rose);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">🔄 Retry Quiz</button>`;
+  container.innerHTML = html;
+}
+
+// Initialize all section quizzes on page load
+function initAllSectionQuizzes() {
+  SECTION_ORDER.forEach((id, idx) => {
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    const data = SECTION_QUIZZES[id];
+    if (!data) return;
+
+    // Build quiz block HTML
+    const sqHtml = `<div class="sq-wrap" id="sq-${id}">
+      <div class="sq-header" onclick="toggleSQ('${id}')">
+        <h4>🧠 Section Quiz — ${data.title}</h4>
+        <span class="sq-badge">${data.qs.length} Questions</span>
+        <span class="sq-arrow">▾</span>
+      </div>
+      <div class="sq-body" id="sqbody-${id}"></div>
+    </div>`;
+
+    // Append quiz block to section
+    sec.insertAdjacentHTML('beforeend', sqHtml);
+    buildSectionQuiz(id);
+
+    // Lock sections after the first one
+    if (idx > 0) {
+      sec.classList.add('locked');
+      sec.insertAdjacentHTML('beforeend', `
+        <div class="sec-locked-overlay">
+          <div class="lock-icon">🔒</div>
+          <h4>Section Locked</h4>
+          <p>Pass the quiz in the previous section to unlock this content.</p>
+        </div>`);
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   VOCABULARY QUIZ ENGINE
+═══════════════════════════════════════════════════════ */
+let vqMode = 'mc';
+let vqOrder = [];
+let vqIdx = 0;
+let vqCorrect = 0;
+let vqTotal = 0;
+let vqWrong = [];
+let vqSubmitted = false;
+
+function setVQMode(mode) {
+  vqMode = mode;
+  document.getElementById('vqm-mc').classList.toggle('active', mode === 'mc');
+  document.getElementById('vqm-type').classList.toggle('active', mode === 'type');
+  document.getElementById('vq-mc-opts').style.display = mode === 'mc' ? 'flex' : 'none';
+  document.getElementById('vq-type-wrap').style.display = mode === 'type' ? 'block' : 'none';
+}
+
+function restartVQ(wrongOnly = false) {
+  document.getElementById('vq-results').style.display = 'none';
+  document.getElementById('vq-card').style.display = 'block';
+  document.getElementById('vq-progress-wrap').style.display = 'block';
+  if (wrongOnly && vqWrong.length > 0) {
+    vqOrder = [...vqWrong].sort(() => Math.random() - 0.5);
+  } else {
+    vqOrder = [...Array(VOCAB_QUIZ_DATA.length).keys()].sort(() => Math.random() - 0.5);
+  }
+  vqIdx = 0; vqCorrect = 0; vqTotal = 0; vqWrong = [];
+  renderVQ();
+}
+
+function renderVQ() {
+  const total = vqOrder.length;
+  const term = VOCAB_QUIZ_DATA[vqOrder[vqIdx]];
+  vqSubmitted = false;
+
+  document.getElementById('vq-term-display').textContent = term[0];
+  document.getElementById('vq-prog-label').textContent = `Term ${vqIdx + 1} of ${total}`;
+  document.getElementById('vq-score-label').textContent = `Score: ${vqCorrect} / ${vqTotal}`;
+  document.getElementById('vq-prog-bar').style.width = ((vqIdx + 1) / total * 100) + '%';
+  document.getElementById('vq-feedback').style.display = 'none';
+  document.getElementById('vq-next-btn').style.display = 'none';
+
+  if (vqMode === 'mc') {
+    // Generate 4 options (1 correct + 3 random distractors)
+    const correctDef = term[1];
+    let distractors = VOCAB_QUIZ_DATA.filter((_, i) => i !== vqOrder[vqIdx])
+      .sort(() => Math.random() - 0.5).slice(0, 3).map(t => t[1]);
+    let options = [correctDef, ...distractors].sort(() => Math.random() - 0.5);
+    const correctIdx = options.indexOf(correctDef);
+
+    let html = '';
+    options.forEach((opt, i) => {
+      html += `<div class="ati-opt" id="vqopt-${i}" onclick="selectVQOpt(this,${i},${correctIdx})">
+        <div class="opt-letter">${letters[i]}</div>
+        <div class="opt-text">${opt}</div>
+      </div>`;
+    });
+    document.getElementById('vq-mc-opts').innerHTML = html;
+    document.getElementById('vq-mc-opts').style.display = 'flex';
+    document.getElementById('vq-type-wrap').style.display = 'none';
+  } else {
+    document.getElementById('vq-mc-opts').style.display = 'none';
+    document.getElementById('vq-type-wrap').style.display = 'block';
+    const inp = document.getElementById('vq-type-input');
+    inp.value = '';
+    inp.style.borderColor = 'var(--blush-mid)';
+    setTimeout(() => inp.focus(), 100);
+  }
+}
+
+function selectVQOpt(el, chosen, correct) {
+  if (vqSubmitted) return;
+  vqSubmitted = true;
+  document.querySelectorAll('#vq-mc-opts .ati-opt').forEach(o => o.classList.add('locked'));
+  const isCorrect = chosen === correct;
+  document.querySelectorAll('#vq-mc-opts .ati-opt').forEach((o, i) => {
+    if (i === correct) o.classList.add('correct');
+    else if (i === chosen) o.classList.add('wrong');
+  });
+  showVQFeedback(isCorrect, VOCAB_QUIZ_DATA[vqOrder[vqIdx]][1]);
+}
+
+function submitVQ() {
+  if (vqSubmitted) return;
+  const inp = document.getElementById('vq-type-input');
+  const userAns = inp.value.trim().toLowerCase();
+  const correctDef = VOCAB_QUIZ_DATA[vqOrder[vqIdx]][1].toLowerCase();
+  // Fuzzy match: check if key words present
+  const keyWords = correctDef.split(' ').filter(w => w.length > 5);
+  const matchCount = keyWords.filter(w => userAns.includes(w.replace(/[^a-z]/g,''))).length;
+  const isCorrect = matchCount >= Math.ceil(keyWords.length * 0.4);
+  vqSubmitted = true;
+  inp.style.borderColor = isCorrect ? '#43a047' : '#ef5350';
+  showVQFeedback(isCorrect, VOCAB_QUIZ_DATA[vqOrder[vqIdx]][1]);
+}
+
+function showVQFeedback(isCorrect, correctDef) {
+  vqTotal++;
+  if (isCorrect) vqCorrect++;
+  else vqWrong.push(vqOrder[vqIdx]);
+
+  const fb = document.getElementById('vq-feedback');
+  fb.style.display = 'block';
+  fb.style.background = isCorrect ? 'var(--green-bg)' : 'var(--red-bg)';
+  fb.style.borderColor = isCorrect ? '#43a047' : '#ef5350';
+  fb.style.color = isCorrect ? 'var(--green)' : 'var(--red)';
+  fb.innerHTML = isCorrect
+    ? `<strong>✅ Correct!</strong> ${correctDef}`
+    : `<strong>❌ Not quite.</strong> The correct definition is: <em>${correctDef}</em>`;
+
+  document.getElementById('vq-score-label').textContent = `Score: ${vqCorrect} / ${vqTotal}`;
+
+  const nextBtn = document.getElementById('vq-next-btn');
+  nextBtn.style.display = 'block';
+  const isLast = vqIdx >= vqOrder.length - 1;
+  nextBtn.textContent = isLast ? 'See Results 🎉' : 'Next Term →';
+  nextBtn.onclick = isLast ? showVQResults : nextVQ;
+}
+
+function nextVQ() {
+  vqIdx++;
+  if (vqIdx >= vqOrder.length) { showVQResults(); return; }
+  renderVQ();
+}
+
+function skipVQ() {
+  vqWrong.push(vqOrder[vqIdx]);
+  vqTotal++;
+  vqIdx++;
+  if (vqIdx >= vqOrder.length) { showVQResults(); return; }
+  renderVQ();
+}
+
+function showVQResults() {
+  document.getElementById('vq-card').style.display = 'none';
+  document.getElementById('vq-progress-wrap').style.display = 'none';
+  const res = document.getElementById('vq-results');
+  res.style.display = 'block';
+  const pct = Math.round(vqCorrect / vqTotal * 100);
+  let emoji = pct >= 90 ? '🏆' : pct >= 75 ? '🌟' : pct >= 60 ? '💪' : '📚';
+  let msg = pct >= 90 ? 'You are CRUSHING it! Vocabulary master! 💕'
+    : pct >= 75 ? 'Great job! Just a few more to nail!'
+    : pct >= 60 ? 'Solid effort! Review the wrong ones and retry.'
+    : 'Keep studying! Use the "Only Wrong Ones" button to focus.';
+  document.getElementById('vq-res-emoji').textContent = emoji;
+  document.getElementById('vq-res-score').textContent = `${vqCorrect} / ${vqTotal} — ${pct}%`;
+  document.getElementById('vq-res-msg').textContent = msg;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLL, NAV, BUBU (same as before)
+═══════════════════════════════════════════════════════ */
+const pb = document.getElementById('progress-bar');
+const bt = document.getElementById('back-top');
+const obsOpts = { threshold: .08 };
+const secObs = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('visible');
+}), obsOpts);
+document.querySelectorAll('.sec').forEach(s => secObs.observe(s));
+
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  pb.style.width = pct + '%';
+  bt.classList.toggle('show', window.scrollY > 400);
+  document.querySelectorAll('#sidenav a').forEach(a => {
+    const tgt = document.querySelector(a.getAttribute('href'));
+    if (tgt) a.classList.toggle('active', window.scrollY >= tgt.offsetTop - 130);
+  });
+});
+
+const tog = document.getElementById('nav-toggle');
+const nav = document.getElementById('sidenav');
+const ovl = document.getElementById('overlay');
+tog.addEventListener('click', () => {
+  const o = nav.classList.toggle('open');
+  tog.classList.toggle('open', o); ovl.classList.toggle('show', o);
+});
+ovl.addEventListener('click', () => { nav.classList.remove('open'); tog.classList.remove('open'); ovl.classList.remove('show'); });
+
+const bubuMsgs = ["You got this! 💕","Study hard! ♥","So proud of you!","Keep going! 🌟","Almost there! 💪","You're a star! ✨","Believe in you! 💕","NUR 110 queen! 👑","Go Shayne go! 🎉","50/50 incoming! 🏆","Section passed! 🎊","Vocab genius! 📚","You're amazing! 🌸","Keep crushing it! 💅"];
+let bIdx = 0;
+function bubuClick() {
+  const msg = document.getElementById('bubu-msg');
+  msg.textContent = bubuMsgs[bIdx++ % bubuMsgs.length];
+  msg.style.display = 'block';
+  clearTimeout(bubuClick._t);
+  bubuClick._t = setTimeout(() => msg.style.display = 'none', 2800);
+}
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  if (Math.abs(window.scrollY - lastScroll) > 350) { bubuClick(); }
+  lastScroll = window.scrollY;
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════════════
+   ATI EXAM ENGINE — 3 TEST SETS
+═══════════════════════════════════════════════════════ */
+const ALL_QUESTIONS = [
+  // ── TEST SET A ── (questions 0-39)
+  {set:'A',topic:"Assessment Sequence",type:"mc",
+   q:"A nurse is about to perform a full abdominal assessment on a client admitted with abdominal pain. Which sequence of techniques does the nurse use?",
+   opts:["Inspection, palpation, percussion, auscultation","Auscultation, inspection, palpation, percussion","Inspection, auscultation, percussion, palpation","Palpation, percussion, inspection, auscultation"],
+   correct:[2],r:"The abdomen uses I-A-P-P: Inspection → Auscultation → Percussion → Palpation. Auscultation must come BEFORE palpation/percussion because mechanical stimulation alters bowel sounds."},
+
+  {set:'A',topic:"Types of Data",type:"mc",
+   q:"A nurse cares for a client who reports 'My left leg feels heavy and aches when I stand.' The nurse also notes 2+ pitting edema and brown discoloration around the left ankle. Which statement correctly identifies the data types?",
+   opts:["Both findings are objective data","Both findings are subjective data","'Feels heavy and aches' is subjective; edema and discoloration are objective","'Feels heavy and aches' is objective; edema and discoloration are subjective"],
+   correct:[2],r:"Subjective data = what the patient REPORTS ('feels heavy and aches'). Objective data = what the nurse OBSERVES or MEASURES (pitting edema, skin discoloration). These are separate types that together paint a complete clinical picture."},
+
+  {set:'A',topic:"Respiratory Emergency",type:"mc",
+   q:"A nurse is assessing a client who had a severe allergic reaction to a bee sting 10 minutes ago. The nurse notes inspiratory stridor audible from across the room, increasing respiratory distress, and hives across the chest. The nurse's PRIORITY action is to:",
+   opts:["Apply a cool compress to the hive areas and reassess in 15 minutes","Document the stridor and notify the charge nurse at the end of the shift","Activate the emergency response system and prepare for airway management","Place the client in Trendelenburg position and continue assessment"],
+   correct:[2],r:"Stridor indicates UPPER AIRWAY OBSTRUCTION. In the context of anaphylaxis, laryngeal edema is rapidly progressive and fatal. This is an EMERGENCY requiring immediate activation of the rapid response system. Time to epinephrine and airway management is critical. Trendelenburg is NOT indicated."},
+
+  {set:'A',topic:"Blood Pressure",type:"sata",
+   q:"A nurse is assessing a client who recently had a left mastectomy and has a peripheral IV in the right arm. The nurse needs to obtain a blood pressure. Which sites are appropriate? SELECT ALL THAT APPLY.",
+   opts:["Left arm (mastectomy side)","Right arm (IV side)","Left thigh","Right thigh","Left lower leg"],
+   correct:[2,3,4],r:"NEVER take BP on the mastectomy side (lymphedema risk) or on the arm with an IV (disrupts flow, inaccurate). The thighs and lower extremities are appropriate alternative sites. Both thighs and the left lower leg are acceptable."},
+
+  {set:'A',topic:"Cardiovascular",type:"mc",
+   q:"A nurse is assessing a client's peripheral pulses. The nurse documents the radial pulse as 1+. The nurse interprets this finding as:",
+   opts:["Absent — requires immediate notification","Diminished — weaker than expected, monitor closely","Normal (brisk) — expected finding","Bounding — suggests hypertension"],
+   correct:[1],r:"Pulse strength scale: 0=absent, 1+=diminished (weaker than expected), 2+=brisk/normal, 3+=strong, 4+=bounding. A 1+ pulse suggests reduced peripheral circulation and warrants monitoring and reporting."},
+
+  {set:'A',topic:"Respiratory Assessment",type:"mc",
+   q:"A nurse auscultates a client's lungs and hears low-pitched snoring sounds on both inspiration and expiration. After the client coughs, the sounds partially clear. The nurse documents this finding as:",
+   opts:["Fine crackles","Wheezing","Rhonchi","Stridor"],
+   correct:[2],r:"RHONCHI are low-pitched, musical, snoring/gurgling sounds present on BOTH inspiration and expiration. A key distinguishing feature is that they MAY CLEAR WITH COUGHING (as secretions are dislodged). Crackles are intermittent popping sounds. Wheezing is high-pitched. Stridor is inspiratory and a medical emergency."},
+
+  {set:'A',topic:"Neurological",type:"mc",
+   q:"A nurse is assessing LOC. The nurse calls the client's name loudly — no response. The nurse applies a sternal rub — the client withdraws from the pain but does not open eyes. The nurse documents LOC as:",
+   opts:["Lethargic","Obtunded","Stuporous","Comatose"],
+   correct:[2],r:"STUPOROUS: responds ONLY to painful stimuli (sternal rub) with minimal response (withdrawal). Does NOT respond to verbal stimuli. Obtunded responds to vigorous stimulation but not only pain. Lethargic is drowsy but arousable with normal stimuli. Comatose has NO response even to pain."},
+
+  {set:'A',topic:"Urinary Output",type:"mc",
+   q:"A postoperative client has a urine output of 20 mL in the past hour. The client's blood pressure has dropped from 118/76 to 94/60 mmHg. The nurse correctly identifies these findings as MOST consistent with:",
+   opts:["Normal postoperative diuresis","Urinary retention requiring a bladder scan","Oliguria with possible hemodynamic instability requiring immediate provider notification","Polyuria secondary to IV fluid administration"],
+   correct:[2],r:"Oliguria (<30 mL/hr) combined with hypotension is a critical clinical picture suggesting hemodynamic instability — possible hemorrhage, sepsis, or cardiogenic shock. This requires IMMEDIATE provider notification. This is NOT normal, retention (no output, distended bladder), or polyuria."},
+
+  {set:'A',topic:"LOC & Pupils",type:"mc",
+   q:"A nurse assesses a client after a head injury and notes: right pupil 7mm, fixed and non-reactive; left pupil 3mm, reacts sluggishly. The client responds only to painful stimuli. The nurse's PRIORITY action is to:",
+   opts:["Continue the head-to-toe assessment and document findings","Reassess the pupils in 30 minutes with better lighting","Notify the provider immediately — these findings suggest neurological emergency","Place the client in high Fowler's position for comfort"],
+   correct:[2],r:"A BLOWN pupil (large, fixed, non-reactive) on one side with a sluggish contralateral pupil, combined with response only to pain (stuporous), indicates TRANSTENTORIAL HERNIATION — a life-threatening neurological emergency. IMMEDIATE provider notification is the priority. Every second matters."},
+
+  {set:'A',topic:"Skin Assessment",type:"mc",
+   q:"A nurse is rounding on clients. Which client finding requires IMMEDIATE assessment and intervention?",
+   opts:["A client with mild erythema around a peripheral IV site, no warmth or swelling","A client with 1+ pitting edema bilaterally in the ankles, chronic finding","A client with new cyanosis of the lips and fingertips, SpO₂ 86%","A client with a well-healing surgical incision with minimal serous drainage"],
+   correct:[2],r:"New CYANOSIS of the lips/fingertips with SpO₂ of 86% indicates acute HYPOXIA — a life-threatening emergency requiring IMMEDIATE intervention. The other findings are either chronic, minor, or normal. Priority: ABCs — airway, breathing, circulation."},
+
+  {set:'A',topic:"Interview Techniques",type:"mc",
+   q:"A nurse is conducting a health history. The client becomes tearful when discussing their home situation. The nurse asks, 'Are things at home okay? You seem fine overall.' Which response by the nurse represents which technique and why is it problematic?",
+   opts:["Open-ended question — takes too much time","Leading question — implies the client should say 'yes' and discourages disclosure","Neutral question — too vague to elicit useful information","Closed question — does not build rapport"],
+   correct:[1],r:"'You seem fine overall' is a LEADING QUESTION — it implies the expected answer ('yes, I'm fine'), discouraging the client from disclosing problems. This is especially dangerous when assessing for abuse or depression. A better approach: 'Tell me what's happening at home' (open-ended) or simply 'What's making you feel upset?' (neutral)."},
+
+  {set:'A',topic:"Vital Signs Lifespan",type:"mc",
+   q:"A nurse receives a shift report on four clients. Which vital sign finding requires the nurse's MOST immediate assessment?",
+   opts:["Newborn: heart rate 140 bpm, respiratory rate 42 breaths/min","Adult: blood pressure 138/88 mmHg, heart rate 82 bpm","6-month-old: respiratory rate 8 breaths/min, SpO₂ 89%","Older adult: temperature 99.2°F, heart rate 78 bpm"],
+   correct:[2],r:"A 6-month-old with a respiratory rate of 8 breaths/min (normal 25–50) is critically bradypneic, AND the SpO₂ of 89% confirms hypoxia. This infant is in respiratory failure. The newborn's VS are normal for age. The adult has elevated but non-emergency BP. The older adult's findings are mildly elevated but not immediately critical."},
+
+  {set:'A',topic:"Positioning",type:"mc",
+   q:"A client with heart failure and severe orthopnea is most comfortable sleeping in a recliner with the head elevated almost 90 degrees. The nurse recognizes the client is using which position to aid breathing?",
+   opts:["Semi-Fowler's position","Trendelenburg position","High Fowler's or orthopneic position","Reverse Trendelenburg position"],
+   correct:[2],r:"HIGH FOWLER'S (60–90°) or ORTHOPNEIC position maximizes chest expansion and reduces preload, improving breathing in clients with heart failure. These clients cannot lie flat (orthopnea) because fluid redistributes to the lungs in the supine position."},
+
+  {set:'A',topic:"Wound Assessment",type:"mc",
+   q:"A nurse changes a wound dressing and notes thick, yellow-green, malodorous drainage saturating the old dressing. The surrounding skin is warm, red, and the client reports increased pain at the site. The nurse's PRIORITY action is to:",
+   opts:["Apply a clean dressing and reassess at the next scheduled change","Irrigate the wound with hydrogen peroxide to remove the drainage","Notify the provider — these findings indicate wound infection","Document the findings and continue with routine wound care"],
+   correct:[2],r:"Purulent (thick, yellow-green, malodorous) drainage + warmth + erythema + increased pain = INFECTION. The provider must be notified IMMEDIATELY for evaluation, possible wound culture, and antibiotic therapy. Hydrogen peroxide is CONTRAINDICATED on wounds (destroys new tissue). Routine care is not appropriate for a suspected infected wound."},
+
+  {set:'A',topic:"Cardiovascular Comparison",type:"mc",
+   q:"A nurse compares two clients. Client A has an ankle ulcer with irregular borders, pale and cool skin, absent dorsalis pedis pulses, and pain when walking. Client B has an ankle ulcer near the medial malleolus, brown skin discoloration, warm skin, and edema. Which assessment is CORRECT?",
+   opts:["Client A has venous insufficiency; Client B has arterial insufficiency","Both clients have venous insufficiency","Client A has arterial insufficiency; Client B has venous insufficiency","Both clients have arterial insufficiency"],
+   correct:[2],r:"Client A: absent pulses + pale/cool skin + pain with walking (claudication) = ARTERIAL INSUFFICIENCY. Client B: medial malleolus ulcer + brown discoloration (hemosiderin staining) + edema + warm skin = VENOUS INSUFFICIENCY. These are classic differentiating presentations."},
+
+  {set:'A',topic:"Temperature",type:"mc",
+   q:"A nurse obtains an axillary temperature of 97.2°F for a client. The client feels warm to the touch and is complaining of chills. The nurse should:",
+   opts:["Accept the axillary reading as accurate since it is within the normal range","Recheck using a more accurate route such as oral or temporal, as axillary tends to read 1°F lower","Document the normal finding and administer scheduled antipyretics","Recognize this as hypothermia and activate a warming protocol"],
+   correct:[1],r:"Axillary temperature reads approximately 1°F LOWER than oral. An axillary reading of 97.2°F could correspond to an oral temp of 98.2°F — or the discrepancy between feeling warm/having chills suggests the reading may be inaccurate or the client is early in a febrile process. The nurse should recheck using a more accurate route."},
+
+  {set:'A',topic:"Assessment Techniques",type:"mc",
+   q:"A nursing student asks why the nurse uses the bell of the stethoscope rather than the diaphragm over the carotid artery. Which response is MOST accurate?",
+   opts:["The bell is easier to position on the neck","The bell is best for detecting HIGH-pitched sounds like bruits; the diaphragm picks up low-pitched sounds","The diaphragm is best for HIGH-pitched sounds; the bell amplifies LOW-pitched sounds like vascular bruits","The diaphragm should always be used unless the nurse prefers the bell"],
+   correct:[2],r:"The BELL of the stethoscope is used for LOW-pitched sounds such as: S3/S4 heart sounds, vascular bruits, and bowel sounds. The DIAPHRAGM is used for HIGH-pitched sounds such as: breath sounds, normal heart sounds (S1, S2), and bowel sounds. Both have clinical uses depending on what sound is being assessed."},
+
+  {set:'A',topic:"Genitourinary",type:"mc",
+   q:"A client with chronic heart failure tells the nurse 'I get up to use the bathroom 4–5 times every night and it really interrupts my sleep.' The nurse documents this symptom as:",
+   opts:["Polyuria — abnormally large urine volume","Oliguria — below normal urine output","Nocturia — excessive nighttime urination","Diuresis — increased urine production from diuretics"],
+   correct:[2],r:"NOCTURIA is waking MORE THAN ONCE per night to urinate. In heart failure, fluid redistribution occurs when the client lies down, increasing renal perfusion and urine output at night. While diuretics also contribute, the symptom of nighttime urination that disrupts sleep is specifically called nocturia."},
+
+  {set:'A',topic:"General Survey",type:"mc",
+   q:"A nurse enters a client's room for the first shift assessment. The client is lying in bed, unshaven, with unwashed hair, wearing the same hospital gown from 3 days ago. The client barely responds to the nurse's greeting, answering in one-word responses. Which component of the general survey MOST reflects these observations?",
+   opts:["Vital signs assessment","Observation of hygiene, grooming, affect, and mood","Auscultation of breath sounds","Review of the medical chart"],
+   correct:[1],r:"The GENERAL SURVEY includes observing: physical appearance, hygiene/grooming, signs of distress, speech, behavior, affect, and mood. Poor self-care, flat affect, and minimal verbal response are concerning findings in the general survey that may indicate depression, physical decline, or neurological change."},
+
+  {set:'A',topic:"Musculoskeletal",type:"mc",
+   q:"A nurse is assessing a client who had a left-sided stroke. The nurse asks the client to grip both of the nurse's hands simultaneously and squeeze as hard as possible. The right hand grip is 5/5 strength; the left hand is 1/5 (trace). The nurse correctly identifies this as:",
+   opts:["Normal bilateral hand strength expected in a stroke client","Asymmetrical hand grip strength — left-sided weakness consistent with right-hemisphere stroke deficit","Evidence of peripheral vascular disease affecting the left arm","A finding that does not require documentation or reporting"],
+   correct:[1],r:"A stroke affecting the RIGHT hemisphere causes LEFT-sided motor deficits (contralateral). Asymmetrical grip strength (5/5 vs 1/5) is a significant finding that is expected in the context of stroke but must be documented as a baseline and reported if it changes. This guides rehabilitation planning."},
+
+  // ── Set A continues ──
+  {set:'A',topic:"HEENT",type:"mc",
+   q:"During an oral assessment, the nurse notes that the client's breath has a strong ammonia-like odor. The nurse associates this finding with:",
+   opts:["Diabetic ketoacidosis","Poor oral hygiene","Renal failure (uremia)","Alcohol intoxication"],
+   correct:[2],r:"AMMONIA-LIKE (uremic fetor) breath odor is associated with RENAL FAILURE (uremia). When the kidneys cannot excrete waste products, urea is converted to ammonia and exhaled. Fruity/acetone breath = DKA. Foul odor = poor oral hygiene. Alcohol has a distinct 'boozy' smell."},
+
+  {set:'A',topic:"Lifespan",type:"sata",
+   q:"A nurse is performing a comprehensive health history on a 78-year-old client. Which of the following should the nurse INCLUDE in the assessment? SELECT ALL THAT APPLY.",
+   opts:["Assess for falls and fall risk","Review all medications including OTC and herbal supplements","Assess memory, senses (hearing/vision), and cognitive function","Use only closed questions to save time with older adults","Assess ADL function and social support systems"],
+   correct:[0,1,2,4],r:"A comprehensive geriatric assessment includes: falls/fall risk, polypharmacy (all medications including OTC/herbal), cognitive and sensory function, and ADL/social support. Using ONLY closed questions is INCORRECT — open-ended questions should still be used and extra TIME should be allowed for older adults to respond."},
+
+  {set:'A',topic:"Pain Assessment",type:"mc",
+   q:"A nurse needs to assess pain in a 4-year-old child following surgery. Which pain scale is MOST appropriate?",
+   opts:["Numeric Rating Scale (NRS) 0–10","Visual Analog Scale (VAS)","Wong-Baker FACES Scale","PAINAD Scale"],
+   correct:[2],r:"The WONG-BAKER FACES scale uses cartoon faces ranging from happy to crying, making it developmentally appropriate for children ages 3–7 who can identify faces but may not reliably use a numeric scale. PAINAD is for dementia patients. NRS and VAS are best for adults who can self-report on a numeric scale."},
+
+  {set:'A',topic:"Integumentary",type:"mc",
+   q:"A nurse assesses a bedridden client and finds a reddened area over the coccyx that does NOT blanch when pressed. The surrounding skin is intact. The nurse correctly identifies this as:",
+   opts:["Stage 2 pressure injury — partial thickness skin loss","Stage 1 pressure injury — non-blanchable erythema of intact skin","Suspected deep tissue injury","Normal skin redness from sitting"],
+   correct:[1],r:"STAGE 1 pressure injury is defined as non-blanchable erythema of INTACT skin over a bony prominence. Non-blanching is key — it indicates the capillaries are damaged and cannot respond normally to pressure. Stage 2 involves partial thickness skin loss (blister or shallow open ulcer). This finding requires IMMEDIATE pressure relief."},
+
+  {set:'A',topic:"Respiratory Patterns",type:"mc",
+   q:"A nurse is called to a client's room. The client is breathing in a pattern of very deep, rapid breaths. The client is confused and has a glucose of 620 mg/dL with a fruity odor to the breath. The nurse recognizes this breathing pattern as:",
+   opts:["Cheyne-Stokes breathing — brain injury pattern","Eupnea — normal breathing","Kussmaul breathing — compensating for metabolic acidosis in DKA","Orthopnea — requires sitting upright"],
+   correct:[2],r:"KUSSMAUL breathing is deep, rapid, labored breathing that is the body's COMPENSATORY RESPONSE to metabolic acidosis — specifically DKA. The high glucose, fruity breath, confusion, and Kussmaul breathing together form the classic DKA picture. The deep breathing attempts to blow off CO₂ to raise pH."},
+
+  {set:'A',topic:"Bowel Sounds",type:"mc",
+   q:"A nurse caring for a client on day 2 post-abdominal surgery auscultates the abdomen and hears no bowel sounds after listening for 5 minutes in each quadrant. The client has not passed gas. The nurse's BEST action is to:",
+   opts:["Administer a suppository to stimulate bowel activity","Encourage the client to eat solid food to stimulate peristalsis","Document the finding and notify the provider — absent bowel sounds suggest paralytic ileus","Begin tube feeding as the bowel is clearly not working"],
+   correct:[2],r:"ABSENT bowel sounds for 5+ minutes in all quadrants after abdominal surgery indicates PARALYTIC ILEUS — a complete cessation of peristalsis. The provider must be notified. Feeding (oral or tube) is CONTRAINDICATED until bowel function returns. Suppositories are not indicated for ileus."},
+
+  {set:'A',topic:"Vital Signs",type:"mc",
+   q:"A nurse obtains orthostatic vital signs: Lying: BP 126/78, HR 72. Sitting: BP 114/72, HR 80. Standing: BP 100/62, HR 96. The nurse correctly identifies this as:",
+   opts:["Normal variation in vital signs with position changes","Orthostatic hypotension — systolic dropped >20 mmHg when standing","Hypertensive urgency requiring immediate medication","Tachycardia — heart rate increased too rapidly"],
+   correct:[1],r:"ORTHOSTATIC HYPOTENSION is defined as a drop of ≥20 mmHg systolic OR ≥10 mmHg diastolic when moving from lying to standing. The systolic dropped from 126 to 100 (26 mmHg drop) — this meets the criteria. The compensatory tachycardia (HR 72→96) is also classic. This client is at risk for falls."},
+
+  {set:'A',topic:"Cardiovascular",type:"sata",
+   q:"A nurse is assessing a client with venous insufficiency. Which findings are consistent with this diagnosis? SELECT ALL THAT APPLY.",
+   opts:["Absent dorsalis pedis pulses bilaterally","Brown discoloration around both ankles","2+ pitting edema bilaterally","Shiny, hairless, cool skin on lower legs","Varicose veins visible on bilateral lower legs"],
+   correct:[1,2,4],r:"VENOUS INSUFFICIENCY presents with: brown/rust discoloration (hemosiderin staining), pitting edema, and varicose veins. ABSENT pulses and cool/hairless/shiny skin are features of ARTERIAL insufficiency. Venous pulses are normal; arterial pulses are diminished or absent."},
+
+  {set:'A',topic:"Assessment",type:"mc",
+   q:"A newly graduated nurse asks a preceptor: 'How is objective data different from what the patient tells me?' The BEST response from the preceptor is:",
+   opts:["They are the same thing — both document how the patient feels","Objective data is what the patient tells you; subjective is what you measure","Objective data is what you directly observe and measure; subjective data is what the patient reports and only they can provide","Objective data comes from family members; subjective data comes from the patient"],
+   correct:[2],r:"OBJECTIVE data = verifiable, measurable, observable by ANY trained observer (VS, labs, physical exam findings). SUBJECTIVE data = what only the patient can report (symptoms, feelings, perceptions). Both types are essential — together they create a complete clinical picture. Neither comes from family (those are secondary sources)."},
+
+  {set:'A',topic:"Respiratory",type:"mc",
+   q:"A nurse is auscultating a client with pneumonia. Over the right lower lobe, the nurse hears soft, high-pitched, short cracking sounds on inspiration. These sounds do NOT clear with coughing. The nurse documents these as:",
+   opts:["Rhonchi — secretions in large airways","Coarse crackles — fluid in large airways","Fine crackles — fluid in small alveoli","Wheezing — bronchospasm"],
+   correct:[2],r:"FINE CRACKLES (rales) are soft, high-pitched, short, popping/cracking sounds heard on INSPIRATION. They do NOT clear with coughing (differentiating them from rhonchi). In pneumonia, fluid fills the alveoli, causing this sound as they pop open during inspiration. Coarse crackles are louder and lower-pitched."},
+
+  {set:'A',topic:"Neuro",type:"mc",
+   q:"A nurse assesses orientation in an older adult client. The client knows their name, knows they are in a hospital, but thinks it is 1987 and believes the current president is Ronald Reagan. The nurse documents this client as:",
+   opts:["Alert and oriented ×4","Alert and oriented ×2 — disoriented to time and situation","Alert and oriented ×3 — oriented to person and place but not time","Comatose — unable to answer correctly"],
+   correct:[1],r:"Orientation is assessed ×4: PERSON (knows own name ✓), PLACE (knows they're in a hospital ✓), TIME (thinks it's 1987 ✗), SITUATION (confused about current events ✗). The client is oriented to person and place but not time and situation = ORIENTED ×2. This is an important safety finding requiring further cognitive assessment."},
+
+  // ── TEST SET B QUESTIONS (indices 30–39) ──
+  {set:'B',topic:"Cardiac Auscultation",type:"mc",
+   q:"A nurse auscultates the client's heart at the 5th intercostal space, left midclavicular line, and hears a clear 'lub-dub' without extra sounds. The nurse is auscultating at which landmark and identifying which normal heart sounds?",
+   opts:["Aortic area; S3 and S4","Mitral (apical) area; S1 and S2","Pulmonic area; S1 and S2","Erb's point; S3 and S4"],
+   correct:[1],r:"The MITRAL area (left midclavicular line, 5th ICS) is the apical pulse site and where S1 ('Lub' — AV valves closing) and S2 ('Dub' — semilunar valves closing) are best heard. This is also where apical heart rate is auscultated for a full minute. S3/S4 are EXTRA sounds (abnormal in adults)."},
+
+  {set:'B',topic:"Situational",type:"mc",
+   q:"A home health nurse visits a 75-year-old client who lives alone. The client appears disheveled, has lost 15 lbs since last visit, and has three falls in the past month. The client's apartment is cluttered with a throw rug at the entrance. Which assessment is the nurse's PRIORITY?",
+   opts:["Perform a detailed cardiovascular examination","Complete a comprehensive safety and fall risk assessment","Review the client's medication list for new prescriptions","Assess the client's surgical history in detail"],
+   correct:[1],r:"This client presents with multiple RED FLAGS for falls: weight loss (nutritional decline), actual falls ×3, and an unsafe environment (clutter, throw rug). A comprehensive FALL RISK and SAFETY assessment is the priority. Falls are the leading cause of injury-related death in adults 65+. Environmental hazards must be identified and addressed."},
+
+  {set:'B',topic:"Respiratory",type:"mc",
+   q:"A nurse is caring for a client with COPD who is hospitalized with an acute exacerbation. The client has a RR of 28, SpO₂ of 91% on 2L nasal cannula, and is using accessory muscles to breathe. The nurse positions the client in which position FIRST?",
+   opts:["Supine to promote rest","Trendelenburg to increase blood flow to the lungs","Orthopneic (tripod) to maximize respiratory effort","Left lateral to drain secretions"],
+   correct:[2],r:"ORTHOPNEIC (tripod) position — sitting upright, leaning forward on arms — is the FIRST priority for a client in respiratory distress. This position maximizes diaphragmatic excursion and chest expansion, reducing the work of breathing. It is the most effective non-pharmacological intervention for acute dyspnea."},
+
+  {set:'B',topic:"Situational — Skin",type:"mc",
+   q:"A nurse is caring for a 68-year-old client who is post-op day 1 after a hip replacement. During morning assessment, the nurse notices the client is reluctant to move, the surgical dressing has 4cm of bright red drainage, and the client's heart rate has increased from 74 to 102 bpm since admission. The nurse's PRIORITY concern is:",
+   opts:["Post-operative pain — administer prescribed analgesics","Surgical site infection — culture the wound","Active bleeding from the surgical site — assess and notify provider","Normal postoperative findings — document and reassess in 4 hours"],
+   correct:[2],r:"Bright red (SANGUINOUS) drainage that is INCREASING, combined with NEW tachycardia (74→102 bpm) = possible ACTIVE BLEEDING from the surgical site. This is a surgical emergency. The nurse must assess the wound, apply pressure if needed, and notify the surgeon immediately. Sanguinous drainage + hemodynamic changes = red flag."},
+
+  {set:'B',topic:"Situational — Neuro",type:"mc",
+   q:"A nurse on a medical-surgical unit notices a client who was alert and oriented during morning assessment is now confused, unable to recognize family members, and is trying to get out of bed. The client's urine in the Foley catheter is dark amber with sediment. Which is the nurse's BEST interpretation?",
+   opts:["This is expected sundowning in older adults; dim the lights","The client is experiencing a panic attack; provide reassurance","The sudden change in mental status and abnormal urine suggests possible UTI or sepsis — notify the provider immediately","The client is bored and needs activity; arrange for a volunteer visit"],
+   correct:[2],r:"A SUDDEN CHANGE in mental status (alert to confused/agitated) is always an emergency until proven otherwise — especially in older adults. Combined with dark, cloudy urine (UTI signs), this presentation strongly suggests UROSEPSIS or UTI. In older adults, confusion is often the FIRST sign of infection. Immediate provider notification is essential."},
+
+  {set:'B',topic:"Situational — Pediatric",type:"mc",
+   q:"A nurse is assessing a 2-year-old who is brought to the ED by their parent. The child clings to the parent and cries when the nurse approaches. The nurse wants to assess the child's abdomen. What is the BEST approach?",
+   opts:["Firmly hold the child down to complete the assessment quickly","Ask the parent to leave so the child will calm down","Allow the child to sit in the parent's lap and begin with the least invasive assessment first; use play and distraction","Tell the child to 'be brave' and start with the most painful assessment to get it over with"],
+   correct:[2],r:"Toddlers (1–3 years) experience STRANGER ANXIETY and need their caregiver for security. Best practices: keep the parent present, use a non-threatening approach, start with the LEAST invasive techniques (inspection, then light auscultation), use play and distraction, and save painful or invasive assessments for last. This builds trust and improves cooperation."},
+
+  {set:'B',topic:"Situational — Vital Signs",type:"mc",
+   q:"A nurse is assessing a client's blood pressure using a cuff that appears too small for the client's arm circumference. The nurse should expect the reading to be:",
+   opts:["Falsely low because the cuff cannot compress the artery adequately","Falsely high because excessive pressure is needed to occlude the artery","Accurate — cuff size does not affect blood pressure readings","Falsely low because the small cuff deflates too quickly"],
+   correct:[1],r:"A BP cuff that is TOO SMALL reads FALSELY HIGH because extra pressure is required to occlude the artery through excess tissue. A cuff that is too LARGE reads FALSELY LOW. Using the correct cuff size (bladder width = 40% of arm circumference) is essential for accurate BP measurement."},
+
+  {set:'B',topic:"Situational — Documentation",type:"mc",
+   q:"A client says: 'I feel like my heart is racing and I keep getting dizzy when I stand up.' The nurse assesses HR 108 bpm, BP 104/64 lying and 86/52 standing. Which nursing documentation is MOST accurate and complete?",
+   opts:["Client appears anxious. VS stable.","Client with tachycardia and hypotension. No further assessment needed.","Client reports palpitations and dizziness with standing. HR 108, BP 104/64 lying, dropping to 86/52 standing. Findings consistent with orthostatic hypotension. Provider notified.","Client comfortable. VS WNL."],
+   correct:[2],r:"Accurate documentation includes: the client's SUBJECTIVE complaint (palpitations, dizziness), the OBJECTIVE findings (HR, BP measurements in two positions), clinical interpretation (orthostatic hypotension), and action taken (provider notified). 'VS stable' and 'VS WNL' are INACCURATE — these are not normal findings."},
+
+  {set:'B',topic:"Situational — Assessment Priority",type:"sata",
+   q:"A nurse is preparing to assess a new client admitted from a nursing facility. The client is an 82-year-old with altered mental status, a pressure ulcer on the coccyx, and a history of CHF and DM. Which components are ESSENTIAL in the initial assessment? SELECT ALL THAT APPLY.",
+   opts:["Perform a complete head-to-toe baseline assessment","Assess current mental status and compare to baseline","Stage and document the pressure ulcer","Restrict fluid intake without a provider order to manage CHF","Assess pedal pulses and bilateral lower extremity edema"],
+   correct:[0,1,2,4],r:"An initial assessment of a new client requires a complete HEAD-TO-TOE baseline. Specifically for this client: mental status must be assessed and compared to prior baseline (AMS), the pressure ulcer must be staged and documented, and CV/peripheral vascular assessment (edema, pulses) is essential given CHF and DM. Restricting fluids WITHOUT a provider order is OUTSIDE nursing scope and potentially dangerous."},
+
+  {set:'B',topic:"Situational — Communication",type:"mc",
+   q:"A nurse is admitting a client who speaks limited English. An interpreter service is available. The client's adult child offers to interpret. Which is the nurse's BEST action?",
+   opts:["Allow the family member to interpret — they know the client best","Use the professional medical interpreter service for all clinical communication","Ask the client to write down their answers instead","Perform the assessment without an interpreter to save time"],
+   correct:[1],r:"A PROFESSIONAL MEDICAL INTERPRETER should always be used for clinical communication. Family members may: (1) be unable to accurately translate medical terminology, (2) add their own interpretations, (3) withhold sensitive information (abuse, substance use) to protect the client. Using family as interpreters violates patient confidentiality and may lead to assessment errors."},
+
+  {set:'B',topic:"Situational — Holistic Care",type:"mc",
+   q:"A nurse is assessing a 55-year-old client who was just diagnosed with Type 2 diabetes. The client states: 'I don't understand why this happened to me. My grandmother died from diabetes complications and I'm terrified.' The nurse's BEST response demonstrates which concept?",
+   opts:["Objective data collection: check the client's blood glucose immediately","Psychosocial assessment: acknowledge fear, assess support system, and educate collaboratively","Physical assessment priority: auscultate lung sounds for diabetic complications","Tertiary prevention: schedule the client for dialysis education"],
+   correct:[1],r:"This client is expressing FEAR and references a family member's death — a significant psychosocial response to a new diagnosis. The priority is PSYCHOSOCIAL ASSESSMENT: acknowledge the client's emotions, assess their support system, and address misperceptions through collaborative education. Assessment is holistic — it includes physical AND emotional responses."},
+];
+
+/* ── Active exam set & state ─────────────────────────────── */
+let currentExamSet = 0; // 0=A (Q0-29), 1=B (Q30-39 but really all 40 for set B)
+let examQuestions = [];
+
+const EXAM_SETS = [
+  { label: 'Test A', name: 'Comprehensive Assessment — Test A', filter: q => q.set === 'A' },
+  { label: 'Test B', name: 'Clinical Reasoning — Test B', filter: q => q.set === 'B' },
+  { label: 'Test C', name: 'Mixed Mastery — Test C', filter: () => true },
+];
+
+let examState = {
+  current: 0, answers: [], results: [], submitted: [], timerSec: 45*60, timerInt: null
+};
+
+function launchExam(setIdx = 0) {
+  currentExamSet = setIdx;
+  const setDef = EXAM_SETS[setIdx];
+  examQuestions = ALL_QUESTIONS.filter(setDef.filter).sort(() => Math.random() - 0.5);
+  // For test C (mixed), limit to 40
+  if (setIdx === 2) examQuestions = examQuestions.slice(0, 40);
+
+  const total = examQuestions.length;
+  examState = {
+    current: 0,
+    answers: new Array(total).fill(null),
+    results: new Array(total).fill(null),
+    submitted: new Array(total).fill(false),
+    timerSec: 45 * 60,
+    timerInt: null,
+  };
   document.getElementById('exam-overlay').classList.add('active');
   document.getElementById('results-screen').classList.remove('show');
-  document.getElementById('exam-body').style.display='flex';
-  document.body.style.overflow='hidden';
-  examState = {
-    current:0,
-    answers: new Array(QUESTIONS.length).fill(null),
-    results: new Array(QUESTIONS.length).fill(null),
-    submitted: new Array(QUESTIONS.length).fill(false),
-    timerSec: 30*60,
-    timerInt: null,
-    started: true,
-  };
-  buildQDots();
+  document.getElementById('exam-body').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  document.querySelector('.ati-logo').innerHTML = `💕 <span>NUR 110</span> ${setDef.name}`;
+  buildQDots(total);
   renderQ(0);
   startTimer();
 }
-function closeExam(){
+
+function closeExam() {
   document.getElementById('exam-overlay').classList.remove('active');
-  document.body.style.overflow='';
-  if(examState.timerInt) clearInterval(examState.timerInt);
+  document.body.style.overflow = '';
+  if (examState.timerInt) clearInterval(examState.timerInt);
 }
-function confirmCloseExam(){
-  if(confirm('Exit the exam? Your progress will be lost.')) closeExam();
-}
-function retakeExam(){ closeExam(); setTimeout(launchExam,300); }
+function confirmCloseExam() { if (confirm('Exit the exam? Progress will be lost.')) closeExam(); }
+function retakeExam() { closeExam(); setTimeout(() => launchExam(currentExamSet), 300); }
 
-function startTimer(){
-  if(examState.timerInt) clearInterval(examState.timerInt);
-  examState.timerInt = setInterval(()=>{
+function startTimer() {
+  if (examState.timerInt) clearInterval(examState.timerInt);
+  examState.timerInt = setInterval(() => {
     examState.timerSec--;
-    const m=Math.floor(examState.timerSec/60);
-    const s=examState.timerSec%60;
-    const d=document.getElementById('timer-display');
-    d.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    if(examState.timerSec<=300) d.style.color='#ef5350';
-    if(examState.timerSec<=0){clearInterval(examState.timerInt);finishExam();}
-  },1000);
+    const m = Math.floor(examState.timerSec / 60);
+    const s = examState.timerSec % 60;
+    const d = document.getElementById('timer-display');
+    if (d) d.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (examState.timerSec <= 300 && d) d.style.color = '#ef5350';
+    if (examState.timerSec <= 0) { clearInterval(examState.timerInt); finishExam(); }
+  }, 1000);
 }
 
-function buildQDots(){
-  const wrap=document.getElementById('q-dots');
-  wrap.innerHTML='';
-  QUESTIONS.forEach((_,i)=>{
-    const d=document.createElement('div');
-    d.className='q-dot';d.id=`dot-${i}`;d.textContent=i+1;
-    d.onclick=()=>{if(examState.submitted[i]||true) goToQ(i);}
+function buildQDots(total) {
+  const wrap = document.getElementById('q-dots');
+  wrap.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'q-dot'; d.id = `dot-${i}`; d.textContent = i + 1;
+    d.onclick = () => renderQ(i);
     wrap.appendChild(d);
-  });
-}
-function updateDot(i){
-  const d=document.getElementById(`dot-${i}`);
-  if(!d)return;
-  d.className='q-dot';
-  if(i===examState.current) d.classList.add('current');
-  else if(examState.submitted[i]){
-    d.classList.add(examState.results[i]?'answered':'wrong-dot');
   }
 }
 
-function renderQ(idx){
-  const q=QUESTIONS[idx];
-  examState.current=idx;
+function updateDot(i) {
+  const d = document.getElementById(`dot-${i}`);
+  if (!d) return;
+  d.className = 'q-dot';
+  if (i === examState.current) d.classList.add('current');
+  else if (examState.submitted[i]) d.classList.add(examState.results[i] ? 'answered' : 'wrong-dot');
+}
 
-  document.getElementById('q-label').textContent=`QUESTION ${idx+1} OF ${QUESTIONS.length}`;
-  document.getElementById('q-counter-top').textContent=`${idx+1} / ${QUESTIONS.length}`;
-  document.getElementById('q-type-badge').textContent=q.type==='sata'?'Select All That Apply':'Multiple Choice';
-  document.getElementById('q-topic').textContent=q.topic;
-  document.getElementById('q-text').textContent=q.q;
-  document.getElementById('sata-note').style.display=q.type==='sata'?'block':'none';
+function renderQ(idx) {
+  const q = examQuestions[idx];
+  examState.current = idx;
+  const total = examQuestions.length;
 
-  // Options
-  const oWrap=document.getElementById('q-options');
-  oWrap.innerHTML='';
-  const letters=['A','B','C','D','E'];
-  q.opts.forEach((opt,i)=>{
-    const el=document.createElement('div');
-    el.className='ati-opt';
-    el.id=`opt-${i}`;
-    if(q.type==='sata'){
-      el.innerHTML=`<div class="opt-check"></div><div class="opt-text">${opt}</div>`;
+  document.getElementById('q-label').textContent = `QUESTION ${idx + 1} OF ${total}`;
+  document.getElementById('q-counter-top').textContent = `${idx + 1} / ${total}`;
+  document.getElementById('q-type-badge').textContent = q.type === 'sata' ? 'Select All That Apply' : 'Multiple Choice';
+  document.getElementById('q-topic').textContent = q.topic;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('sata-note').style.display = q.type === 'sata' ? 'block' : 'none';
+  document.getElementById('ati-prog').style.width = ((idx + 1) / total * 100) + '%';
+  document.getElementById('answered-count').textContent = examState.submitted.filter(Boolean).length;
+
+  const oWrap = document.getElementById('q-options');
+  oWrap.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const el = document.createElement('div');
+    el.className = 'ati-opt'; el.id = `opt-${i}`;
+    const prevAns = examState.answers[idx] || [];
+    if (q.type === 'sata') {
+      el.innerHTML = `<div class="opt-check"></div><div class="opt-text">${opt}</div>`;
     } else {
-      el.innerHTML=`<div class="opt-letter">${letters[i]}</div><div class="opt-text">${opt}</div>`;
+      el.innerHTML = `<div class="opt-letter">${letters[i]}</div><div class="opt-text">${opt}</div>`;
     }
-    // If already submitted, show results
-    if(examState.submitted[idx]){
+    if (examState.submitted[idx]) {
       el.classList.add('locked');
-      const wasSelected = examState.answers[idx]&&examState.answers[idx].includes(i);
-      const isCorrect = q.correct.includes(i);
-      if(isCorrect) el.classList.add('correct');
-      else if(wasSelected&&!isCorrect) el.classList.add('wrong');
-      if(q.type==='sata'&&wasSelected) el.querySelector('.opt-check').classList.add('selected-check');
+      if (q.correct.includes(i)) el.classList.add('correct');
+      else if (prevAns.includes(i)) el.classList.add('wrong');
     } else {
-      // Check if this was selected before
-      const prevAns = examState.answers[idx]||[];
-      if(prevAns.includes(i)){
-        el.classList.add('selected');
-        if(q.type==='sata') el.querySelector('.opt-check').style.background='var(--rose)';
-      }
-      el.addEventListener('click',()=>selectOpt(el,idx,i,q.type));
+      if (prevAns.includes(i)) el.classList.add('selected');
+      el.addEventListener('click', () => selectOpt(el, idx, i, q.type));
     }
     oWrap.appendChild(el);
   });
 
-  // Submit btn
-  const sb=document.getElementById('submit-btn');
-  sb.disabled = examState.submitted[idx] || !(examState.answers[idx]&&examState.answers[idx].length>0);
-  sb.style.display = examState.submitted[idx]?'none':'block';
+  const sb = document.getElementById('submit-btn');
+  sb.disabled = examState.submitted[idx] || !(examState.answers[idx] && examState.answers[idx].length > 0);
+  sb.style.display = examState.submitted[idx] ? 'none' : 'block';
 
-  // Feedback
-  const fb=document.getElementById('feedback');
-  if(examState.submitted[idx]){
-    fb.className='ati-feedback show '+(examState.results[idx]?'correct-fb':'wrong-fb');
-    const correct=q.correct.map(c=>letters[c]).join(', ');
-    fb.innerHTML=`
-      <div class="fb-header">
-        <div class="fb-icon">${examState.results[idx]?'✅':'❌'}</div>
-        <div class="fb-title">${examState.results[idx]?'Correct!':'Incorrect'}</div>
-      </div>
-      <div class="fb-body"><strong>Rationale:</strong> ${q.rationale}</div>
-      ${!examState.results[idx]?`<div class="fb-correct-ans">✓ Correct answer${q.correct.length>1?'s':''}: <strong>${correct}</strong></div>`:''}
-    `;
-  } else {
-    fb.className='ati-feedback';fb.innerHTML='';
-  }
+  const fb = document.getElementById('feedback');
+  if (examState.submitted[idx]) {
+    const correct = q.correct.map(c => letters[c]).join(', ');
+    fb.className = 'ati-feedback show ' + (examState.results[idx] ? 'correct-fb' : 'wrong-fb');
+    fb.innerHTML = `<div class="fb-header"><div class="fb-icon">${examState.results[idx] ? '✅' : '❌'}</div><div class="fb-title">${examState.results[idx] ? 'Correct!' : 'Incorrect'}</div></div>
+      <div class="fb-body"><strong>Rationale:</strong> ${q.r}</div>
+      ${!examState.results[idx] ? `<div class="fb-correct-ans">✓ Correct: <strong>${correct}</strong></div>` : ''}`;
+  } else { fb.className = 'ati-feedback'; fb.innerHTML = ''; }
 
-  // Nav buttons
-  const nav=document.getElementById('nav-btns');
-  nav.style.display=examState.submitted[idx]?'flex':'none';
-  document.getElementById('prev-btn').disabled=(idx===0);
-  const isLast=(idx===QUESTIONS.length-1);
-  const nb=document.getElementById('next-btn');
-  nb.textContent=isLast?'Finish Exam ✓':'Next Question →';
-  nb.onclick=isLast?finishExam:()=>goQ(1);
+  const navEl = document.getElementById('nav-btns');
+  navEl.style.display = examState.submitted[idx] ? 'flex' : 'none';
+  document.getElementById('prev-btn').disabled = (idx === 0);
+  const isLast = idx === total - 1;
+  const nb = document.getElementById('next-btn');
+  nb.textContent = isLast ? 'Finish Exam ✓' : 'Next Question →';
+  nb.onclick = isLast ? finishExam : () => goQ(1);
 
-  // Progress
-  const prog=(idx+1)/QUESTIONS.length*100;
-  document.getElementById('ati-prog').style.width=prog+'%';
-
-  // Answered count
-  document.getElementById('answered-count').textContent=examState.submitted.filter(Boolean).length;
-
-  // Update all dots
-  QUESTIONS.forEach((_,i)=>updateDot(i));
+  for (let i = 0; i < total; i++) updateDot(i);
 }
 
-function selectOpt(el,qIdx,optIdx,type){
-  if(examState.submitted[qIdx])return;
-  if(type==='mc'){
-    document.querySelectorAll('.ati-opt').forEach(o=>{o.classList.remove('selected');const l=o.querySelector('.opt-letter');if(l){l.style.background='';l.style.borderColor=''}});
+function selectOpt(el, qIdx, optIdx, type) {
+  if (examState.submitted[qIdx]) return;
+  if (type === 'mc') {
+    document.querySelectorAll('.ati-opt').forEach(o => { o.classList.remove('selected'); });
     el.classList.add('selected');
-    examState.answers[qIdx]=[optIdx];
+    examState.answers[qIdx] = [optIdx];
   } else {
-    // SATA toggle
     el.classList.toggle('selected');
-    const chk=el.querySelector('.opt-check');
-    if(el.classList.contains('selected')){chk.style.background='var(--rose)';chk.style.borderColor='var(--rose)';}
-    else{chk.style.background='';chk.style.borderColor='';}
-    if(!examState.answers[qIdx])examState.answers[qIdx]=[];
-    const set=new Set(examState.answers[qIdx]);
-    if(el.classList.contains('selected'))set.add(optIdx);else set.delete(optIdx);
-    examState.answers[qIdx]=[...set];
+    if (!examState.answers[qIdx]) examState.answers[qIdx] = [];
+    const s = new Set(examState.answers[qIdx]);
+    el.classList.contains('selected') ? s.add(optIdx) : s.delete(optIdx);
+    examState.answers[qIdx] = [...s];
   }
-  document.getElementById('submit-btn').disabled=!(examState.answers[qIdx]&&examState.answers[qIdx].length>0);
+  document.getElementById('submit-btn').disabled = !(examState.answers[qIdx] && examState.answers[qIdx].length > 0);
 }
 
-function submitAnswer(){
-  const idx=examState.current;
-  const q=QUESTIONS[idx];
-  const ans=examState.answers[idx]||[];
-  examState.submitted[idx]=true;
-  // Check correctness (for SATA, all must match exactly)
-  const sortedAns=[...ans].sort().join(',');
-  const sortedCorrect=[...q.correct].sort().join(',');
-  examState.results[idx]=(sortedAns===sortedCorrect);
+function submitAnswer() {
+  const idx = examState.current;
+  const q = examQuestions[idx];
+  const ans = examState.answers[idx] || [];
+  examState.submitted[idx] = true;
+  const sortedAns = [...ans].sort().join(',');
+  const sortedCorrect = [...q.correct].sort().join(',');
+  examState.results[idx] = sortedAns === sortedCorrect;
   renderQ(idx);
 }
 
-function goQ(dir){
-  const next=examState.current+dir;
-  if(next>=0&&next<QUESTIONS.length) renderQ(next);
+function goQ(dir) {
+  const next = examState.current + dir;
+  if (next >= 0 && next < examQuestions.length) renderQ(next);
 }
-function goToQ(i){ renderQ(i); }
 
-function finishExam(){
-  if(examState.timerInt)clearInterval(examState.timerInt);
-  const correct=examState.results.filter(Boolean).length;
-  const total=QUESTIONS.length;
-  const pct=Math.round((correct/total)*100);
-  document.getElementById('exam-body').style.display='none';
-  const rs=document.getElementById('results-screen');
+function finishExam() {
+  if (examState.timerInt) clearInterval(examState.timerInt);
+  const correct = examState.results.filter(Boolean).length;
+  const total = examQuestions.length;
+  const pct = Math.round(correct / total * 100);
+  document.getElementById('exam-body').style.display = 'none';
+  const rs = document.getElementById('results-screen');
   rs.classList.add('show');
-  document.getElementById('res-pct').textContent=pct+'%';
-  document.getElementById('res-correct').textContent=correct;
-  document.getElementById('res-wrong').textContent=total-correct;
-  document.getElementById('res-total').textContent=total;
-  let heading,sub;
-  if(pct>=90){heading='Outstanding! 🌟';sub="Shayne, you absolutely crushed it! 50/50 energy right here 💕";}
-  else if(pct>=80){heading='Great Work! 💪';sub="You're so close to perfect! Review the missed questions and you've got this!";}
-  else if(pct>=70){heading='Good Effort! 📚';sub="Solid foundation! Study the rationales for missed questions and try again.";}
-  else{heading='Keep Studying! 💕';sub="Bubu believes in you! Review the material and come back stronger 🌸";}
-  document.getElementById('res-heading').textContent=heading;
-  document.getElementById('res-sub').textContent=sub;
+  document.getElementById('res-pct').textContent = pct + '%';
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = total - correct;
+  document.getElementById('res-total').textContent = total;
+  let h, s;
+  if (pct >= 90) { h = 'Outstanding! 🌟'; s = "Shayne you absolutely crushed it! Perfect ATI energy 💕"; }
+  else if (pct >= 80) { h = 'Great Work! 💪'; s = "You're so close! Review the rationales on missed questions."; }
+  else if (pct >= 70) { h = 'Good Effort! 📚'; s = "Solid foundation! Study the explanations and try again."; }
+  else { h = 'Keep Going! 💕'; s = "Bubu believes in you! Review your weak areas and come back stronger 🌸"; }
+  document.getElementById('res-heading').textContent = h;
+  document.getElementById('res-sub').textContent = s;
 }
+
+/* ── Start everything ────────────────────────────────────── */
+// Vocab quiz init
+restartVQ();
+
+// Section quizzes init
+initAllSectionQuizzes();
+// First section is always unlocked
+document.querySelectorAll('#s1 .sec-locked-overlay').forEach(el => el.remove());
+document.getElementById('s1').classList.remove('locked');
 </script>
-</body>
 </html>
