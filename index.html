@@ -6,6 +6,63 @@
 <title>Shayne Ramos — NUR 110 Study Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ── Login Screen ─────────────────────────────────────────── */
+#login-screen{
+  position:fixed;inset:0;z-index:99999;
+  background:linear-gradient(135deg,#880e4f 0%,#c2185b 45%,#e91e8c 75%,#f06292 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'DM Sans',sans-serif;overflow:hidden;
+}
+#login-screen.hide{display:none}
+.login-orb{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:float2 8s ease-in-out infinite}
+.login-orb:nth-child(1){width:340px;height:340px;top:-100px;right:-80px}
+.login-orb:nth-child(2){width:220px;height:220px;bottom:-60px;left:-60px;animation-delay:2s}
+.login-orb:nth-child(3){width:150px;height:150px;top:40%;left:4%;animation-delay:1.5s}
+@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+.login-box{
+  background:rgba(255,255,255,.13);backdrop-filter:blur(20px);
+  border:1.5px solid rgba(255,255,255,.25);border-radius:24px;
+  padding:44px 48px;text-align:center;position:relative;z-index:1;
+  width:100%;max-width:420px;box-shadow:0 24px 64px rgba(0,0,0,.25);margin:16px;
+}
+.login-hearts{font-size:30px;margin-bottom:10px;animation:lhb 1.8s ease-in-out infinite}
+@keyframes lhb{0%,100%{transform:scale(1)}14%{transform:scale(1.15)}28%{transform:scale(1)}42%{transform:scale(1.1)}70%{transform:scale(1)}}
+.login-box h1{font-family:'Playfair Display',serif;font-size:26px;color:#fff;margin-bottom:4px}
+.login-sub{color:rgba(255,255,255,.75);font-size:13px;margin-bottom:24px}
+.login-bubu{
+  width:88px;height:88px;border-radius:50%;overflow:hidden;
+  border:3px solid rgba(255,255,255,.45);margin:0 auto 20px;
+  box-shadow:0 0 0 8px rgba(255,255,255,.08);
+  animation:lbubu 3s ease-in-out infinite;
+}
+@keyframes lbubu{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.login-bubu img{width:100%;height:100%;object-fit:cover}
+.login-label{display:block;text-align:left;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:6px}
+.login-field{
+  width:100%;padding:13px 18px;margin-bottom:16px;
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);
+  border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;
+  color:#fff;outline:none;transition:all .2s;
+}
+.login-field::placeholder{color:rgba(255,255,255,.45)}
+.login-field:focus{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.65);box-shadow:0 0 0 3px rgba(255,255,255,.12)}
+.login-btn{
+  width:100%;padding:14px;margin-top:4px;
+  background:#fff;color:#880e4f;border:none;border-radius:12px;
+  font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;
+  font-family:'DM Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.22);background:#fce4ec}
+.login-btn:active{transform:translateY(0)}
+.login-error{
+  color:#ffcdd2;font-size:13px;font-weight:600;margin-top:14px;
+  background:rgba(198,40,40,.25);border:1px solid rgba(255,100,100,.3);
+  border-radius:8px;padding:9px 14px;display:none;
+}
+.login-error.show{display:block}
+.login-shake{animation:lshake .4s ease}
+@keyframes lshake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
+
 /* ═══════════════════════════════════════════════════════════
    VARIABLES & RESET
 ═══════════════════════════════════════════════════════════ */
@@ -587,12 +644,34 @@ footer p{opacity:.82;font-size:14px;margin-bottom:4px}
 </head>
 <body>
 
+<!-- ══════════════════════════ LOGIN SCREEN ══════════════════════════ -->
+<div id="login-screen">
+  <div class="login-orb"></div>
+  <div class="login-orb"></div>
+  <div class="login-orb"></div>
+  <div class="login-box" id="login-box">
+    <div class="login-bubu">
+      <img src="./bubu-cute-dancing.gif" alt="Bubu" />
+    </div>
+    <div class="login-hearts">♥ ♥ ♥</div>
+    <h1>NUR 110 Study Guide</h1>
+    <p class="login-sub">Shayne Ramos · UPMC Mercy · 2026<br>Enter your credentials to unlock 💕</p>
+    <label class="login-label">Username</label>
+    <input class="login-field" id="login-user" type="text" placeholder="Enter username" autocomplete="username" onkeydown="if(event.key==='Enter')document.getElementById('login-pass').focus()" />
+    <label class="login-label">Password</label>
+    <input class="login-field" id="login-pass" type="password" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" />
+    <button class="login-btn" onclick="doLogin()">Unlock Study Guide →</button>
+    <div class="login-error" id="login-error">❌ Incorrect username or password. Try again!</div>
+  </div>
+</div>
+
+
 <!-- Progress bar -->
 <div id="progress-bar"></div>
 
 <!-- Bubu companion -->
 <div id="bubu" title="Bubu cheers you on! 💕" onclick="bubuClick()">
-  <img src="./bubu-cute-dancing.gif" alt="Bubu dancing" onerror="this.src='https://media.tenor.com/images/bubu-dance.gif'" />
+  <img src="https://media.tenor.com/kDoxO3OQKTEAAAAC/bubu-dudu.gif" alt="Bubu dancing" onerror="this.src='https://media.tenor.com/images/bubu-dance.gif'" />
 </div>
 <div id="bubu-msg" style="display:none"></div>
 
@@ -2232,5 +2311,30 @@ window.addEventListener('scroll',()=>{if(Math.abs(window.scrollY-lastScroll)>350
 /* ── Init ────────────────────────────────────────────────── */
 restartVQ();
 initAllSectionQuizzes();
+
+/* ── Login ────────────────────────────────────────────────── */
+function doLogin() {
+  const user = document.getElementById('login-user').value.trim().toLowerCase();
+  const pass = document.getElementById('login-pass').value.trim();
+  const err  = document.getElementById('login-error');
+  const box  = document.getElementById('login-box');
+  if (user === 'bubu' && pass === 'duduphudu') {
+    const screen = document.getElementById('login-screen');
+    screen.style.transition = 'opacity .6s ease';
+    screen.style.opacity = '0';
+    setTimeout(() => { screen.classList.add('hide'); }, 600);
+  } else {
+    err.classList.add('show');
+    box.classList.remove('login-shake');
+    void box.offsetWidth; // reflow to re-trigger animation
+    box.classList.add('login-shake');
+    document.getElementById('login-pass').value = '';
+    setTimeout(() => box.classList.remove('login-shake'), 400);
+  }
+}
+// Auto-focus username on load
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => document.getElementById('login-user').focus(), 300);
+});
 </script>
 </html>
